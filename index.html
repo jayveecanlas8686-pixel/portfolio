@@ -50,20 +50,6 @@
             <a class="button primary" href="#projects">View Projects</a>
             <a class="button secondary" href="#contact">Start a Conversation</a>
           </div>
-          <div class="hero-stats" aria-label="Portfolio focus areas">
-            <div>
-              <strong>5+</strong>
-              <span>Automation case studies</span>
-            </div>
-            <div>
-              <strong>3</strong>
-              <span>Core disciplines</span>
-            </div>
-            <div>
-              <strong>24/7</strong>
-              <span>Workflow mindset</span>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -163,6 +149,8 @@
               <span>Power Automate</span>
               <span>API Integrations</span>
               <span>Python</span>
+              <span>C++</span>
+              <span>PHP</span>
               <span>JavaScript</span>
               <span>HTML</span>
               <span>CSS</span>
@@ -176,6 +164,12 @@
         <div class="section-heading">
           <p class="eyebrow">Projects</p>
           <h2 id="projects-title">Selected work</h2>
+        </div>
+        <div class="project-category">
+          <div class="project-category-heading">
+            <span>01</span>
+            <h3>Automation Projects</h3>
+          </div>
         </div>
         <article class="featured-project">
           <div class="featured-project-content">
@@ -198,52 +192,6 @@
               <img src="assets/consolidate-raw-collection-data-workflow.png" alt="n8n workflow for consolidating raw collection data with AI-assisted column correction">
             </button>
             <figcaption>n8n workflow preview for AI-assisted column cleanup before appending raw collection data to Excel.</figcaption>
-          </figure>
-        </article>
-        <article class="featured-project">
-          <div class="featured-project-content">
-            <div class="project-topline">
-              <span>AI Forecasting</span>
-              <small>n8n + AI + LightGBM + Sales Data</small>
-            </div>
-            <h3>AI Sales Forecast</h3>
-            <p>
-              Built an n8n forecasting workflow that predicts sales using a hybrid AI and LightGBM approach. The process prepares sales history, enriches the forecast with external signals, and generates prediction results for business planning.
-            </p>
-            <ul>
-              <li>Sales history extraction and cleaning</li>
-              <li>Forecast inputs from weather, holidays, crisis events, and location signals</li>
-              <li>Hybrid AI and LightGBM prediction workflow for more accurate forecasts</li>
-            </ul>
-          </div>
-          <figure class="workflow-preview">
-            <button class="image-zoom-trigger" type="button" aria-label="Zoom AI sales forecast workflow screenshot">
-              <img src="assets/ai-sales-forecast-workflow.png" alt="n8n workflow for AI and LightGBM sales forecasting">
-            </button>
-            <figcaption>n8n workflow preview for sales forecasting using history, weather, holidays, crisis signals, AI, and LightGBM.</figcaption>
-          </figure>
-        </article>
-        <article class="featured-project">
-          <div class="featured-project-content">
-            <div class="project-topline">
-              <span>Data Engineering</span>
-              <small>n8n + Power BI + SQL Server + ETL</small>
-            </div>
-            <h3>ETL from Power BI to SQL Server</h3>
-            <p>
-              Built an ETL workflow that pulls data from a Power BI dataset, prepares records for SQL Server, and performs real-time insert and update operations to keep the database synchronized.
-            </p>
-            <ul>
-              <li>Power BI dataset extraction and refresh-status handling</li>
-              <li>SQL Server insert and update logic for synced records</li>
-              <li>Operational notifications for process success or failure</li>
-            </ul>
-          </div>
-          <figure class="workflow-preview">
-            <button class="image-zoom-trigger" type="button" aria-label="Zoom ETL Power BI to SQL Server workflow screenshot">
-              <img src="assets/etl-pbi-to-sql-server-workflow.png" alt="n8n ETL workflow from Power BI dataset to SQL Server">
-            </button>
-            <figcaption>n8n workflow preview for synchronizing Power BI dataset records into SQL Server.</figcaption>
           </figure>
         </article>
         <article class="featured-project">
@@ -292,50 +240,96 @@
             <figcaption>n8n workflow preview for converting uploaded waybill PDFs into Excel-ready records.</figcaption>
           </figure>
         </article>
-        <div class="project-grid">
-          <article class="project-card">
+        <article class="featured-project">
+          <div class="featured-project-content">
             <div class="project-topline">
-              <span>01</span>
-              <small>Data Engineering</small>
+              <span>AI Forecasting</span>
+              <small>n8n + AI + LightGBM + Sales Data</small>
             </div>
-            <h3>Data Pipeline and Reporting</h3>
-            <p>Extract, clean, transform, and organize operational data into a reporting-ready structure for dashboards and recurring analysis.</p>
+            <h3>AI Sales Forecast</h3>
+            <p>
+              Built an n8n forecasting workflow that predicts sales using a hybrid AI and LightGBM approach. The process prepares sales history, enriches the forecast with external signals, and generates prediction results for business planning.
+            </p>
             <ul>
-              <li>ETL workflow structure</li>
-              <li>Data quality checks</li>
-              <li>Dashboard-ready outputs</li>
+              <li>Sales history extraction and cleaning</li>
+              <li>Forecast inputs from weather, holidays, crisis events, and location signals</li>
+              <li>Hybrid AI and LightGBM prediction workflow for more accurate forecasts</li>
             </ul>
-            <a href="#contact" aria-label="Ask about Data Pipeline and Reporting project">Ask About It</a>
-          </article>
+          </div>
+          <figure class="workflow-preview">
+            <button class="image-zoom-trigger" type="button" aria-label="Zoom AI sales forecast workflow screenshot">
+              <img src="assets/ai-sales-forecast-workflow.png" alt="n8n workflow for AI and LightGBM sales forecasting">
+            </button>
+            <figcaption>n8n workflow preview for sales forecasting using history, weather, holidays, crisis signals, AI, and LightGBM.</figcaption>
+          </figure>
+        </article>
+        <article class="featured-project">
+          <div class="featured-project-content">
+            <div class="project-topline">
+              <span>Data Engineering</span>
+              <small>n8n + Power BI + SQL Server + ETL</small>
+            </div>
+            <h3>ETL from Power BI to SQL Server</h3>
+            <p>
+              Built an ETL workflow that pulls data from a Power BI dataset, prepares records for SQL Server, and performs real-time insert and update operations to keep the database synchronized.
+            </p>
+            <ul>
+              <li>Power BI dataset extraction and refresh-status handling</li>
+              <li>SQL Server insert and update logic for synced records</li>
+              <li>Operational notifications for process success or failure</li>
+            </ul>
+          </div>
+          <figure class="workflow-preview">
+            <button class="image-zoom-trigger" type="button" aria-label="Zoom ETL Power BI to SQL Server workflow screenshot">
+              <img src="assets/etl-pbi-to-sql-server-workflow.png" alt="n8n ETL workflow from Power BI dataset to SQL Server">
+            </button>
+            <figcaption>n8n workflow preview for synchronizing Power BI dataset records into SQL Server.</figcaption>
+          </figure>
+        </article>
+        <div class="project-category">
+          <div class="project-category-heading">
+            <span>02</span>
+            <h3>Data Engineering and Analysis Projects</h3>
+          </div>
+        </div>
+        <div class="empty-project-state">
+          <span>Coming soon</span>
+          <h3>Data and analytics case studies will be added here.</h3>
+          <p>
+            This section is reserved for dashboards, reporting systems, SQL analysis, ETL documentation, and data engineering work that can be safely shared publicly.
+          </p>
+        </div>
 
+        <div class="project-category">
+          <div class="project-category-heading">
+            <span>03</span>
+            <h3>Software Development Projects</h3>
+          </div>
+        </div>
+        <div class="project-grid single-project-grid">
           <article class="project-card">
             <div class="project-topline">
-              <span>02</span>
-              <small>AI Automation</small>
+              <span>Live Website</span>
             </div>
-            <h3>n8n Workflow Automation</h3>
-            <p>Automated workflow concept for routing data between apps, triggering AI-assisted actions, and notifying teams when tasks need attention.</p>
+            <h3>AI customer support chatbot and support</h3>
+            <p>
+              An AI customer support chatbot and support desk platform concept built to present a public-facing frontend for automated customer assistance and ticket-style support workflows.
+            </p>
             <ul>
-              <li>Webhook and API flow</li>
-              <li>AI-assisted processing</li>
-              <li>Notification logic</li>
+              <li>AI customer support chatbot concept</li>
+              <li>Support desk platform interface</li>
+              <li>Automated customer assistance flow</li>
             </ul>
-            <a href="#contact" aria-label="Ask about n8n Workflow Automation project">Ask About It</a>
-          </article>
-
-          <article class="project-card">
-            <div class="project-topline">
-              <span>03</span>
-              <small>Software Development</small>
+            <div class="project-actions">
+              <button
+                class="preview-site-trigger"
+                type="button"
+                data-preview-url="https://jayveecanlas8686-pixel.github.io/AI-Powered-Business-Platforms/frontend/"
+              >
+                Try It Here
+              </button>
+              <a href="https://jayveecanlas8686-pixel.github.io/AI-Powered-Business-Platforms/frontend/" target="_blank" rel="noreferrer" aria-label="Open AI customer support chatbot website">Open Full Site</a>
             </div>
-            <h3>Custom Web Tool</h3>
-            <p>Lightweight internal tool concept for capturing structured information, tracking status, and making daily work easier to manage.</p>
-            <ul>
-              <li>Responsive interface</li>
-              <li>Structured data capture</li>
-              <li>Operational visibility</li>
-            </ul>
-            <a href="#contact" aria-label="Ask about Custom Web Tool project">Ask About It</a>
           </article>
         </div>
       </section>
@@ -351,9 +345,31 @@
               Available for data projects, analytics dashboards, AI automation workflows, Power Automate solutions, n8n integrations, and custom software tools.
             </p>
             <div class="contact-links">
-              <a href="mailto:jayveecanlas8686@gmail.com">jayveecanlas8686@gmail.com</a>
-              <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
-              <a href="https://www.linkedin.com/in/jayvee-canlas-237b36378/" target="_blank" rel="noreferrer">LinkedIn</a>
+              <a href="mailto:jayveecanlas8686@gmail.com" aria-label="Send email to Jayvee Canlas">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 6h16v12H4z"></path>
+                  <path d="m4 7 8 6 8-6"></path>
+                </svg>
+                <span>Email</span>
+              </a>
+              <a href="https://github.com/" target="_blank" rel="noreferrer" aria-label="Open GitHub profile">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.18-3.37-1.18-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.35 1.08 2.92.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.99c.85 0 1.7.11 2.5.34 1.9-1.29 2.74-1.02 2.74-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.93.36.31.68.92.68 1.86v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"></path>
+                </svg>
+                <span>GitHub</span>
+              </a>
+              <a href="https://www.linkedin.com/in/jayvee-canlas-237b36378/" target="_blank" rel="noreferrer" aria-label="Open LinkedIn profile">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6.94 8.98H3.82V20h3.12V8.98ZM5.38 4a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6ZM20.18 13.96c0-3.02-1.61-4.42-3.77-4.42-1.74 0-2.52.96-2.95 1.63V8.98h-3V20h3.12v-5.45c0-1.44.27-2.83 2.05-2.83 1.76 0 1.78 1.65 1.78 2.92V20h3.12v-6.04h-.35Z"></path>
+                </svg>
+                <span>LinkedIn</span>
+              </a>
+              <a href="https://www.facebook.com/jebthegreat0126/" target="_blank" rel="noreferrer" aria-label="Open Facebook profile">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M14.2 8.3V6.95c0-.65.44-.8.75-.8h1.9V3.12L14.23 3.1c-2.91 0-3.57 2.18-3.57 3.57V8.3H8.36v3.12h2.3V20h3.54v-8.58h2.38l.32-3.12h-2.7Z"></path>
+                </svg>
+                <span>Facebook</span>
+              </a>
             </div>
           </div>
           <a class="button primary" href="mailto:jayveecanlas8686@gmail.com">Send Email</a>
@@ -369,6 +385,16 @@
     <div class="image-modal" id="image-modal" aria-hidden="true">
       <button class="image-modal-close" type="button" aria-label="Close image preview">&times;</button>
       <img src="" alt="">
+    </div>
+
+    <div class="site-preview-modal" id="site-preview-modal" aria-hidden="true">
+      <div class="site-preview-shell" role="dialog" aria-modal="true" aria-label="Website preview">
+        <div class="site-preview-bar">
+          <span>Live Website Preview</span>
+          <button class="site-preview-close" type="button" aria-label="Close website preview">&times;</button>
+        </div>
+        <iframe title="AI customer support chatbot and support website preview" src=""></iframe>
+      </div>
     </div>
 
     <script src="script.js"></script>
