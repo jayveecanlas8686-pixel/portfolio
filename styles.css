@@ -10,6 +10,7 @@
   --amber: #b56d1f;
   --rose: #93435a;
   --shadow: 0 22px 70px rgba(16, 24, 32, 0.14);
+  --shadow-soft: 0 12px 34px rgba(16, 24, 32, 0.08);
 }
 
 * {
@@ -23,9 +24,16 @@ html {
 body {
   margin: 0;
   color: var(--ink);
-  background: var(--paper);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.64), rgba(244, 241, 234, 0.92) 36%),
+    var(--paper);
   font-family: "Segoe UI", Arial, Helvetica, sans-serif;
   line-height: 1.6;
+}
+
+::selection {
+  color: #fff;
+  background: var(--teal);
 }
 
 a {
@@ -51,8 +59,9 @@ img {
   min-height: 72px;
   padding: 14px clamp(18px, 5vw, 64px);
   color: #fff;
-  background: rgba(10, 18, 24, 0.72);
+  background: rgba(10, 18, 24, 0.78);
   border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.16);
   backdrop-filter: blur(14px);
 }
 
@@ -83,12 +92,31 @@ img {
 }
 
 .site-nav a {
+  position: relative;
   color: rgba(255, 255, 255, 0.82);
 }
 
 .site-nav a:hover,
 .site-nav a:focus-visible {
   color: #fff;
+}
+
+.site-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -7px;
+  height: 2px;
+  background: #ffcf8b;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 180ms ease;
+}
+
+.site-nav a:hover::after,
+.site-nav a:focus-visible::after {
+  transform: scaleX(1);
 }
 
 .nav-toggle {
@@ -110,7 +138,7 @@ img {
 
 .hero {
   position: relative;
-  min-height: 94vh;
+  min-height: 94svh;
   display: grid;
   align-items: end;
   overflow: hidden;
@@ -132,6 +160,7 @@ img {
 
 .hero-overlay {
   background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.03) 0 1px, transparent 1px 88px),
     linear-gradient(90deg, rgba(5, 10, 15, 0.9), rgba(5, 10, 15, 0.54) 52%, rgba(5, 10, 15, 0.2)),
     linear-gradient(0deg, rgba(5, 10, 15, 0.78), rgba(5, 10, 15, 0.04) 44%);
 }
@@ -200,6 +229,40 @@ h1 {
   margin-top: 30px;
 }
 
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  width: min(720px, 100%);
+  margin-top: 34px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+}
+
+.hero-stats div {
+  padding: 16px;
+  background: rgba(6, 12, 18, 0.42);
+}
+
+.hero-stats strong,
+.hero-stats span {
+  display: block;
+}
+
+.hero-stats strong {
+  color: #fff;
+  font-size: 1.55rem;
+  line-height: 1;
+}
+
+.hero-stats span {
+  margin-top: 5px;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 0.88rem;
+}
+
 .button {
   display: inline-flex;
   align-items: center;
@@ -209,6 +272,13 @@ h1 {
   border: 1px solid transparent;
   border-radius: 8px;
   font-weight: 700;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.button:hover,
+.button:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.16);
 }
 
 .button.primary {
@@ -233,6 +303,11 @@ h1 {
 .intro-band div {
   padding: 26px clamp(18px, 5vw, 54px);
   background: var(--surface);
+  transition: background 180ms ease;
+}
+
+.intro-band div:hover {
+  background: #f9fbfb;
 }
 
 .intro-band strong,
@@ -275,6 +350,7 @@ h1 {
   border: 1px solid var(--line);
   border-radius: 8px;
   box-shadow: var(--shadow);
+  transform: translateZ(0);
 }
 
 .profile-card img {
@@ -344,7 +420,15 @@ h3 {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 8px;
-  box-shadow: 0 12px 34px rgba(16, 24, 32, 0.08);
+  box-shadow: var(--shadow-soft);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.expertise-item:hover,
+.skills-layout > div:hover {
+  border-color: rgba(8, 118, 111, 0.32);
+  box-shadow: 0 18px 44px rgba(16, 24, 32, 0.12);
+  transform: translateY(-3px);
 }
 
 .expertise-number {
@@ -387,7 +471,8 @@ h3 {
   max-width: none;
   padding-left: clamp(18px, 5vw, 64px);
   padding-right: clamp(18px, 5vw, 64px);
-  background: #101820;
+  background:
+    linear-gradient(180deg, #101820, #0d151b);
   color: #fff;
 }
 
@@ -414,9 +499,17 @@ h3 {
   margin: 0 auto 18px;
   padding: 18px;
   color: var(--ink);
-  background: #fff;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(249, 252, 252, 0.96)),
+    #fff;
   border-radius: 8px;
   box-shadow: var(--shadow);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.featured-project:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 30px 82px rgba(0, 0, 0, 0.2);
 }
 
 .featured-project-content {
@@ -468,6 +561,7 @@ h3 {
   background: #0d1117;
   border: 1px solid #26313a;
   border-radius: 8px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .workflow-preview img {
@@ -485,7 +579,9 @@ h3 {
   height: 320px;
   padding: 0;
   cursor: zoom-in;
-  background: transparent;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.04), transparent 48%),
+    #0d1117;
   border: 0;
 }
 
@@ -510,6 +606,12 @@ h3 {
   color: var(--ink);
   border-radius: 8px;
   box-shadow: var(--shadow);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.project-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 24px 62px rgba(0, 0, 0, 0.18);
 }
 
 .project-card p {
@@ -684,8 +786,12 @@ h3 {
     border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   }
 
+  .site-nav a::after {
+    display: none;
+  }
+
   .hero {
-    min-height: 86vh;
+    min-height: 86svh;
   }
 
   .hero-content {
@@ -700,6 +806,11 @@ h3 {
   .featured-project,
   .project-grid {
     grid-template-columns: 1fr;
+  }
+
+  .hero-stats {
+    grid-template-columns: 1fr;
+    width: min(460px, 100%);
   }
 
   .profile-card {
@@ -743,7 +854,7 @@ h3 {
   }
 
   .hero {
-    min-height: 82vh;
+    min-height: 82svh;
   }
 
   .hero-image {
@@ -756,6 +867,30 @@ h3 {
 
   .hero-meta span {
     width: 100%;
+  }
+
+  h1 {
+    font-size: clamp(2.8rem, 17vw, 4.8rem);
+  }
+
+  h2 {
+    font-size: clamp(1.85rem, 10vw, 3rem);
+  }
+
+  .featured-project {
+    padding: 14px;
+  }
+
+  .featured-project-content {
+    padding: 4px;
+  }
+
+  .image-zoom-trigger {
+    height: 190px;
+  }
+
+  .image-modal {
+    padding: 14px;
   }
 
   .site-footer {
