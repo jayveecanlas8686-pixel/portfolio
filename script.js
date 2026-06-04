@@ -80,3 +80,26 @@ sitePreviewModal.addEventListener("click", (event) => {
     closeSitePreview();
   }
 });
+
+const revealTargets = document.querySelectorAll(
+  ".featured-project, .expertise-item, .skills-layout > div, .about-layout, .contact-panel, .empty-project-state, .profile-card"
+);
+
+revealTargets.forEach((el, i) => {
+  el.classList.add("reveal-item");
+  el.style.transitionDelay = `${(i % 3) * 80}ms`;
+});
+
+const revealObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.07, rootMargin: "0px 0px -36px 0px" }
+);
+
+revealTargets.forEach((el) => revealObserver.observe(el));
