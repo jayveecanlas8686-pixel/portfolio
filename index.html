@@ -247,23 +247,23 @@
           <div class="featured-project-content">
             <div class="project-topline">
               <span>AI Forecasting</span>
-              <small>n8n + AI + LightGBM + Sales Data</small>
+              <small>n8n + SQL Server + LightGBM + Gemini AI</small>
             </div>
             <h3>AI Sales Forecast</h3>
             <p>
-              Built an n8n forecasting workflow that predicts sales using a hybrid AI and LightGBM approach. The process prepares sales history, enriches the forecast with external signals, and generates prediction results for business planning.
+              Built an advanced n8n forecasting workflow that runs on a daily 8:00 AM trigger, pulling multi-year SQL data on revenue trends, top products and customers, YoY comparisons, discounts, and seasonality, then blends a LightGBM machine learning model with a Gemini AI forecasting agent into a dynamic weighted hybrid ensemble to produce a professional daily sales forecast report.
             </p>
             <ul>
-              <li>Sales history extraction and cleaning</li>
-              <li>Forecast inputs from weather, holidays, crisis events, and location signals</li>
-              <li>Hybrid AI and LightGBM prediction workflow for more accurate forecasts</li>
+              <li>Daily-triggered SQL extraction covering revenue trends, top products/customers, YoY comparisons, discounts, and seasonality</li>
+              <li>PH holiday data enrichment combined with LightGBM machine learning forecasts</li>
+              <li>Gemini AI forecasting agent blended into a dynamic weighted hybrid ensemble with automated report generation</li>
             </ul>
           </div>
           <figure class="workflow-preview">
             <button class="image-zoom-trigger" type="button" aria-label="Zoom AI sales forecast workflow screenshot">
-              <img src="assets/ai-sales-forecast-workflow.png" alt="n8n workflow for AI and LightGBM sales forecasting">
+              <img src="assets/ai-sales-hybrid_forecast-workflow.png" alt="n8n workflow for hybrid LightGBM and Gemini AI sales forecasting">
             </button>
-            <figcaption>n8n workflow preview for sales forecasting using history, weather, holidays, crisis signals, AI, and LightGBM.</figcaption>
+            <figcaption>n8n workflow preview for the daily hybrid LightGBM and Gemini AI sales forecast pipeline.</figcaption>
           </figure>
         </article>
         <article class="featured-project">
@@ -287,6 +287,29 @@
               <img src="assets/etl-pbi-to-sql-server-workflow.png" alt="n8n ETL workflow from Power BI dataset to SQL Server">
             </button>
             <figcaption>n8n workflow preview for synchronizing Power BI dataset records into SQL Server.</figcaption>
+          </figure>
+        </article>
+        <article class="featured-project">
+          <div class="featured-project-content">
+            <div class="project-topline">
+              <span>Data Sync Automation</span>
+              <small>n8n + OneDrive + Microsoft Graph + SQL Server</small>
+            </div>
+            <h3>OneDrive Excel to SQL Server Sync</h3>
+            <p>
+              Built an n8n workflow that recursively scans multiple team members' OneDrive "Manual Collection" folders and subfolders, identifies Excel files, reads table data via Microsoft Graph, maps headers and rows into structured JSON, and syncs the consolidated records into SQL Server with automated insert and update operations.
+            </p>
+            <ul>
+              <li>Recursive OneDrive folder and subfolder scanning across multiple collectors</li>
+              <li>Excel table extraction via Microsoft Graph with header-to-row JSON mapping</li>
+              <li>Automated insert/update sync of consolidated records into SQL Server</li>
+            </ul>
+          </div>
+          <figure class="workflow-preview">
+            <button class="image-zoom-trigger" type="button" aria-label="Zoom OneDrive Excel to SQL Server sync workflow screenshot">
+              <img src="assets/onedrive-excel-sql-sync-workflow.png" alt="n8n workflow for syncing multi-folder OneDrive Excel data into SQL Server">
+            </button>
+            <figcaption>n8n workflow preview for consolidating multi-folder OneDrive Excel data into SQL Server.</figcaption>
           </figure>
         </article>
         <div class="project-category">
