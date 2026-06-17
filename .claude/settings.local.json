@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(gh auth status 2>&1)",
+      "PowerShell(gh repo view jayveecanlas8686-pixel/portfolio --json name,defaultBranchRef 2>&1)",
+      "PowerShell(git fetch origin 2>&1)",
+      "PowerShell(git checkout -b main origin/main 2>&1)",
+      "PowerShell(git branch -D temp_branch 2>&1)",
+      "PowerShell(git branch main origin/main 2>&1)",
+      "PowerShell(git symbolic-ref HEAD refs/heads/main 2>&1)",
+      "PowerShell(git reset HEAD 2>&1)",
+      "PowerShell(git checkout main 2>&1)"
+    ]
+  }
+}
