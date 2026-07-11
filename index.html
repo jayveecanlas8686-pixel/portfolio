@@ -453,6 +453,52 @@
             <figcaption>n8n workflow preview for consolidating multi-folder OneDrive Excel data into SQL Server.</figcaption>
           </figure>
         </article>
+        <article class="featured-project">
+          <div class="featured-project-content">
+            <div class="project-topline">
+              <span>AI Content Automation</span>
+              <small>n8n + Gemini + Veo + json2video + YouTube API + Google Sheets</small>
+            </div>
+            <h3>Automated YouTube Shorts Generator &amp; Publisher</h3>
+            <p>
+              Built a scheduled n8n workflow that generates and publishes AI trivia/"did you know" YouTube Shorts twice a day (12PM and 6PM), fully automated from idea to upload across three phases.
+            </p>
+            <ul>
+              <li>Idea generation — reads past ideas from Google Sheets to avoid repeats, searches trending "did you know" videos for context, then uses Gemini to generate a new trivia script and logs it back to the Sheet</li>
+              <li>Per-segment video generation (looped) — generates a reference image, submits to Veo (Google's video model), polls until complete, retries if safety filter blocks it, then uploads the clean segment to Drive</li>
+              <li>Final assembly &amp; publish — stitches all segments via json2video.com, polls until rendering completes, uploads to Drive, prepares title/description/tags, publishes to YouTube, and marks as published in the Sheet</li>
+            </ul>
+          </div>
+          <figure class="workflow-preview">
+            <button class="image-zoom-trigger" type="button" aria-label="Zoom automated YouTube Shorts generator workflow screenshot">
+              <img src="assets/yt_content_and_posting.png" alt="n8n workflow for automated YouTube Shorts generation and publishing">
+            </button>
+            <figcaption>n8n workflow preview for the fully automated idea-to-YouTube Shorts pipeline with Gemini, Veo, and json2video.</figcaption>
+          </figure>
+        </article>
+        <article class="featured-project">
+          <div class="featured-project-content">
+            <div class="project-topline">
+              <span>Data Sync Automation</span>
+              <small>n8n + Microsoft Graph + SharePoint/OneDrive + SQL Server</small>
+            </div>
+            <h3>SharePoint Excel to SQL Server via Graph Webhook</h3>
+            <p>
+              Built a Microsoft Graph change-notification workflow that syncs new and updated Excel files from SharePoint/OneDrive into SQL Server using delta queries, processing only incremental changes on each run.
+            </p>
+            <ul>
+              <li>Webhook intake &amp; validation — receives Graph change notifications, branches on subscription handshake vs. real notification, responds with validation token or 202 acknowledgement, and verifies client state for security</li>
+              <li>Delta sync — retrieves stored delta token, queries Graph's delta API, merges paginated results, persists the new delta link, then filters and normalizes only the relevant changed files</li>
+              <li>Per-file loop — for each changed file, reads named Excel tables via Graph API, resolves the target SQL table, cleans the data, and performs a delete-then-insert refresh to keep SQL Server in sync</li>
+            </ul>
+          </div>
+          <figure class="workflow-preview">
+            <button class="image-zoom-trigger" type="button" aria-label="Zoom SharePoint Excel to SQL Server webhook workflow screenshot">
+              <img src="assets/manualcollection_webhook.png" alt="n8n workflow for Graph webhook-driven SharePoint Excel to SQL Server sync">
+            </button>
+            <figcaption>n8n workflow preview for the Microsoft Graph webhook delta sync pipeline from SharePoint/OneDrive Excel into SQL Server.</figcaption>
+          </figure>
+        </article>
         <div class="project-category">
           <div class="project-category-heading">
             <span>02</span>
