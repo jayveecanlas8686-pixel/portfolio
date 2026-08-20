@@ -10,13 +10,16 @@ const types = {
   ".js": "application/javascript; charset=utf-8",
   ".png": "image/png",
   ".jpg": "image/jpeg",
-  ".jpeg": "image/jpeg"
+  ".jpeg": "image/jpeg",
+  ".svg": "image/svg+xml",
+  ".pdf": "application/pdf"
 };
 
 http
   .createServer((req, res) => {
     const requestedUrl = new URL(req.url, `http://${req.headers.host}`);
-    const pathname = requestedUrl.pathname === "/" ? "/index.html" : requestedUrl.pathname;
+    const decodedPathname = decodeURIComponent(requestedUrl.pathname);
+    const pathname = decodedPathname === "/" ? "/index.html" : decodedPathname;
     const filePath = path.normalize(path.join(root, pathname));
 
     if (!filePath.startsWith(root)) {
@@ -33,7 +36,8 @@ http
       }
 
       res.writeHead(200, {
-        "Content-Type": types[path.extname(filePath)] || "application/octet-stream"
+        "Content-Type": types[path.extname(filePath)] || "application/octet-stream",
+        "Cache-Control": "no-cache, no-store, must-revalidate"
       });
       res.end(data);
     });
