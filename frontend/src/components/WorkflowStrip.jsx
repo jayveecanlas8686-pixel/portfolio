@@ -23,7 +23,7 @@ export default function WorkflowStrip({ steps, result, caption, compact = false 
   const finished = active >= steps.length
 
   return (
-    <figure className={`rounded-[20px] bg-card ring-1 ring-line ${compact ? "p-5" : "p-5 sm:p-6"}`}>
+    <figure className={`rounded-[1.25rem] bg-card ring-1 ring-line ${compact ? "p-5" : "p-5 sm:p-6"}`}>
       <figcaption className={`${compact ? "mb-4" : "mb-5"} flex items-center gap-2 text-sm text-muted`}>
         <span
           aria-hidden="true"
@@ -67,7 +67,7 @@ export default function WorkflowStrip({ steps, result, caption, compact = false 
             finished ? 'opacity-100' : 'opacity-0'
           }`}
         >
-          <CheckCircle size={22} weight="fill" aria-hidden="true" />
+          <CheckCircle size="1.375rem" weight="fill" aria-hidden="true" />
           {result}
         </p>
       )}

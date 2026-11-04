@@ -30,13 +30,13 @@ export default function ClientDetail({ kind = 'client' }) {
   return (
     <div className="flex flex-col gap-12">
       <div>
-        <Link to="/projects" className="inline-flex items-center gap-1.5 text-sm font-semibold text-muted hover:text-ink">
-          <ArrowLeft size={16} aria-hidden="true" />
+        <Link to="/projects" className="inline-flex items-center gap-1.5 py-1 text-sm font-semibold text-muted hover:text-ink">
+          <ArrowLeft size="1rem" aria-hidden="true" />
           All projects
         </Link>
         <div className="mt-6 flex items-center gap-4">
           <ClientMark client={entry} size="h-16" />
-          <h1 className="text-[2.4rem] font-extrabold leading-[1.05] tracking-[-0.03em] sm:text-5xl">{entry.name}</h1>
+          <h1 className="min-w-0 text-[clamp(1.875rem,9.5vw,2.4rem)] font-extrabold leading-[1.05] tracking-[-0.03em] sm:text-5xl">{entry.name}</h1>
         </div>
         <p className="mt-3 text-lg text-muted">{subtitleFor(entry)}</p>
         <p className="mt-2 max-w-[60ch]">{entry.about}</p>

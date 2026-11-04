@@ -18,13 +18,17 @@ export default function DownloadCvButton({ variant = 'primary' }) {
       data-testid="download-cv"
       href={profile.cvPath}
       download
+      aria-label="Download CV"
       onClick={() => {
         recordCvDownload()
       }}
       className={STYLES[variant] ?? STYLES.primary}
     >
-      <DownloadSimple size={16} weight="bold" aria-hidden="true" />
-      Download CV
+      <DownloadSimple size="1rem" weight="bold" aria-hidden="true" />
+      {/* Smallest phones: the bar only has room for "CV". */}
+      <span>
+        <span className={variant === 'compact' ? 'max-[379px]:hidden' : undefined}>Download </span>CV
+      </span>
     </a>
   )
 }

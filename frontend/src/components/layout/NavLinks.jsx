@@ -13,7 +13,7 @@ const NAV_ITEMS = [
 
 function NavIcon({ icon }) {
   const Icon = icon
-  return <Icon size={18} weight="duotone" aria-hidden="true" className="relative" />
+  return <Icon size="1.125rem" weight="duotone" aria-hidden="true" className="relative" />
 }
 
 // pillId: each nav (sidebar, mobile menu) needs its own id so the sliding highlight stays in its own list.
@@ -27,7 +27,7 @@ export default function NavLinks({ onNavigate, pillId = 'nav-pill' }) {
             end={to === '/'}
             onClick={onNavigate}
             className={({ isActive }) =>
-              `relative flex items-center gap-3 rounded-lg px-3 py-2 text-[15px] transition-colors ${
+              `relative flex items-center gap-3 rounded-lg px-3 py-2 text-[0.9375rem] transition-colors ${
                 isActive ? 'font-semibold text-ink' : 'text-muted hover:text-ink'
               }`
             }

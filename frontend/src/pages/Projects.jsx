@@ -16,7 +16,7 @@ export default function Projects() {
   return (
     <div className="flex flex-col gap-14 sm:gap-16">
       <header>
-        <h1 className="max-w-[22ch] text-[2.4rem] font-extrabold leading-[1.05] tracking-[-0.03em] sm:text-[3.25rem]">
+        <h1 className="max-w-[22ch] text-[clamp(1.875rem,9.5vw,2.4rem)] font-extrabold leading-[1.05] tracking-[-0.03em] sm:text-[3.25rem]">
           Projects that took work off people's plates.
         </h1>
         <p className="mt-4 max-w-[60ch] text-lg text-muted">

@@ -23,7 +23,7 @@ export default function MobileBar() {
       <div className="flex items-center justify-between gap-3 px-4 py-3">
         <Link to="/" className="flex min-w-0 items-center gap-2.5">
           <Avatar size={34} />
-          <span className="truncate font-display text-[15px] font-bold">{profile.name}</span>
+          <span className="truncate font-display text-[0.9375rem] font-bold">{profile.name}</span>
         </Link>
         <div className="flex items-center gap-2">
           <DownloadCvButton variant="compact" />
@@ -33,9 +33,9 @@ export default function MobileBar() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             onClick={() => setOpen((o) => !o)}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-lg ring-1 ring-line"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg ring-1 ring-line"
           >
-            {open ? <X size={18} aria-hidden="true" /> : <List size={18} aria-hidden="true" />}
+            {open ? <X size="1.125rem" aria-hidden="true" /> : <List size="1.125rem" aria-hidden="true" />}
           </button>
         </div>
       </div>
@@ -45,7 +45,7 @@ export default function MobileBar() {
           id="mobile-menu"
           role="dialog"
           aria-label="Site menu"
-          className="border-t border-line bg-paper px-4 pb-5 pt-3"
+          className="max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-line bg-paper px-4 pb-5 pt-3"
         >
           <nav aria-label="Mobile">
             <NavLinks onNavigate={() => setOpen(false)} pillId="nav-pill-mobile" />

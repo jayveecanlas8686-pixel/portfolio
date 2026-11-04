@@ -25,7 +25,7 @@ function ToolList({ hidden = false }) {
     <ul className="flex shrink-0 items-center" aria-hidden={hidden || undefined}>
       {TOOLS.map(([name, file]) => (
         <li key={name} className="flex items-center gap-2 border-r border-line px-5 text-sm font-semibold whitespace-nowrap text-ink">
-          <img src={`/icons/${file}`} alt="" width="18" height="18" className="h-[18px] w-[18px] opacity-80 dark:invert" />
+          <img src={`/icons/${file}`} alt="" width="18" height="18" className="h-[1.125rem] w-[1.125rem] opacity-80 dark:invert" />
           {name}
         </li>
       ))}
@@ -37,7 +37,7 @@ export default function ToolsMarquee() {
   return (
     <section
       aria-labelledby="tools-heading"
-      className="flex items-center gap-4 overflow-hidden rounded-[20px] bg-card py-3 pl-5 ring-1 ring-line"
+      className="flex items-center gap-4 overflow-hidden rounded-[1.25rem] bg-card py-3 pl-5 ring-1 ring-line"
     >
       <h2 id="tools-heading" className="shrink-0 font-display text-sm font-bold leading-tight text-ink">
         Tools I<br className="hidden sm:block" /> work with

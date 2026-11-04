@@ -37,7 +37,7 @@ function FlowNode({ n, label, lit = false, children }) {
       <p className="flex items-center gap-2 text-sm font-semibold text-ink">
         <span
           aria-hidden="true"
-          className={`inline-flex h-5 w-5 items-center justify-center rounded-full font-display text-[11px] font-bold ${
+          className={`inline-flex h-5 w-5 items-center justify-center rounded-full font-display text-[0.6875rem] font-bold ${
             lit ? 'bg-accent text-accent-ink' : 'bg-ink text-paper'
           }`}
         >
@@ -45,7 +45,7 @@ function FlowNode({ n, label, lit = false, children }) {
         </span>
         <span>{label}</span>
       </p>
-      <div className="mt-1.5 text-[15px] leading-relaxed">{children}</div>
+      <div className="mt-1.5 text-[0.9375rem] leading-relaxed">{children}</div>
     </li>
   )
 }
@@ -55,7 +55,7 @@ export function ProjectRow({ project }) {
   const href = `/projects/${project.slug}`
   return (
     <article
-      className={`lift group relative grid overflow-hidden rounded-[20px] bg-card ring-1 ring-line has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-accent ${
+      className={`lift group relative grid overflow-hidden rounded-[1.25rem] bg-card ring-1 ring-line has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-accent ${
         project.image || project.flow ? 'md:grid-cols-[2fr_3fr]' : ''
       }`}
     >
@@ -120,7 +120,7 @@ function primaryExternalLink(project) {
 export function ProjectTile({ project }) {
   const link = primaryExternalLink(project)
   return (
-    <article className="lift flex flex-col overflow-hidden rounded-[20px] bg-card ring-1 ring-line">
+    <article className="lift flex flex-col overflow-hidden rounded-[1.25rem] bg-card ring-1 ring-line">
       {!project.image && project.flow && (
         <div className="border-b border-line bg-paper-2 p-3">
           <WorkflowCard title={project.title} steps={project.flow} compact />
@@ -136,16 +136,16 @@ export function ProjectTile({ project }) {
           <h3 className="text-lg font-bold">
             <Link
               to={`/projects/${project.slug}`}
-              className="underline decoration-line underline-offset-4 hover:decoration-accent"
+              className="inline-block py-1 underline decoration-line underline-offset-4 hover:decoration-accent"
             >
               {project.title}
             </Link>
           </h3>
-          <p className="mt-1 text-[15px] text-muted">{project.problem}</p>
+          <p className="mt-1 text-[0.9375rem] text-muted">{project.problem}</p>
         </div>
         <div>
           <p className="text-sm font-semibold text-ink">What it does</p>
-          <p className="mt-0.5 text-[15px] leading-relaxed text-ink">{project.whatItDoes}</p>
+          <p className="mt-0.5 text-[0.9375rem] leading-relaxed text-ink">{project.whatItDoes}</p>
         </div>
         <div className="mt-auto flex flex-wrap items-center justify-between gap-3 pt-1">
           <ToolTags tools={project.tools} />
@@ -156,7 +156,7 @@ export function ProjectTile({ project }) {
               className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold text-ink ring-1 ring-line hover:bg-paper"
             >
               {link.label}
-              <ArrowUpRight size={14} aria-hidden="true" />
+              <ArrowUpRight size="0.875rem" aria-hidden="true" />
             </a>
           )}
         </div>

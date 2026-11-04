@@ -48,6 +48,9 @@
 @layer base {
   html {
     background: var(--paper);
+    /* Everything is in rem, so this one line scales the whole site on big screens: 100% up to
+       1600x900, then with the screen (whichever of width or height runs out first), up to double. */
+    font-size: clamp(100%, min(1vw, 1.778vh), 200%);
   }
   body {
     background: var(--paper);

@@ -7,7 +7,7 @@ function ProofLink({ project }) {
   return (
     <Link
       to={`/projects/${project.slug}`}
-      className="font-semibold text-ink underline decoration-line underline-offset-4 hover:decoration-accent"
+      className="inline-block py-1 font-semibold text-ink underline decoration-line underline-offset-4 hover:decoration-accent"
     >
       {project.title}
     </Link>
@@ -25,8 +25,8 @@ export default function ServiceCard({ service, showProofResults = false, heading
       <p className="mt-2 max-w-[46ch] text-muted">{service.outcome}</p>
       <ul className="mt-4 space-y-1.5">
         {service.benefits.map((b) => (
-          <li key={b} className="flex items-start gap-2 text-[15px]">
-            <Check size={18} weight="bold" className="mt-0.5 shrink-0 text-accent" aria-hidden="true" />
+          <li key={b} className="flex items-start gap-2 text-[0.9375rem]">
+            <Check size="1.125rem" weight="bold" className="mt-0.5 shrink-0 text-accent" aria-hidden="true" />
             {b}
           </li>
         ))}
