@@ -29,6 +29,13 @@ describe('Client page', () => {
     expect(screen.getAllByRole('article')).toHaveLength(1)
   })
 
+  it('shows SimGolf with Michael and no invented title', () => {
+    renderAt('/clients/simgolf')
+    expect(screen.getByRole('heading', { level: 1, name: 'SimGolf' })).toBeInTheDocument()
+    expect(screen.getByText('Michael Frahm')).toBeInTheDocument()
+    expect(screen.getByText('In progress')).toBeInTheDocument()
+  })
+
   it('unknown client shows not found', () => {
     renderAt('/clients/nope')
     expect(screen.getByRole('heading', { name: /not found/i })).toBeInTheDocument()

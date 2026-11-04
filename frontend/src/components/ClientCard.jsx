@@ -19,7 +19,7 @@ export default function ClientCard({ client }) {
         <span className="min-w-0">
           <span className="block font-display text-lg font-bold text-ink group-hover:text-accent">{client.name}</span>
           <span className="block text-sm text-muted">
-            {client.contact}, {client.role}
+            {client.role ? `${client.contact}, ${client.role}` : client.contact}
           </span>
           <span className="mt-2 block text-sm">{client.about}</span>
           <span className="mt-2 block text-sm font-semibold text-accent">

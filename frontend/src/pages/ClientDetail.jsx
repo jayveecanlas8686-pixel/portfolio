@@ -23,7 +23,7 @@ export default function ClientDetail() {
           All projects
         </Link>
         <h1 className="mt-6 text-[2.4rem] font-extrabold leading-[1.05] tracking-[-0.03em] sm:text-5xl">{client.name}</h1>
-        <p className="mt-3 text-lg text-muted">{client.contact}, {client.role}</p>
+        <p className="mt-3 text-lg text-muted">{client.role ? `${client.contact}, ${client.role}` : client.contact}</p>
         <p className="mt-2 max-w-[60ch]">{client.about}</p>
       </div>
 

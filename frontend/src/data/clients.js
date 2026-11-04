@@ -17,6 +17,14 @@ export const CLIENTS = [
     about: 'A skin and aesthetics clinic in Copenhagen.',
     projectSlugs: ['reset-dashboard'],
   },
+  {
+    // Contact's title isn't stated anywhere in the project files, so none is shown.
+    id: 'simgolf',
+    name: 'SimGolf',
+    contact: 'Michael Frahm',
+    about: 'An indoor golf simulator business with several centres.',
+    projectSlugs: ['simgolf-platform'],
+  },
 ]
 
 export function getClient(id) {

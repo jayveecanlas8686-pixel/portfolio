@@ -108,7 +108,7 @@ export default function Home() {
             Built for{' '}
             {CLIENTS.map((c, i) => (
               <span key={c.id}>
-                {i > 0 && ' and '}
+                {i > 0 && (i === CLIENTS.length - 1 ? ' and ' : ', ')}
                 <Link to={`/clients/${c.id}`} className="font-semibold text-ink underline decoration-line underline-offset-4 hover:decoration-accent">
                   {c.name}
                 </Link>

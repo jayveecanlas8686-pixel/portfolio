@@ -22,7 +22,7 @@ describe('Projects', () => {
     const h2s = screen.getAllByRole('heading', { level: 2 }).map((h) => h.textContent)
     const groupTitles = PROJECT_GROUPS.map((g) => g.title)
     expect(h2s.filter((t) => groupTitles.includes(t))).toEqual(groupTitles)
-    expect(screen.getAllByRole('article')).toHaveLength(19)
+    expect(screen.getAllByRole('article')).toHaveLength(20)
   })
 
   it('real card shows Problem / Built / Result', () => {
@@ -84,6 +84,7 @@ describe('Projects: client work', () => {
     expect(within(clients).getByRole('link', { name: /Resét Skin & Aesthetics/ })).toHaveAttribute('href', '/clients/reset')
     expect(within(clients).getByText(/Umar Shaikh/)).toBeInTheDocument()
     expect(within(clients).getByText(/Sebastian Larsen/)).toBeInTheDocument()
+    expect(within(clients).getByRole('link', { name: /SimGolf/ })).toHaveAttribute('href', '/clients/simgolf')
   })
 
   it('client project cards name the client', () => {

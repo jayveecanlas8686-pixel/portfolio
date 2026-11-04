@@ -151,6 +151,28 @@ export const PROJECTS = [
     links: {},
   },
 
+  {
+    // User asked for SimGolf (2026-11-04): no mockup link, no mention of the data-collection robot, no results yet.
+    slug: 'simgolf-platform',
+    title: 'SimGolf Intelligence Platform',
+    group: 'clients',
+    client: 'simgolf',
+    kind: 'launching',
+    status: 'In progress',
+    context: 'SimGolf · operations platform',
+    problem:
+      'Operations, finances, bookings and customers were spread across separate systems, with no single place to see how each centre was doing.',
+    built:
+      'One platform with clubhouse KPI dashboards, a steering-meeting view, a staff league and TV screens (Danish and English), on a database and API with team roles and an audit log, plus automated weekly reports.',
+    highlights: [
+      'Clubhouse KPI dashboard and steering-meeting view',
+      'Team roles with an audit log',
+      'Danish and English',
+    ],
+    tools: ['React', 'TypeScript', 'Postgres', 'Express', 'n8n'],
+    links: {},
+  },
+
   // ── Data & AI tools ────────────────────────────────────────────────
   {
     slug: 'ai-sales-forecast',

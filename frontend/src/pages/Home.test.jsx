@@ -42,7 +42,7 @@ describe('Home hub', () => {
       expect(link).toHaveTextContent(before)
       expect(link).toHaveTextContent(after)
     }
-    expect(within(tile).getByRole('link', { name: /All 19 projects/ })).toHaveAttribute('href', '/projects')
+    expect(within(tile).getByRole('link', { name: /All 20 projects/ })).toHaveAttribute('href', '/projects')
   })
 
   it('has an about tile with the CV and a link to the about page', () => {
@@ -66,5 +66,6 @@ describe('Home hub: clients', () => {
     const tile = screen.getByRole('region', { name: 'Projects' })
     expect(within(tile).getByRole('link', { name: 'Nest Marketing' })).toHaveAttribute('href', '/clients/nest-marketing')
     expect(within(tile).getByRole('link', { name: 'Resét Skin & Aesthetics' })).toHaveAttribute('href', '/clients/reset')
+    expect(within(tile).getByRole('link', { name: 'SimGolf' })).toHaveAttribute('href', '/clients/simgolf')
   })
 })

@@ -54,9 +54,9 @@ describe('project content honesty (spec §4, §7)', () => {
 })
 
 describe('content structure', () => {
-  it('has 19 projects with unique slugs in known groups', () => {
-    expect(PROJECTS.length).toBe(19)
-    expect(new Set(PROJECTS.map((p) => p.slug)).size).toBe(19)
+  it('has 20 projects with unique slugs in known groups', () => {
+    expect(PROJECTS.length).toBe(20)
+    expect(new Set(PROJECTS.map((p) => p.slug)).size).toBe(20)
     const groupIds = PROJECT_GROUPS.map((g) => g.id)
     expect(groupIds).toEqual(['clients', 'automation', 'data-ai', 'demos', 'repos'])
     for (const p of PROJECTS) expect(groupIds, p.slug).toContain(p.group)
@@ -129,7 +129,9 @@ describe('performance: profile images are web-sized', () => {
 // Client work (user request 2026-11-04): names + company shown, no quotes, facts only from the project files.
 describe('client work', () => {
   it('lists Nest Marketing (Umar Shaikh) and Resét (Sebastian Larsen), no quotes', () => {
-    expect(CLIENTS.map((c) => c.id)).toEqual(['nest-marketing', 'reset'])
+    expect(CLIENTS.map((c) => c.id)).toEqual(['nest-marketing', 'reset', 'simgolf'])
+    expect(getClient('simgolf')).toMatchObject({ name: 'SimGolf', contact: 'Michael Frahm' })
+    expect(getClient('simgolf').role).toBeUndefined()
     expect(getClient('nest-marketing')).toMatchObject({ name: 'Nest Marketing', contact: 'Umar Shaikh', role: 'Founder' })
     expect(getClient('reset')).toMatchObject({ name: 'Resét Skin & Aesthetics', contact: 'Sebastian Larsen', role: 'Owner' })
     for (const c of CLIENTS) expect(c.quote, c.id).toBeUndefined()
@@ -138,6 +140,7 @@ describe('client work', () => {
   it('every client project exists, sits in the clients group and points back to its client', () => {
     expect(getClient('nest-marketing').projectSlugs).toEqual(['ai-email-builder', 'nest-brain', 'campaign-alerts', 'nest-audit-engine'])
     expect(getClient('reset').projectSlugs).toEqual(['reset-dashboard'])
+    expect(getClient('simgolf').projectSlugs).toEqual(['simgolf-platform'])
     for (const c of CLIENTS) {
       for (const slug of c.projectSlugs) {
         const p = getProject(slug)
@@ -153,6 +156,15 @@ describe('client work', () => {
     expect(p.kind).toBe('launching')
     expect(p.status).toBe('Launching November 2026')
     expect(p.result).toBeUndefined()
+  })
+
+  it('SimGolf is in progress: no result, no public link, no data robot', () => {
+    const p = getProject('simgolf-platform')
+    expect(p.kind).toBe('launching')
+    expect(p.status).toBe('In progress')
+    expect(p.result).toBeUndefined()
+    expect(p.links).toEqual({})
+    expect(JSON.stringify(p)).not.toMatch(/robot|scrap|vercel/i)
   })
 
   it('client results use only facts from the project files', () => {
