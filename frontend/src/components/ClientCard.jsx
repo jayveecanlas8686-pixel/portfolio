@@ -9,7 +9,7 @@ export function ClientMark({ client, size = 'h-11' }) {
       <img
         src={client.logo}
         alt={`${client.name} logo`}
-        className={`${size} w-auto max-w-[110px] shrink-0 rounded-xl bg-white object-contain ring-1 ring-line`}
+        className={`${size} w-auto shrink-0 rounded-xl bg-white object-cover ring-1 ring-line`}
       />
     )
   }
