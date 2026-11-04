@@ -1,37 +1,38 @@
-// Spec §8. Four services with equal weight, each backed by proof projects.
+// Four services, rebuilt around the client work (user request 2026-11-04).
+// Each leads with a client project as proof, then supporting work.
 
 export const SERVICES = [
   {
-    id: 'automation',
+    id: 'ai-assistants',
     number: '01',
-    title: 'Kill the manual work',
-    outcome: 'Flows that move, clean and file your data so your team stops copy-pasting.',
-    benefits: ['Repetitive tasks run on their own', 'Fewer typos and missed steps', 'Hours handed back to your team'],
-    proofSlugs: ['waybill-pdf-extraction', 'consolidate-raw-collection-data'],
+    title: 'AI assistants for your team',
+    outcome: 'Assistants that answer from your own data and turn requests into tasks, inside Slack and the tools you already use.',
+    benefits: ['Answers from your own docs and chats', 'Requests become tasks in the right place', 'Only your team can use it'],
+    proofSlugs: ['nest-brain', 'nest-audit-engine'],
   },
   {
-    id: 'reporting',
+    id: 'dashboards',
     number: '02',
-    title: 'Reports you can trust',
-    outcome: 'Power BI and SQL Server pipelines that refresh, check themselves and alert you.',
-    benefits: ['Dashboards that are never stale', 'Every refresh confirmed, not assumed', 'An alert the moment something breaks'],
-    proofSlugs: ['power-bi-refresh-monitor', 'data-sync-sql-server'],
+    title: 'Live dashboards and internal apps',
+    outcome: 'One view of bookings, sales, marketing and finance that refreshes itself every day.',
+    benefits: ['Data pulled from all your tools daily', 'Finance numbers nobody updates by hand', 'An alert when a sync fails'],
+    proofSlugs: ['reset-dashboard', 'simgolf-platform', 'power-bi-refresh-monitor'],
   },
   {
-    id: 'ai',
+    id: 'automation',
     number: '03',
-    title: 'AI that does real work',
-    outcome: 'AI built into a workflow: content, forecasts and documents, on a schedule.',
-    benefits: ['More output from the same team', 'Runs on a schedule, not on someone remembering', 'Fits the tools you already use'],
-    proofSlugs: ['ai-email-builder', 'ai-sales-forecast'],
+    title: 'Automations and alerts',
+    outcome: 'Workflows that move and check your data, and tell you the moment something drops.',
+    benefits: ['Repetitive tasks run on their own', 'Problems flagged before anyone has to look', 'Hours handed back to your team'],
+    proofSlugs: ['campaign-alerts', 'waybill-pdf-extraction', 'consolidate-raw-collection-data'],
   },
   {
-    id: 'web-apps',
+    id: 'ai-content',
     number: '04',
-    title: 'Custom web apps',
-    outcome: 'Dashboards, CRMs and booking tools built around how your team works.',
-    benefits: ['Built for your workflow, not a template', 'Clean, fast and easy to use', 'Yours to keep and extend'],
-    proofSlugs: ['nexuscrm', 'shophub', 'stayease'],
+    title: 'AI content and outreach',
+    outcome: 'On-brand emails, audits and reports produced on a schedule, and checked before anything goes out.',
+    benefits: ['More output from the same team', 'On-brand every time', 'Checked before it is sent'],
+    proofSlugs: ['ai-email-builder', 'nest-audit-engine', 'ai-sales-forecast'],
   },
 ]
 

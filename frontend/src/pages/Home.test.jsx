@@ -64,7 +64,8 @@ describe('Home bento', () => {
     renderHome()
     const card = region('Services')
     expect(within(card).getAllByTestId('service')).toHaveLength(4)
-    expect(within(card).getByRole('link', { name: /Kill the manual work/ })).toHaveAttribute('href', '/services#automation')
+    expect(within(card).getByRole('link', { name: /Automations and alerts/ })).toHaveAttribute('href', '/services#automation')
+    expect(within(card).getByRole('link', { name: /AI assistants for your team/ })).toHaveAttribute('href', '/services#ai-assistants')
   })
 
   it('credentials card links to the certificates', () => {

@@ -184,3 +184,22 @@ describe('client work', () => {
     expect(getClient('nope')).toBeUndefined()
   })
 })
+
+// Services rebuilt around client work (user request 2026-11-04).
+describe('services follow the client work', () => {
+  it('are the four client-backed services, in order', () => {
+    expect(SERVICES.map((s) => s.id)).toEqual(['ai-assistants', 'dashboards', 'automation', 'ai-content'])
+    expect(SERVICES.map((s) => s.title)).toEqual([
+      'AI assistants for your team',
+      'Live dashboards and internal apps',
+      'Automations and alerts',
+      'AI content and outreach',
+    ])
+  })
+
+  it('each service leads with at least one client project as proof', () => {
+    for (const s of SERVICES) {
+      expect(getProject(s.proofSlugs[0]).group, s.id).toBe('clients')
+    }
+  })
+})
