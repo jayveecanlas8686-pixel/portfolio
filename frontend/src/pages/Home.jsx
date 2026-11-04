@@ -3,6 +3,9 @@ import {
   ArrowUpRight,
   Briefcase,
   Certificate,
+  ChartLineUp,
+  EnvelopeSimple,
+  FlowArrow,
   FolderSimple,
   Handshake,
   Robot,
@@ -21,6 +24,23 @@ import ToolsMarquee from '../components/ToolsMarquee.jsx'
 
 // "Less manual work. More reliable data." → first sentence ink, second green.
 const [line1, line2] = profile.headline.split(/(?<=\.)\s+/)
+
+// One icon per service, matching what the service does.
+const SERVICE_ICONS = {
+  'ai-assistants': Robot,
+  dashboards: ChartLineUp,
+  automation: FlowArrow,
+  'ai-content': EnvelopeSimple,
+}
+
+function ServiceIcon({ id }) {
+  const Icon = SERVICE_ICONS[id] ?? Briefcase
+  return (
+    <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-accent-soft text-accent">
+      <Icon size={14} weight="bold" aria-hidden="true" data-service-icon={id} />
+    </span>
+  )
+}
 
 const AI_BUILDS = ['nest-brain', 'ai-email-builder', 'ai-sales-forecast', 'nest-audit-engine']
 const CERT_PREVIEW = ABOUT.certifications.filter((c) => c.image).slice(3, 6)
@@ -91,18 +111,21 @@ export default function Home() {
         <motion.section
           variants={fadeUp}
           aria-labelledby="home-about"
-          className="lift flex flex-col items-center rounded-[18px] bg-card p-4 text-center ring-1 ring-line lg:row-span-2"
+          className="lift flex min-h-0 flex-col items-center rounded-[18px] bg-card p-4 text-center ring-1 ring-line lg:row-span-2"
         >
           <h2 id="home-about" className="sr-only">
             About me
           </h2>
-          <img
-            src={profile.photo}
-            alt="Jayvee Canlas"
-            width="150"
-            height="190"
-            className="h-[150px] w-[120px] rounded-2xl object-cover object-top ring-1 ring-line xl:h-[170px] xl:w-[136px] [@media(max-height:760px)]:h-[112px] [@media(max-height:760px)]:w-[90px]"
-          />
+          {/* The photo takes all the height the card has to spare (user request 2026-11-04); fixed height when stacked. */}
+          <div className="relative h-72 w-full overflow-hidden rounded-2xl bg-paper-2 ring-1 ring-line lg:h-auto lg:min-h-[120px] lg:flex-1">
+            <img
+              src={profile.photo}
+              alt="Jayvee Canlas"
+              width="480"
+              height="672"
+              className="absolute inset-0 h-full w-full object-cover object-[50%_18%]"
+            />
+          </div>
           <p className="mt-3 text-xs text-muted">Hi, I'm</p>
           <p className="font-display text-2xl font-extrabold leading-tight tracking-[-0.02em]">{profile.name}</p>
           <p className="mt-1 text-xs text-muted">Data engineer, automation & AI</p>
@@ -111,7 +134,7 @@ export default function Home() {
             <br />
             <span className="text-accent">{line2}</span>
           </p>
-          <div className="mt-auto flex w-full flex-col items-center gap-2 pt-4">
+          <div className="flex w-full flex-col items-center gap-2 pt-3">
             <DownloadCvButton variant="outline" />
             <Link to="/about" className="text-xs font-semibold text-accent underline underline-offset-4">
               More about me
@@ -181,9 +204,14 @@ export default function Home() {
               <li key={s.id} data-testid="service">
                 <Link
                   to={`/services#${s.id}`}
-                  className="group flex items-center justify-between gap-2 py-1.5 text-[13px] font-semibold text-ink"
+                  className="group flex min-w-0 items-center justify-between gap-2 py-1.5 text-[13px] font-semibold text-ink"
                 >
-                  <span className="group-hover:text-accent">{s.title}</span>
+                  <span className="flex min-w-0 items-center gap-2">
+                    <ServiceIcon id={s.id} />
+                    <span className="truncate group-hover:text-accent" title={s.title}>
+                      {s.short ?? s.title}
+                    </span>
+                  </span>
                   <span className="font-mono text-[11px] text-muted">{s.number}</span>
                 </Link>
               </li>

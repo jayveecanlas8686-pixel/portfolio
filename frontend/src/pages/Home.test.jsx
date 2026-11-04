@@ -40,9 +40,9 @@ describe('Home bento', () => {
     renderHome()
     const card = region('Projects')
     const cases = [
-      [/2\.5×/, '/projects/ai-email-builder', '20 emails/day', '50+ emails/day'],
-      [/2h → 10m/, '/projects/waybill-pdf-extraction', '2 hrs/day', '5–10 min/day'],
-      [/8×\/day/, '/projects/power-bi-refresh-monitor', 'Refreshed by hand', 'Up to 8×/day, verified'],
+      [/AI Email Builder/, '/projects/ai-email-builder', '20 emails/day', '50+ emails/day'],
+      [/Nest Brain/, '/projects/nest-brain', 'Posted by hand', '840+ tasks routed in 3 weeks'],
+      [/Business & CFO Dashboard/, '/projects/reset-dashboard', 'Updated by hand', 'Synced daily from 6 sources'],
     ]
     for (const [name, href, before, after] of cases) {
       const link = within(card).getByRole('link', { name })
@@ -51,6 +51,8 @@ describe('Home bento', () => {
       expect(link).toHaveTextContent(after)
     }
     expect(within(card).getByRole('link', { name: /All 22 projects/ })).toHaveAttribute('href', '/projects')
+    expect(within(card).getAllByText('Nest Marketing').length).toBe(2)
+    expect(within(card).getByText('Resét Skin & Aesthetics')).toBeInTheDocument()
   })
 
   it('AI builds card links to the AI projects', () => {
@@ -64,8 +66,8 @@ describe('Home bento', () => {
     renderHome()
     const card = region('Services')
     expect(within(card).getAllByTestId('service')).toHaveLength(4)
-    expect(within(card).getByRole('link', { name: /Automations and alerts/ })).toHaveAttribute('href', '/services#automation')
-    expect(within(card).getByRole('link', { name: /AI assistants for your team/ })).toHaveAttribute('href', '/services#ai-assistants')
+    expect(within(card).getByRole('link', { name: /Automations & alerts/ })).toHaveAttribute('href', '/services#automation')
+    expect(within(card).getByRole('link', { name: /AI assistants/ })).toHaveAttribute('href', '/services#ai-assistants')
   })
 
   it('credentials card links to the certificates', () => {
@@ -81,5 +83,15 @@ describe('Home bento', () => {
     expect(within(card).getByRole('link', { name: /Nest Marketing/ })).toHaveAttribute('href', '/clients/nest-marketing')
     expect(within(card).getByRole('link', { name: /Resét Skin & Aesthetics/ })).toHaveAttribute('href', '/clients/reset')
     expect(within(card).getByRole('link', { name: /SimGolf/ })).toHaveAttribute('href', '/clients/simgolf')
+  })
+})
+
+describe('Home bento: service icons', () => {
+  it('every service row has its own icon', () => {
+    renderHome()
+    const rows = within(region('Services')).getAllByTestId('service')
+    for (const row of rows) expect(row.querySelector('svg[data-service-icon]')).not.toBeNull()
+    const kinds = rows.map((r) => r.querySelector('svg[data-service-icon]').getAttribute('data-service-icon'))
+    expect(new Set(kinds).size).toBe(4)
   })
 })

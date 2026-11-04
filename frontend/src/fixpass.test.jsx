@@ -68,8 +68,9 @@ describe('final review fixes', () => {
   })
 
   it('refresh result keeps the "up to" from the stated fact', () => {
-    const refresh = HOME_RESULTS.find((r) => r.slug === 'power-bi-refresh-monitor')
-    expect(refresh.after).toMatch(/^Up to 8×\/day/)
+    // Home no longer shows this project; the wording lives on the project itself.
+    expect(getProject('power-bi-refresh-monitor').result.detail).toMatch(/^Up to 8 verified refreshes/)
+    expect(HOME_RESULTS.some((r) => /^8×/.test(r.after))).toBe(false)
   })
 
   it('waybill problem makes no claim the user never made', () => {

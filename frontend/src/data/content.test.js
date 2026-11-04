@@ -80,14 +80,19 @@ describe('content structure', () => {
     expect(METHOD.map((m) => m.step)).toEqual(['Map it', 'Automate it', 'Hand it over'])
   })
 
-  it('home results are the three stated numbers and resolve', () => {
-    expect(HOME_RESULTS.map((r) => r.value)).toEqual(['2.5×', '2h → 10m', '8×/day'])
-    expect(HOME_RESULTS.map((r) => r.slug)).toEqual([
-      'ai-email-builder',
-      'waybill-pdf-extraction',
-      'power-bi-refresh-monitor',
+  it('home results are client projects with stated results', () => {
+    expect(HOME_RESULTS.map((r) => r.slug)).toEqual(['ai-email-builder', 'nest-brain', 'reset-dashboard'])
+    for (const r of HOME_RESULTS) {
+      const p = getProject(r.slug)
+      expect(p.group, r.slug).toBe('clients')
+      expect(p.result, r.slug).toBeDefined()
+      expect(r.client, r.slug).toBeTruthy()
+    }
+    expect(HOME_RESULTS.map((r) => r.after)).toEqual([
+      '50+ emails/day',
+      '840+ tasks routed in 3 weeks',
+      'Synced daily from 6 sources',
     ])
-    for (const r of HOME_RESULTS) expect(getProject(r.slug)).toBeDefined()
   })
 
   it('profile has the headline, tagline and photo', () => {
@@ -197,6 +202,10 @@ describe('services follow the client work', () => {
     ])
   })
 
+  it('each service has a short name for the Home card (max 26 characters)', () => {
+    for (const s of SERVICES) expect(s.short?.length, s.id).toBeLessThanOrEqual(26)
+  })
+
   it('each service leads with at least one client project as proof', () => {
     for (const s of SERVICES) {
       expect(getProject(s.proofSlugs[0]).group, s.id).toBe('clients')
@@ -218,5 +227,12 @@ describe('projects still being built say so', () => {
     expect(p).toMatchObject({ kind: 'launching', status: 'Rolling out November 2026', client: 'reset', group: 'clients' })
     expect(p.result).toBeUndefined()
     expect(JSON.stringify(p)).not.toMatch(/85 ?%|69|100 reviews|80k/)
+  })
+})
+
+describe('every client project backs a service', () => {
+  it('each client project appears as proof under at least one service', () => {
+    const proofs = new Set(SERVICES.flatMap((s) => s.proofSlugs))
+    for (const p of PROJECTS.filter((x) => x.group === 'clients')) expect(proofs.has(p.slug), p.slug).toBe(true)
   })
 })

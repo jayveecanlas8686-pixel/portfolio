@@ -16,10 +16,15 @@ export default function ResultsLedger({ results, compact = false }) {
                 : 'group grid grid-cols-1 gap-x-6 gap-y-1 py-5 sm:grid-cols-[minmax(0,14rem)_1fr_auto] sm:items-center'
             }
           >
-            <span className={compact ? 'min-w-0' : 'contents'}>
-              <span className={`block font-display font-bold text-ink ${compact ? 'text-sm' : 'text-base'}`}>
-                {r.title}
-                <span className="sr-only"> ({r.value})</span>
+            <span className={compact ? 'min-w-0 flex-1' : 'contents'}>
+              <span
+                className={`font-display font-bold text-ink ${compact ? 'flex items-baseline justify-between gap-3 text-sm' : 'block text-base'}`}
+              >
+                <span className="truncate">
+                  {r.title}
+                  <span className="sr-only"> ({r.value})</span>
+                </span>
+                {r.client && <span className="shrink-0 font-body text-xs font-normal text-muted">{r.client}</span>}
               </span>
               <span className={`flex flex-wrap items-baseline gap-x-2 gap-y-0.5 ${compact ? 'mt-0.5' : ''}`}>
                 <span className={`text-muted line-through decoration-1 ${compact ? 'text-sm' : ''}`}>{r.before}</span>
@@ -28,11 +33,13 @@ export default function ResultsLedger({ results, compact = false }) {
                 {r.note && <span className="text-xs text-muted">({r.note})</span>}
               </span>
             </span>
-            <ArrowUpRight
-              size={compact ? 16 : 18}
-              aria-hidden="true"
-              className={`shrink-0 text-muted transition-colors group-hover:text-accent ${compact ? 'mt-0.5' : 'hidden sm:block'}`}
-            />
+            {!compact && (
+              <ArrowUpRight
+                size={18}
+                aria-hidden="true"
+                className="hidden shrink-0 text-muted transition-colors group-hover:text-accent sm:block"
+              />
+            )}
           </Link>
         </li>
       ))}
