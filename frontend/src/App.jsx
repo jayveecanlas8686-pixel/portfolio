@@ -19,7 +19,9 @@ export function AppRoutes() {
         <Route index element={<Home />} />
         <Route path="projects" element={<Projects />} />
         <Route path="projects/:slug" element={<ProjectDetail />} />
-        <Route path="clients/:id" element={<ClientDetail />} />
+        <Route path="clients/:id" element={<ClientDetail kind="client" />} />
+        <Route path="employment/:id" element={<ClientDetail kind="employer" />} />
+        <Route path="personal" element={<ClientDetail kind="personal" />} />
         <Route path="services" element={<Services />} />
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />

@@ -1,19 +1,30 @@
 import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft } from '@phosphor-icons/react'
-import { getClient } from '../data/clients.js'
+import { getCollection, subtitleFor } from '../data/clients.js'
 import { getProject } from '../data/projects.js'
+import { isRow } from '../lib/format.js'
 import { useDocumentTitle } from '../lib/useDocumentTitle.js'
-import { ProjectRow } from '../components/ProjectCard.jsx'
+import { ProjectRow, ProjectTile } from '../components/ProjectCard.jsx'
 import ContactBand from '../components/ContactBand.jsx'
 import NotFound from './NotFound.jsx'
 
-// Everything built for one client (user request: click a client to see the projects made for their company).
-export default function ClientDetail() {
-  const { id } = useParams()
-  const client = getClient(id)
-  useDocumentTitle(client?.name ?? 'Not found')
-  if (!client) return <NotFound />
-  const projects = client.projectSlugs.map(getProject).filter(Boolean)
+const HEADINGS = {
+  client: (c) => `What I built for ${c.name}`,
+  employer: (c) => `What I built at ${c.name}`,
+  personal: () => 'What I built',
+}
+
+// The page a Projects card opens: one client, the employer, or the personal set (user request 2026-11-04).
+// kind comes from the route; /personal has no id, so it uses its single entry.
+export default function ClientDetail({ kind = 'client' }) {
+  const { id = kind } = useParams()
+  const entry = getCollection(kind, id)
+  useDocumentTitle(entry?.name ?? 'Not found')
+  if (!entry) return <NotFound />
+
+  const projects = entry.projectSlugs.map(getProject).filter(Boolean)
+  const rows = projects.filter(isRow)
+  const tiles = projects.filter((p) => !isRow(p))
 
   return (
     <div className="flex flex-col gap-12">
@@ -22,20 +33,29 @@ export default function ClientDetail() {
           <ArrowLeft size={16} aria-hidden="true" />
           All projects
         </Link>
-        <h1 className="mt-6 text-[2.4rem] font-extrabold leading-[1.05] tracking-[-0.03em] sm:text-5xl">{client.name}</h1>
-        <p className="mt-3 text-lg text-muted">{client.role ? `${client.contact}, ${client.role}` : client.contact}</p>
-        <p className="mt-2 max-w-[60ch]">{client.about}</p>
+        <h1 className="mt-6 text-[2.4rem] font-extrabold leading-[1.05] tracking-[-0.03em] sm:text-5xl">{entry.name}</h1>
+        <p className="mt-3 text-lg text-muted">{subtitleFor(entry)}</p>
+        <p className="mt-2 max-w-[60ch]">{entry.about}</p>
       </div>
 
-      <section aria-labelledby="client-projects">
-        <h2 id="client-projects" className="text-2xl font-extrabold">
-          What I built for {client.name}
+      <section aria-labelledby="collection-projects">
+        <h2 id="collection-projects" className="text-2xl font-extrabold">
+          {HEADINGS[kind](entry)}
         </h2>
-        <div className="mt-6 grid gap-6">
-          {projects.map((p) => (
-            <ProjectRow key={p.slug} project={p} />
-          ))}
-        </div>
+        {rows.length > 0 && (
+          <div data-testid="rows" className="mt-6 grid gap-6">
+            {rows.map((p) => (
+              <ProjectRow key={p.slug} project={p} />
+            ))}
+          </div>
+        )}
+        {tiles.length > 0 && (
+          <div data-testid="tiles" className="mt-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            {tiles.map((p) => (
+              <ProjectTile key={p.slug} project={p} />
+            ))}
+          </div>
+        )}
       </section>
 
       <ContactBand />

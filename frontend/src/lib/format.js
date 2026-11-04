@@ -12,3 +12,6 @@ export function contextLine(project) {
 
 // Props for every link that leaves the site.
 export const EXTERNAL = { target: '_blank', rel: 'noopener noreferrer' }
+
+// Full problem → built → result stories show as wide rows; demos and repos as compact tiles.
+export const isRow = (p) => ['real', 'personal', 'launching', 'building'].includes(p.kind)

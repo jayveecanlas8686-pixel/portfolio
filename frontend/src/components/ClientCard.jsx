@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom'
 import { ArrowUpRight } from '@phosphor-icons/react'
+import { hrefFor, subtitleFor } from '../data/clients.js'
 
-// A client the work was done for. No quote yet (user's choice, 2026-11-04): name, person, what they do, project count.
+// One card per client, employer or personal set (user request 2026-11-04). No quotes yet.
 export default function ClientCard({ client }) {
   const count = client.projectSlugs.length
   return (
     <Link
-      to={`/clients/${client.id}`}
+      to={hrefFor(client)}
       className="lift group flex items-start justify-between gap-4 rounded-[20px] bg-card p-5 ring-1 ring-line"
     >
       <span className="flex min-w-0 items-start gap-4">
@@ -18,9 +19,7 @@ export default function ClientCard({ client }) {
         </span>
         <span className="min-w-0">
           <span className="block font-display text-lg font-bold text-ink group-hover:text-accent">{client.name}</span>
-          <span className="block text-sm text-muted">
-            {client.role ? `${client.contact}, ${client.role}` : client.contact}
-          </span>
+          <span className="block text-sm text-muted">{subtitleFor(client)}</span>
           <span className="mt-2 block text-sm">{client.about}</span>
           <span className="mt-2 block text-sm font-semibold text-accent">
             {count} {count === 1 ? 'project' : 'projects'} built
