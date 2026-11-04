@@ -3,7 +3,7 @@ import { profile } from '../../data/profile.js'
 import NavLinks from './NavLinks.jsx'
 import SocialLinks from './SocialLinks.jsx'
 import ThemeToggle from './ThemeToggle.jsx'
-import CvLink from './CvLink.jsx'
+import DownloadCvButton from '../DownloadCvButton.jsx'
 import Avatar from './Avatar.jsx'
 
 export default function Sidebar() {
@@ -26,7 +26,7 @@ export default function Sidebar() {
           <SocialLinks />
           <ThemeToggle />
         </div>
-        <CvLink variant="primary" />
+        <DownloadCvButton variant="primary" />
       </div>
     </aside>
   )

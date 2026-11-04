@@ -5,7 +5,7 @@ import { profile } from '../../data/profile.js'
 import NavLinks from './NavLinks.jsx'
 import SocialLinks from './SocialLinks.jsx'
 import ThemeToggle from './ThemeToggle.jsx'
-import CvLink from './CvLink.jsx'
+import DownloadCvButton from '../DownloadCvButton.jsx'
 import Avatar from './Avatar.jsx'
 
 export default function MobileBar() {
@@ -26,7 +26,7 @@ export default function MobileBar() {
           <span className="truncate font-display text-[15px] font-bold">{profile.name}</span>
         </Link>
         <div className="flex items-center gap-2">
-          <CvLink variant="compact" />
+          <DownloadCvButton variant="compact" />
           <button
             type="button"
             aria-label="Menu"
