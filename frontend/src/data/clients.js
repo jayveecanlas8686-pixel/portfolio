@@ -18,10 +18,11 @@ export const CLIENTS = [
     projectSlugs: ['reset-dashboard'],
   },
   {
-    // Contact's title isn't stated anywhere in the project files, so none is shown.
+    // Owner per Jayvee (2026-11-04). Day-to-day contact in the files is Michael Frahm.
     id: 'simgolf',
     name: 'SimGolf',
-    contact: 'Michael Frahm',
+    contact: 'Keld Jensen',
+    role: 'Owner',
     about: 'An indoor golf simulator business with several centres.',
     projectSlugs: ['simgolf-platform'],
   },

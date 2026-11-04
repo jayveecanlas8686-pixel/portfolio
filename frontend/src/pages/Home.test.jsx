@@ -10,62 +10,75 @@ function renderHome() {
   )
 }
 
-// Home is a one-screen hub (user request 2026-11-04): promise + services + projects + about, each linking deeper.
-describe('Home hub', () => {
-  it('shows the promise and both CTAs', () => {
+const region = (name) => screen.getByRole('region', { name })
+
+// Home = one-screen bento hub modelled on the layout Jayvee shared (2026-11-04), with his own content.
+describe('Home bento', () => {
+  it('shows the promise and the main call to action', () => {
     renderHome()
     expect(screen.getByRole('heading', { level: 1, name: 'Less manual work. More reliable data.' })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'Discuss a project' })).toHaveAttribute('href', '/contact')
-    expect(screen.getByRole('link', { name: 'See results' })).toHaveAttribute('href', '/projects')
+    expect(screen.getByRole('link', { name: /Discuss a project/ })).toHaveAttribute('href', '/contact')
   })
 
-  it('has a services tile listing all 4 services, each linking to its section', () => {
+  it('has a tools strip listing the tools I work with', () => {
     renderHome()
-    const tile = screen.getByRole('region', { name: 'Services' })
-    const items = within(tile).getAllByTestId('service')
-    expect(items).toHaveLength(4)
-    expect(within(tile).getByRole('link', { name: /Kill the manual work/ })).toHaveAttribute('href', '/services#automation')
-    expect(within(tile).getByRole('link', { name: 'All services' })).toHaveAttribute('href', '/services')
+    const tools = region('Tools I work with')
+    for (const name of ['n8n', 'Power BI', 'SQL Server', 'Python', 'Claude']) {
+      expect(within(tools).getAllByText(name).length).toBeGreaterThanOrEqual(1)
+    }
   })
 
-  it('has a projects tile with the three before → after results linking to their projects', () => {
+  it('has a profile card with name, CV and a link to About', () => {
     renderHome()
-    const tile = screen.getByRole('region', { name: 'Projects' })
+    const card = region('About me')
+    expect(within(card).getByText('Jayvee Canlas')).toBeInTheDocument()
+    expect(within(card).getByTestId('download-cv')).toBeInTheDocument()
+    expect(within(card).getByRole('link', { name: 'More about me' })).toHaveAttribute('href', '/about')
+  })
+
+  it('projects card shows the three before → after results and links to all projects', () => {
+    renderHome()
+    const card = region('Projects')
     const cases = [
       [/2\.5×/, '/projects/ai-email-builder', '20 emails/day', '50+ emails/day'],
       [/2h → 10m/, '/projects/waybill-pdf-extraction', '2 hrs/day', '5–10 min/day'],
       [/8×\/day/, '/projects/power-bi-refresh-monitor', 'Refreshed by hand', 'Up to 8×/day, verified'],
     ]
     for (const [name, href, before, after] of cases) {
-      const link = within(tile).getByRole('link', { name })
+      const link = within(card).getByRole('link', { name })
       expect(link).toHaveAttribute('href', href)
       expect(link).toHaveTextContent(before)
       expect(link).toHaveTextContent(after)
     }
-    expect(within(tile).getByRole('link', { name: /All 20 projects/ })).toHaveAttribute('href', '/projects')
+    expect(within(card).getByRole('link', { name: /All 20 projects/ })).toHaveAttribute('href', '/projects')
   })
 
-  it('has an about tile with the CV and a link to the about page', () => {
+  it('AI builds card links to the AI projects', () => {
     renderHome()
-    const tile = screen.getByRole('region', { name: 'About me' })
-    expect(within(tile).getByTestId('download-cv')).toBeInTheDocument()
-    expect(within(tile).getByRole('link', { name: 'More about me' })).toHaveAttribute('href', '/about')
+    const card = region('AI builds')
+    expect(within(card).getByRole('link', { name: 'Nest Brain' })).toHaveAttribute('href', '/projects/nest-brain')
+    expect(within(card).getByRole('link', { name: 'AI Email Builder' })).toHaveAttribute('href', '/projects/ai-email-builder')
   })
 
-  it('keeps the running workflow', () => {
+  it('services card lists all 4 services, each linking to its section', () => {
     renderHome()
-    expect(screen.getAllByRole('listitem').map((li) => li.textContent)).toEqual(
-      expect.arrayContaining(['Waybill PDF', 'n8n extracts', 'Clean data', 'Excel ✓']),
-    )
+    const card = region('Services')
+    expect(within(card).getAllByTestId('service')).toHaveLength(4)
+    expect(within(card).getByRole('link', { name: /Kill the manual work/ })).toHaveAttribute('href', '/services#automation')
   })
-})
 
-describe('Home hub: clients', () => {
-  it('projects tile names both clients and links to their pages', () => {
+  it('credentials card links to the certificates', () => {
     renderHome()
-    const tile = screen.getByRole('region', { name: 'Projects' })
-    expect(within(tile).getByRole('link', { name: 'Nest Marketing' })).toHaveAttribute('href', '/clients/nest-marketing')
-    expect(within(tile).getByRole('link', { name: 'Resét Skin & Aesthetics' })).toHaveAttribute('href', '/clients/reset')
-    expect(within(tile).getByRole('link', { name: 'SimGolf' })).toHaveAttribute('href', '/clients/simgolf')
+    const card = region('Credentials')
+    expect(within(card).getByText(/9 certifications/)).toBeInTheDocument()
+    expect(within(card).getByRole('link', { name: /See certificates/ })).toHaveAttribute('href', '/about')
+  })
+
+  it('clients card opens each client page', () => {
+    renderHome()
+    const card = region('Clients')
+    expect(within(card).getByRole('link', { name: /Nest Marketing/ })).toHaveAttribute('href', '/clients/nest-marketing')
+    expect(within(card).getByRole('link', { name: /Resét Skin & Aesthetics/ })).toHaveAttribute('href', '/clients/reset')
+    expect(within(card).getByRole('link', { name: /SimGolf/ })).toHaveAttribute('href', '/clients/simgolf')
   })
 })

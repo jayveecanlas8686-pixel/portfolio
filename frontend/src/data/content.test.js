@@ -130,8 +130,7 @@ describe('performance: profile images are web-sized', () => {
 describe('client work', () => {
   it('lists Nest Marketing (Umar Shaikh) and Resét (Sebastian Larsen), no quotes', () => {
     expect(CLIENTS.map((c) => c.id)).toEqual(['nest-marketing', 'reset', 'simgolf'])
-    expect(getClient('simgolf')).toMatchObject({ name: 'SimGolf', contact: 'Michael Frahm' })
-    expect(getClient('simgolf').role).toBeUndefined()
+    expect(getClient('simgolf')).toMatchObject({ name: 'SimGolf', contact: 'Keld Jensen', role: 'Owner' })
     expect(getClient('nest-marketing')).toMatchObject({ name: 'Nest Marketing', contact: 'Umar Shaikh', role: 'Founder' })
     expect(getClient('reset')).toMatchObject({ name: 'Resét Skin & Aesthetics', contact: 'Sebastian Larsen', role: 'Owner' })
     for (const c of CLIENTS) expect(c.quote, c.id).toBeUndefined()

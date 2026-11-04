@@ -29,10 +29,10 @@ describe('Client page', () => {
     expect(screen.getAllByRole('article')).toHaveLength(1)
   })
 
-  it('shows SimGolf with Michael and no invented title', () => {
+  it('shows SimGolf with its owner, Keld Jensen', () => {
     renderAt('/clients/simgolf')
     expect(screen.getByRole('heading', { level: 1, name: 'SimGolf' })).toBeInTheDocument()
-    expect(screen.getByText('Michael Frahm')).toBeInTheDocument()
+    expect(screen.getByText('Keld Jensen, Owner')).toBeInTheDocument()
     expect(screen.getByText('In progress')).toBeInTheDocument()
   })
 

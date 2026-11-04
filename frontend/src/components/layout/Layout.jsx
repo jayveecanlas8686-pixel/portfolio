@@ -38,7 +38,7 @@ export default function Layout() {
       {/* Keyed by path: any navigation (name link, Back button, menu link) closes the menu. */}
       <MobileBar key={pathname} />
       <main id="main" className="lg:pl-[264px]">
-        <div className="mx-auto max-w-5xl px-4 py-8 sm:px-8 lg:py-6">
+        <div className="mx-auto max-w-6xl px-4 py-8 sm:px-8 lg:py-6">
           <RouteErrorBoundary resetKey={pathname}>
             <Suspense fallback={<div className="min-h-[60vh]" aria-busy="true" />}>
               {/* Page transition: each page fades up in, 0.45s. */}
