@@ -58,7 +58,7 @@ export function ProjectRow({ project }) {
       }`}
     >
       {project.image && (
-        <div className="px-5 pt-5 sm:px-6 sm:pt-6 md:pb-6 md:pr-0">
+        <div className="flex items-center justify-center px-5 pt-5 sm:px-6 sm:pt-6 md:pb-6 md:pr-0">
           <ProjectImage project={project} className="h-auto w-full rounded-xl bg-paper-2 ring-1 ring-line" />
         </div>
       )}
