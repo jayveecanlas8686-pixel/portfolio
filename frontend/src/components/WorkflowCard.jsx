@@ -3,43 +3,10 @@ import { motion } from 'framer-motion'
 import { Check, Lightning } from '@phosphor-icons/react'
 import { FLOW_ICONS } from '../lib/flowIcons.js'
 import { useReducedMotion } from '../lib/useReducedMotion.js'
+import { edgePath, snakePosition } from '../lib/workflowGeometry.js'
 
 const STEP_MS = 1600 // one node "runs" per step
 const EDGE_S = 0.7 // seconds for the data to travel to the next node
-
-// Zigzag (snake) placement: row 1 left→right, row 2 right→left, ...
-function snakePosition(i, cols) {
-  const row = Math.floor(i / cols)
-  const inRow = i % cols
-  const col = row % 2 === 0 ? inRow : cols - 1 - inRow
-  return { row: row + 1, col: col + 1 }
-}
-
-// Orthogonal connector between two node boxes (relative to the canvas). Straight across within a row.
-// At the snake's turn it routes like n8n does: out past the canvas edge, down, and back into the next
-// node's side, so the line never crosses the labels under the nodes.
-function edgePath(a, b, width) {
-  if (Math.abs(a.cy - b.cy) < 4) {
-    const fromX = b.cx > a.cx ? a.right : a.left
-    const toX = b.cx > a.cx ? b.left : b.right
-    return { d: `M ${fromX} ${a.cy} L ${toX} ${b.cy}`, from: [fromX, a.cy], to: [toX, b.cy] }
-  }
-  const right = a.cx > width / 2
-  const fromX = right ? a.right : a.left
-  const toX = right ? b.right : b.left
-  const outX = right ? width + 8 : -8
-  const r = 10 // rounded corners, like n8n edges
-  const sx = right ? 1 : -1
-  const d = [
-    `M ${fromX} ${a.cy}`,
-    `L ${outX - sx * r} ${a.cy}`,
-    `Q ${outX} ${a.cy} ${outX} ${a.cy + r}`,
-    `L ${outX} ${b.cy - r}`,
-    `Q ${outX} ${b.cy} ${outX - sx * r} ${b.cy}`,
-    `L ${toX} ${b.cy}`,
-  ].join(' ')
-  return { d, from: [fromX, a.cy], to: [toX, b.cy] }
-}
 
 // An n8n-style workflow in place of a screenshot, for backend projects (user requests 2026-11-04):
 // nodes snake across a dotted canvas that fills the space, connected by n8n edges with handle dots.
@@ -55,6 +22,8 @@ export default function WorkflowCard({ title, steps, compact = false, columns })
   const nodeRefs = useRef([])
 
   const cols = columns ?? (compact || (width && width < 420) ? 2 : 3)
+  const colsRef = useRef(cols)
+  colsRef.current = cols
 
   useEffect(() => {
     if (reduced) {
@@ -84,7 +53,12 @@ export default function WorkflowCard({ title, steps, compact = false, columns })
       }
     })
     if (boxes.some((b) => !b || (b.right === 0 && b.bottom === 0))) return setEdges([])
-    setEdges(boxes.slice(0, -1).map((b, i) => edgePath(b, boxes[i + 1], c.width)))
+    const n = colsRef.current
+    setEdges(
+      boxes
+        .slice(0, -1)
+        .map((b, i) => edgePath(b, boxes[i + 1], c.width, snakePosition(i, n).row === snakePosition(i + 1, n).row)),
+    )
   }, [])
 
   useLayoutEffect(() => {
@@ -173,14 +147,16 @@ export default function WorkflowCard({ title, steps, compact = false, columns })
                 key={s.title}
                 data-active={i === active ? 'true' : 'false'}
                 style={{ gridRow: String(row), gridColumn: String(col) }}
-                className="flex min-w-0 flex-col items-center justify-center text-center"
+                className="flex min-w-0 flex-col items-center justify-start pt-1 text-center"
               >
+                {/* Fixed outer box: connectors are measured from this, so the running node's grow
+                    effect (scale) never shifts a connector end. */}
+                <span ref={(el) => (nodeRefs.current[i] = el)} className={`relative z-10 inline-flex ${node}`}>
                 <motion.span
-                  ref={(el) => (nodeRefs.current[i] = el)}
                   initial={false}
                   animate={{ scale: running ? 1.06 : 1 }}
                   transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1], delay: running && i > 0 ? EDGE_S : 0 }}
-                  className={`relative z-10 inline-flex ${node} items-center justify-center bg-card shadow-sm transition-[box-shadow,outline-color] duration-500 ${
+                  className={`relative inline-flex h-full w-full items-center justify-center bg-card shadow-sm transition-[box-shadow,outline-color] duration-500 ${
                     i === 0 ? 'rounded-l-[26px] rounded-r-xl' : 'rounded-xl'
                   } ${
                     done
@@ -209,6 +185,7 @@ export default function WorkflowCard({ title, steps, compact = false, columns })
                     <Check size={10} weight="bold" />
                   </motion.span>
                 </motion.span>
+                </span>
                 <strong className={`mt-1.5 block leading-tight text-ink ${compact ? 'text-[11px]' : 'text-[12px]'}`}>
                   {s.title}
                 </strong>
