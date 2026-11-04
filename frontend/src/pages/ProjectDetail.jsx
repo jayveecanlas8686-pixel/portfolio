@@ -5,6 +5,7 @@ import { useDocumentTitle } from '../lib/useDocumentTitle.js'
 import ResultHeadline from '../components/ResultHeadline.jsx'
 import ToolTags from '../components/ToolTags.jsx'
 import SavingNote from '../components/SavingNote.jsx'
+import WorkflowCard from '../components/WorkflowCard.jsx'
 import { EXTERNAL, contextLine } from '../lib/format.js'
 import NotFound from './NotFound.jsx'
 
@@ -105,6 +106,11 @@ function Detail({ project }) {
           height="900"
           className="h-auto w-full rounded-[20px] bg-card ring-1 ring-line"
         />
+      )}
+      {!project.image && project.flow && (
+        <div className="max-w-3xl">
+          <WorkflowCard title={project.title} steps={project.flow} />
+        </div>
       )}
 
       <ol className="relative flex max-w-[70ch] flex-col gap-8">

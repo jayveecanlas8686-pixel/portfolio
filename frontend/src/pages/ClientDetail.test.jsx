@@ -143,3 +143,11 @@ describe('estimated saving on the card', () => {
     expect(card.getByText(/~40 hrs\/month × \$25\/hour/)).toBeInTheDocument()
   })
 })
+
+describe('workflow in place of a screenshot', () => {
+  it('a backend project card shows its moving workflow; a project with a screenshot does not', () => {
+    renderAt('/clients/nest-marketing')
+    expect(within(articleFor('Nest Brain')).getByRole('figure', { name: 'How Nest Brain works' })).toBeInTheDocument()
+    expect(within(articleFor('AI Email Builder')).queryByRole('figure')).not.toBeInTheDocument()
+  })
+})

@@ -80,6 +80,11 @@ export const PROJECTS = [
     ],
     tools: ['Node.js', 'TypeScript', 'Slack Bolt', 'Claude API', 'Postgres', 'Railway'],
     links: {},
+    flow: [
+      { icon: 'question', title: 'Question', text: 'Someone asks in Slack' },
+      { icon: 'memory', title: 'Slack memory', text: 'Searches the team\'s own history' },
+      { icon: 'answer', title: 'Answer or task', text: 'Replies, or posts the task in the right channel' },
+    ],
   },
   {
     slug: 'campaign-alerts',
@@ -105,6 +110,11 @@ export const PROJECTS = [
     },
     tools: ['n8n', 'Klaviyo', 'Slack', 'TypeScript'],
     links: {},
+    flow: [
+      { icon: 'results', title: 'Flow results', text: 'Each brand\'s daily Klaviyo numbers' },
+      { icon: 'check', title: 'Check', text: '25%+ drop week over week?' },
+      { icon: 'alert', title: 'Alert', text: 'Posted to the alerts channel' },
+    ],
   },
   {
     slug: 'nest-audit-engine',
@@ -131,6 +141,11 @@ export const PROJECTS = [
     ],
     tools: ['Node.js', 'TypeScript', 'Claude API', 'Postgres', 'Railway'],
     links: {},
+    flow: [
+      { icon: 'lead', title: 'Lead', text: 'Finds brands, skips current clients' },
+      { icon: 'audit', title: 'Audit', text: '9 pages, every claim checked' },
+      { icon: 'send', title: 'Outreach', text: 'Approved in Slack, then emailed with follow-ups' },
+    ],
   },
   {
     slug: 'reset-dashboard',
@@ -155,6 +170,11 @@ export const PROJECTS = [
     ],
     tools: ['TypeScript', 'Supabase', 'React', 'Cloudflare', 'GitHub Actions'],
     links: {},
+    flow: [
+      { icon: 'sources', title: '6 sources', text: 'Bookings, accounting, email, analytics, ads' },
+      { icon: 'sync', title: 'Daily sync', text: 'Every morning, with health alerts' },
+      { icon: 'dashboard', title: 'Dashboards', text: 'Business board and CFO board' },
+    ],
   },
 
   {
@@ -177,6 +197,11 @@ export const PROJECTS = [
     ],
     tools: ['Slack', 'Grok', 'Figma'], // database not chosen yet; Grok per Umar 2026-11-02
     links: {},
+    flow: [
+      { icon: 'rule', title: 'Brand rule', text: 'The team posts it in Slack' },
+      { icon: 'memory', title: 'Memory', text: 'Saved per brand, updated on change' },
+      { icon: 'checklist', title: 'Checklist', text: 'Do\'s and Don\'ts before a design ships' },
+    ],
   },
   {
     // Resét automation (RESET PROJECT/Rest n8n Automation/HANDOVER.md, 2026-11-03): sync live, first flows going live.
@@ -205,6 +230,11 @@ export const PROJECTS = [
     ],
     tools: ['n8n', 'ActiveCampaign', 'Gecko Booking'],
     links: {},
+    flow: [
+      { icon: 'booking', title: 'Booking event', text: 'Visit, cancellation or treatment due' },
+      { icon: 'sync', title: 'Nightly sync', text: 'Booking system to email platform' },
+      { icon: 'message', title: 'Message', text: 'The right email or SMS, opt-out respected' },
+    ],
   },
   {
     // User asked for SimGolf (2026-11-04): no mockup link, no mention of the data-collection robot, no results yet.
@@ -226,6 +256,11 @@ export const PROJECTS = [
     ],
     tools: ['React', 'TypeScript', 'Postgres', 'Express', 'n8n'],
     links: {},
+    flow: [
+      { icon: 'data', title: 'Data', text: 'Bookings, sales and members' },
+      { icon: 'kpi', title: 'KPIs', text: 'Clubhouse and steering-meeting views' },
+      { icon: 'screens', title: 'Screens', text: 'Dashboards, TV screens, staff league' },
+    ],
   },
 
   // ── Employment: Brigada Distributions (user grouping 2026-11-04) ────
@@ -343,6 +378,11 @@ export const PROJECTS = [
     whatItDoes: 'Ingests e-commerce data from a REST API through a Bronze → Silver → Gold medallion design on ADLS Gen2, models it with dbt, serves it from Synapse, orchestrated by Airflow.',
     tools: ['Airflow', 'ADLS Gen2', 'dbt', 'Synapse'],
     links: { code: 'https://github.com/jayveecanlas8686-pixel/azure-ecommerce-etl-pipeline' },
+    flow: [
+      { icon: 'ingest', title: 'REST API', text: 'E-commerce data comes in' },
+      { icon: 'layers', title: 'Bronze → Gold', text: 'Cleaned and modeled with dbt' },
+      { icon: 'dashboard', title: 'Synapse', text: 'Analytics-ready tables' },
+    ],
   },
   {
     slug: 'azure-realtime-stock-pipeline',
@@ -354,6 +394,11 @@ export const PROJECTS = [
     whatItDoes: 'Streams live stock ticks through Event Hubs, computes OHLCV micro-batches and indicators (SMA, RSI, Bollinger Bands), and serves them from Synapse. Infrastructure in Terraform, monitored with Prometheus and Grafana.',
     tools: ['Event Hubs', 'Terraform', 'Prometheus', 'Grafana'],
     links: { code: 'https://github.com/jayveecanlas8686-pixel/azure-realtime-stock-pipeline' },
+    flow: [
+      { icon: 'live', title: 'Live ticks', text: 'Stock prices via Event Hubs' },
+      { icon: 'math', title: 'Indicators', text: 'OHLCV, SMA, RSI, Bollinger Bands' },
+      { icon: 'chart', title: 'Synapse', text: 'Enriched data, monitored' },
+    ],
   },
   {
     slug: 'azure-data-quality-framework',
@@ -365,6 +410,11 @@ export const PROJECTS = [
     whatItDoes: 'A reusable framework where every table has a Great Expectations suite that runs daily, results are kept for trending, and failures alert Teams immediately.',
     tools: ['Great Expectations', 'Airflow', 'Synapse'],
     links: { code: 'https://github.com/jayveecanlas8686-pixel/azure-data-quality-framework' },
+    flow: [
+      { icon: 'schedule', title: 'Daily run', text: 'Airflow triggers every suite' },
+      { icon: 'validate', title: 'Expectations', text: 'Every table checked' },
+      { icon: 'alert', title: 'Alert', text: 'Failures posted to Teams' },
+    ],
   },
 
   // ── Personal projects ──────────────────────────────────────────────

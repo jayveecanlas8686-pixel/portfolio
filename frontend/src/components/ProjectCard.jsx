@@ -3,6 +3,7 @@ import { ArrowUpRight } from '@phosphor-icons/react'
 import ResultHeadline from './ResultHeadline.jsx'
 import ToolTags from './ToolTags.jsx'
 import SavingNote from './SavingNote.jsx'
+import WorkflowCard from './WorkflowCard.jsx'
 import { EXTERNAL, contextLine } from '../lib/format.js'
 
 // Images have no stored size in the data; width/height give the browser a ratio to reserve until they load.
@@ -55,12 +56,16 @@ export function ProjectRow({ project }) {
   return (
     <article
       className={`lift group relative grid overflow-hidden rounded-[20px] bg-card ring-1 ring-line has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-accent ${
-        project.image ? 'md:grid-cols-[2fr_3fr]' : ''
+        project.image || project.flow ? 'md:grid-cols-[2fr_3fr]' : ''
       }`}
     >
-      {project.image && (
+      {(project.image || project.flow) && (
         <div className="flex items-center justify-center px-5 pt-5 sm:px-6 sm:pt-6 md:pb-6 md:pr-0">
-          <ProjectImage project={project} className="h-auto w-full rounded-xl bg-paper-2 ring-1 ring-line" />
+          {project.image ? (
+            <ProjectImage project={project} className="h-auto w-full rounded-xl bg-paper-2 ring-1 ring-line" />
+          ) : (
+            <WorkflowCard title={project.title} steps={project.flow} />
+          )}
         </div>
       )}
       <div className="flex min-w-0 flex-col gap-4 p-5 sm:p-6">
@@ -114,6 +119,11 @@ export function ProjectTile({ project }) {
   const link = primaryExternalLink(project)
   return (
     <article className="lift flex flex-col overflow-hidden rounded-[20px] bg-card ring-1 ring-line">
+      {!project.image && project.flow && (
+        <div className="border-b border-line bg-paper-2 p-3">
+          <WorkflowCard title={project.title} steps={project.flow} compact />
+        </div>
+      )}
       {project.image && (
         <div className="aspect-[16/10] border-b border-line bg-paper-2">
           <ProjectImage project={project} className="h-full w-full object-cover object-top" />
