@@ -1,6 +1,6 @@
 export const profile = {
   name: 'Jayvee Canlas',
-  role: 'Automation · Data · AI',
+  role: 'Automation, data & AI',
   email: 'jayveecanlas8686@gmail.com',
   cvPath: '/cv/jayvee-canlas-cv.pdf',
   headline: 'Less manual work. More reliable data.',

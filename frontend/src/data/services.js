@@ -41,8 +41,9 @@ export const METHOD = [
   { step: 'Hand it over', text: 'You get docs and a walkthrough, so your team runs it without depending on me.' },
 ]
 
+// Home 'before → after' ledger (design doc). Numbers from spec §7 only.
 export const HOME_RESULTS = [
-  { value: '2.5×', label: 'more email campaigns a day', slug: 'ai-email-builder' },
-  { value: '2h → 10m', label: 'daily data entry, ~40 hrs/month saved (estimate)', slug: 'waybill-pdf-extraction' },
-  { value: '8×/day', label: 'verified dashboard refreshes, zero by hand', slug: 'power-bi-refresh-monitor' },
+  { value: '2.5×', label: 'more email campaigns a day', slug: 'ai-email-builder', title: 'AI Email Builder', before: '20 emails/day', after: '50+ emails/day', estimate: false },
+  { value: '2h → 10m', label: 'daily data entry, ~40 hrs/month saved', slug: 'waybill-pdf-extraction', title: 'Waybill PDF Extraction', before: '2 hrs/day', after: '5–10 min/day', estimate: true },
+  { value: '8×/day', label: 'verified dashboard refreshes, zero by hand', slug: 'power-bi-refresh-monitor', title: 'Power BI Refresh Monitor', before: 'Refreshed by hand', after: '8×/day, verified', estimate: false },
 ]
