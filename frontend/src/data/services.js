@@ -15,7 +15,7 @@ export const SERVICES = [
     id: 'dashboards',
     number: '02',
     title: 'Live dashboards and internal apps',
-    short: 'Dashboards & internal apps',
+    short: 'Dashboards & apps',
     outcome: 'One view of bookings, sales, marketing and finance that refreshes itself every day.',
     benefits: ['Data pulled from all your tools daily', 'Finance numbers nobody updates by hand', 'An alert when a sync fails'],
     proofSlugs: ['reset-dashboard', 'simgolf-platform', 'power-bi-refresh-monitor'],

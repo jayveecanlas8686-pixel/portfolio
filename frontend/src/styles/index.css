@@ -122,3 +122,21 @@ body {
     animation: none !important;
   }
 }
+
+/* Background workflow: a green pulse runs along each wire. Still with reduced motion. */
+@keyframes backdrop-run {
+  from {
+    stroke-dashoffset: 1000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.backdrop-run {
+  animation: backdrop-run linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .backdrop-run {
+    animation: none !important;
+  }
+}

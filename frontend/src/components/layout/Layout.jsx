@@ -3,6 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { EASE } from '../../lib/motion.js'
 import Sidebar from './Sidebar.jsx'
+import WorkflowBackdrop from '../WorkflowBackdrop.jsx'
 import MobileBar from './MobileBar.jsx'
 import RouteErrorBoundary from './RouteErrorBoundary.jsx'
 
@@ -34,10 +35,11 @@ export default function Layout() {
       >
         Skip to content
       </a>
+      <WorkflowBackdrop />
       <Sidebar />
       {/* Keyed by path: any navigation (name link, Back button, menu link) closes the menu. */}
       <MobileBar key={pathname} />
-      <main id="main" className="lg:pl-[264px]">
+      <main id="main" className="relative z-10 lg:pl-[264px]">
         <div className="mx-auto max-w-6xl px-4 py-8 sm:px-8 lg:py-6">
           <RouteErrorBoundary resetKey={pathname}>
             <Suspense fallback={<div className="min-h-[60vh]" aria-busy="true" />}>
