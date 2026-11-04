@@ -49,4 +49,15 @@ export const ABOUT = {
     { title: 'In Practice: AI, Testing & Best Practices', issuer: 'n8n', date: '', image: '/images/certs/in-practice-ai-cert.png', pdf: '/images/certs/in-practice-ai.pdf' },
     { title: 'Data Future PH 2026', issuer: 'Data Future PH', date: '2026', image: '/images/certs/data-future-ph-2026-cert.png', pdf: '/images/certs/data-future-ph-2026.pdf' },
   ],
+  toolkit: [
+    {
+      group: 'Data & analytics',
+      tools: ['SQL Server', 'Azure Synapse', 'Apache Airflow', 'dbt', 'Great Expectations', 'Power BI', 'Prometheus', 'Grafana', 'Azure Data Lake (ADLS Gen2)'],
+    },
+    {
+      group: 'Automation & AI',
+      tools: ['n8n', 'Power Automate', 'Microsoft Graph', 'Webhooks', 'Claude Code', 'Codex', 'Airtable', 'OpenRouter', 'Google Sheets', 'Figma API', 'Puppeteer', 'Klaviyo'],
+    },
+    { group: 'Development', tools: ['Python', 'JavaScript', 'TypeScript', 'PHP', 'Docker'] },
+  ],
 }
