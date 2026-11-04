@@ -29,7 +29,8 @@ Copy `frontend/.env.example` to `frontend/.env` only if you want to test the CV 
 ## Environments & deploy
 
 - **Branches:** work and push on `staging` only. `main` is promoted by a manual PR on GitHub.
-- **Hosting:** a Vercel project connected to this repo, with **Root Directory = `frontend`** (framework: Vite). `staging` gets preview deploys; `main` is production. `frontend/vercel.json` rewrites every path to `index.html`, so deep links like `/projects/ai-email-builder` work.
+- **Hosting:** Vercel project `jayvee-canlas`, live at https://jayvee-canlas.vercel.app. It's connected to this repo with **Root Directory = `frontend`** (framework: Vite). `staging` gets preview deploys; `main` is the production branch. `frontend/vercel.json` rewrites every path to `index.html`, so deep links like `/projects/ai-email-builder` work.
+- **Share previews:** `og:image`, `og:url` and the canonical link in `frontend/index.html` use the absolute live domain. Update them if the domain changes.
 - **Old site:** still served by the old Vercel project (`portfolio-tau-black-54.vercel.app`) and GitHub Pages until they're retired.
 
 ## CV download counter (private)

@@ -7,3 +7,11 @@ describe('vercel.json', () => {
     expect(config.rewrites).toContainEqual({ source: '/(.*)', destination: '/index.html' })
   })
 })
+
+describe('share previews', () => {
+  it('og:image and og:url are absolute on the live domain (LinkedIn/Facebook need absolute URLs)', () => {
+    const html = readFileSync(resolve(process.cwd(), 'index.html'), 'utf8')
+    expect(html).toContain('<meta property="og:image" content="https://jayvee-canlas.vercel.app/images/profile/og.png" />')
+    expect(html).toContain('<meta property="og:url" content="https://jayvee-canlas.vercel.app/" />')
+  })
+})
