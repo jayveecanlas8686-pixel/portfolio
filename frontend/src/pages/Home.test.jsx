@@ -50,7 +50,7 @@ describe('Home bento', () => {
       expect(link).toHaveTextContent(before)
       expect(link).toHaveTextContent(after)
     }
-    expect(within(card).getByRole('link', { name: /All 20 projects/ })).toHaveAttribute('href', '/projects')
+    expect(within(card).getByRole('link', { name: /All 22 projects/ })).toHaveAttribute('href', '/projects')
   })
 
   it('AI builds card links to the AI projects', () => {

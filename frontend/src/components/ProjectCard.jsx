@@ -79,10 +79,11 @@ export function ProjectRow({ project }) {
           <FlowNode n={1} label="Problem">
             <p className="text-muted">{project.problem}</p>
           </FlowNode>
-          <FlowNode n={2} label="Built">
-            <p className="text-muted">{project.built}</p>
+          {/* Not built yet: say "Building", never "Built" (honesty rule). */}
+          <FlowNode n={2} label={project.kind === 'building' ? 'Building' : 'Built'}>
+            <p className="text-muted">{project.built ?? project.building}</p>
           </FlowNode>
-          {project.kind === 'launching' ? (
+          {project.kind === 'launching' || project.kind === 'building' ? (
             <FlowNode n={3} label="Status">
               <p className="font-display text-lg font-bold text-ink">{project.status}</p>
             </FlowNode>

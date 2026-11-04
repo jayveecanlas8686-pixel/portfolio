@@ -7,7 +7,7 @@ export const CLIENTS = [
     contact: 'Umar Shaikh',
     role: 'Founder',
     about: 'An email and SMS marketing agency running Klaviyo for 60+ brands.',
-    projectSlugs: ['ai-email-builder', 'nest-brain', 'campaign-alerts', 'nest-audit-engine'],
+    projectSlugs: ['ai-email-builder', 'nest-brain', 'campaign-alerts', 'nest-audit-engine', 'nest-guardrails'],
   },
   {
     id: 'reset',
@@ -15,7 +15,7 @@ export const CLIENTS = [
     contact: 'Sebastian Larsen',
     role: 'Owner',
     about: 'A skin and aesthetics clinic in Copenhagen.',
-    projectSlugs: ['reset-dashboard'],
+    projectSlugs: ['reset-dashboard', 'reset-automation'],
   },
   {
     // Owner per Jayvee (2026-11-04). Day-to-day contact in the files is Michael Frahm.

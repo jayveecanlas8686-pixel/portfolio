@@ -54,9 +54,9 @@ describe('project content honesty (spec §4, §7)', () => {
 })
 
 describe('content structure', () => {
-  it('has 20 projects with unique slugs in known groups', () => {
-    expect(PROJECTS.length).toBe(20)
-    expect(new Set(PROJECTS.map((p) => p.slug)).size).toBe(20)
+  it('has 22 projects with unique slugs in known groups', () => {
+    expect(PROJECTS.length).toBe(22)
+    expect(new Set(PROJECTS.map((p) => p.slug)).size).toBe(22)
     const groupIds = PROJECT_GROUPS.map((g) => g.id)
     expect(groupIds).toEqual(['clients', 'automation', 'data-ai', 'demos', 'repos'])
     for (const p of PROJECTS) expect(groupIds, p.slug).toContain(p.group)
@@ -137,8 +137,8 @@ describe('client work', () => {
   })
 
   it('every client project exists, sits in the clients group and points back to its client', () => {
-    expect(getClient('nest-marketing').projectSlugs).toEqual(['ai-email-builder', 'nest-brain', 'campaign-alerts', 'nest-audit-engine'])
-    expect(getClient('reset').projectSlugs).toEqual(['reset-dashboard'])
+    expect(getClient('nest-marketing').projectSlugs).toEqual(['ai-email-builder', 'nest-brain', 'campaign-alerts', 'nest-audit-engine', 'nest-guardrails'])
+    expect(getClient('reset').projectSlugs).toEqual(['reset-dashboard', 'reset-automation'])
     expect(getClient('simgolf').projectSlugs).toEqual(['simgolf-platform'])
     for (const c of CLIENTS) {
       for (const slug of c.projectSlugs) {
@@ -175,7 +175,7 @@ describe('client work', () => {
 
   it('no client money figures or client-of-client names leak into public text', () => {
     const text = JSON.stringify(PROJECTS.filter((p) => p.client))
-    for (const banned of [/\d\s?kr\b/i, /\bDKK\b/, /Klone|Amour|Ava Rosier|Living Word|Code 118|TrackMan|Hims|Phoenix/i]) {
+    for (const banned of [/\d\s?kr\b/i, /\bDKK\b/, /Klone|Amour|Ava Rosier|Living Word|Code 118|TrackMan|Hims|Phoenix|Unikor|Simone|Emma|Anna|Sandfuss/i]) {
       expect(text).not.toMatch(banned)
     }
   })
@@ -201,5 +201,22 @@ describe('services follow the client work', () => {
     for (const s of SERVICES) {
       expect(getProject(s.proofSlugs[0]).group, s.id).toBe('clients')
     }
+  })
+})
+
+
+describe('projects still being built say so', () => {
+  it('Nest Guardrails is being built: no result, labeled building', () => {
+    const p = getProject('nest-guardrails')
+    expect(p).toMatchObject({ kind: 'building', status: 'In progress', client: 'nest-marketing', group: 'clients' })
+    expect(p.result).toBeUndefined()
+    expect(p.building).toBeTruthy()
+  })
+
+  it('Resét automation is rolling out: no result, and the January targets are not claimed', () => {
+    const p = getProject('reset-automation')
+    expect(p).toMatchObject({ kind: 'launching', status: 'Rolling out November 2026', client: 'reset', group: 'clients' })
+    expect(p.result).toBeUndefined()
+    expect(JSON.stringify(p)).not.toMatch(/85 ?%|69|100 reviews|80k/)
   })
 })

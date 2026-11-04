@@ -6,7 +6,7 @@ import ContactBand from '../components/ContactBand.jsx'
 import ClientCard from '../components/ClientCard.jsx'
 import { CLIENTS } from '../data/clients.js'
 
-const isRow = (p) => p.kind === 'real' || p.kind === 'personal' || p.kind === 'launching'
+const isRow = (p) => p.kind === 'real' || p.kind === 'personal' || p.kind === 'launching' || p.kind === 'building'
 
 export default function Projects() {
   useDocumentTitle('Projects')

@@ -152,6 +152,49 @@ export const PROJECTS = [
   },
 
   {
+    // Approved by Umar 2026-11-02 from Ryan's proposal; design decided, no code yet (Context/Project Details, 2026-11-02).
+    slug: 'nest-guardrails',
+    title: 'Nest Guardrails',
+    group: 'clients',
+    client: 'nest-marketing',
+    kind: 'building',
+    status: 'In progress',
+    context: 'Nest Marketing · design QA assistant',
+    problem:
+      'Clients asked the team not to use a certain asset or element, and it still ended up in a design again, because their feedback was spread across people and months-old conversations.',
+    building:
+      'A Slack bot the team posts brand rules to, naming the brand and the rule. It saves each rule as its memory, updates it when a client changes their mind, and turns it into a Do’s and Don’ts checklist designers see before they finish a design.',
+    highlights: [
+      'One channel for every client’s brand rules',
+      'Rules saved per brand and updated when they change',
+      'A checklist designers see before finalising',
+    ],
+    tools: ['Slack', 'Grok', 'Figma'], // database not chosen yet; Grok per Umar 2026-11-02
+    links: {},
+  },
+  {
+    // Resét automation (RESET PROJECT/Rest n8n Automation/HANDOVER.md, 2026-11-03): sync live, first flows going live.
+    // The plan's January figures are targets, not results, so none are shown.
+    slug: 'reset-automation',
+    title: 'Marketing Automation',
+    group: 'clients',
+    client: 'reset',
+    kind: 'launching',
+    status: 'Rolling out November 2026',
+    context: 'Resét Skin & Aesthetics · n8n',
+    problem:
+      'The clinic wanted more repeat bookings without annoying customers: the right message at each step of the customer journey, and quality over quantity.',
+    built:
+      'A nightly n8n sync from the booking system into the email and SMS tool (live), plus journey flows for cancelled bookings, consultation follow-ups and treatments that are due, each with a stop-or-pause page and consent respected.',
+    highlights: [
+      'Nightly booking → email platform sync, live',
+      'Each flow pinned to a step of the customer journey',
+      'Customers can stop or pause messages themselves',
+    ],
+    tools: ['n8n', 'ActiveCampaign', 'Gecko Booking'],
+    links: {},
+  },
+  {
     // User asked for SimGolf (2026-11-04): no mockup link, no mention of the data-collection robot, no results yet.
     slug: 'simgolf-platform',
     title: 'SimGolf Intelligence Platform',

@@ -20,6 +20,14 @@ function steps(project) {
   if (project.kind === 'demo' || project.kind === 'repo') {
     return [problem, { label: 'What it does', body: <p>{project.whatItDoes}</p> }]
   }
+  if (project.kind === 'building') {
+    // Approved and designed, not built yet: describe what is being built, never a result.
+    return [
+      problem,
+      { label: 'What I’m building', body: <p>{project.building}</p> },
+      { label: 'Status', body: <p className="font-display text-xl font-bold text-ink">{project.status}</p> },
+    ]
+  }
   if (project.kind === 'launching') {
     // Built but not yet running for long enough to have results: say so instead of claiming one.
     return [

@@ -17,7 +17,7 @@ describe('Client page', () => {
     renderAt('/clients/nest-marketing')
     expect(screen.getByRole('heading', { level: 1, name: 'Nest Marketing' })).toBeInTheDocument()
     expect(screen.getByText('Umar Shaikh, Founder')).toBeInTheDocument()
-    expect(screen.getAllByRole('article')).toHaveLength(4)
+    expect(screen.getAllByRole('article')).toHaveLength(5)
     expect(screen.getByRole('link', { name: 'Nest Brain' })).toHaveAttribute('href', '/projects/nest-brain')
     expect(screen.getByText('Launching November 2026')).toBeInTheDocument()
   })
@@ -26,7 +26,7 @@ describe('Client page', () => {
     renderAt('/clients/reset')
     expect(screen.getByRole('heading', { level: 1, name: 'Resét Skin & Aesthetics' })).toBeInTheDocument()
     expect(screen.getByText('Sebastian Larsen, Owner')).toBeInTheDocument()
-    expect(screen.getAllByRole('article')).toHaveLength(1)
+    expect(screen.getAllByRole('article')).toHaveLength(2)
   })
 
   it('shows SimGolf with its owner, Keld Jensen', () => {

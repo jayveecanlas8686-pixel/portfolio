@@ -22,7 +22,7 @@ describe('Projects', () => {
     const h2s = screen.getAllByRole('heading', { level: 2 }).map((h) => h.textContent)
     const groupTitles = PROJECT_GROUPS.map((g) => g.title)
     expect(h2s.filter((t) => groupTitles.includes(t))).toEqual(groupTitles)
-    expect(screen.getAllByRole('article')).toHaveLength(20)
+    expect(screen.getAllByRole('article')).toHaveLength(22)
   })
 
   it('real card shows Problem / Built / Result', () => {
@@ -90,5 +90,16 @@ describe('Projects: client work', () => {
   it('client project cards name the client', () => {
     renderProjects()
     expect(within(articleFor('Nest Brain')).getByText(/Nest Marketing/)).toBeInTheDocument()
+  })
+})
+
+
+describe('Projects: work in progress', () => {
+  it('a project being built says Building, not Built, and shows its status', () => {
+    renderProjects()
+    const card = articleFor('Nest Guardrails')
+    expect(within(card).getByText('Building')).toBeInTheDocument()
+    expect(within(card).queryByText('Built')).not.toBeInTheDocument()
+    expect(within(card).getByText('In progress')).toBeInTheDocument()
   })
 })
