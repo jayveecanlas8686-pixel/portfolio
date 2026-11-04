@@ -62,3 +62,16 @@ describe('Projects', () => {
     expect(container.textContent).not.toContain(' · ')
   })
 })
+
+describe('Projects: every detail page is reachable', () => {
+  it('demo and repo tiles link to their detail pages', () => {
+    renderProjects()
+    for (const [title, slug] of [
+      ['ShopHub', 'shophub'],
+      ['Azure Data Quality Framework', 'azure-data-quality-framework'],
+    ]) {
+      const tile = articleFor(title)
+      expect(within(tile).getByRole('link', { name: title })).toHaveAttribute('href', `/projects/${slug}`)
+    }
+  })
+})

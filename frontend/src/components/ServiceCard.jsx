@@ -3,6 +3,17 @@ import { Check } from '@phosphor-icons/react'
 import { getProject } from '../data/projects.js'
 import ResultHeadline from './ResultHeadline.jsx'
 
+function ProofLink({ project }) {
+  return (
+    <Link
+      to={`/projects/${project.slug}`}
+      className="font-semibold text-ink underline decoration-line underline-offset-4 hover:decoration-accent"
+    >
+      {project.title}
+    </Link>
+  )
+}
+
 // One service in the 2×2 hairline grid. Not numbered: services aren't a sequence (design doc).
 // showProofResults: also print each proof project's result headline (Services page).
 export default function ServiceCard({ service, showProofResults = false, headingLevel = 3 }) {
@@ -20,25 +31,32 @@ export default function ServiceCard({ service, showProofResults = false, heading
           </li>
         ))}
       </ul>
-      <div className="mt-5 text-sm">
-        <span className="text-muted">Proof: </span>
-        <ul className="inline">
-          {proofs.map((p, i) => (
-            <li key={p.slug} className="inline">
-              <Link to={`/projects/${p.slug}`} className="font-semibold text-ink underline decoration-line underline-offset-4 hover:decoration-accent">
-                {p.title}
-              </Link>
-              {showProofResults && p.result && (
-                <>
-                  {' '}
-                  <ResultHeadline result={p.result} className="text-sm" />
-                </>
-              )}
-              {i < proofs.length - 1 && <span className="text-muted">, </span>}
-            </li>
-          ))}
-        </ul>
-      </div>
+      {showProofResults ? (
+        // Services page: one proof per line, its result underneath, so title and result never run together.
+        <div className="mt-5 text-sm">
+          <p className="text-muted">Proof</p>
+          <ul className="mt-2 space-y-3">
+            {proofs.map((p) => (
+              <li key={p.slug}>
+                <ProofLink project={p} />
+                {p.result && <ResultHeadline result={p.result} className="mt-0.5 block text-sm" />}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <div className="mt-5 text-sm">
+          <span className="text-muted">Proof: </span>
+          <ul className="inline">
+            {proofs.map((p, i) => (
+              <li key={p.slug} className="inline">
+                <ProofLink project={p} />
+                {i < proofs.length - 1 && <span className="text-muted">, </span>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </article>
   )
 }

@@ -1,12 +1,12 @@
 import { profile } from '../../data/profile.js'
 
-// Photo when profile.photo exists (added with the content in Task 2), initials otherwise.
+// Small web-sized avatar (profile.avatar); initials if it is ever missing.
 export default function Avatar({ size = 44 }) {
   const style = { width: size, height: size }
-  if (profile.photo) {
+  if (profile.avatar) {
     return (
       <img
-        src={profile.photo}
+        src={profile.avatar}
         alt=""
         width={size}
         height={size}

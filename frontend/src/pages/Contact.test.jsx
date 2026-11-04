@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import Contact, { buildMailto } from './Contact.jsx'
+import Contact from './Contact.jsx'
+import { buildMailto } from '../lib/mailto.js'
 
 function renderContact() {
   return render(

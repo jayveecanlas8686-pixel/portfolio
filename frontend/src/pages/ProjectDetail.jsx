@@ -4,7 +4,7 @@ import { getProject } from '../data/projects.js'
 import { useDocumentTitle } from '../lib/useDocumentTitle.js'
 import ResultHeadline from '../components/ResultHeadline.jsx'
 import ToolTags from '../components/ToolTags.jsx'
-import { EXTERNAL, contextLine } from '../components/ProjectCard.jsx'
+import { EXTERNAL, contextLine } from '../lib/format.js'
 import NotFound from './NotFound.jsx'
 
 const LINKS = [

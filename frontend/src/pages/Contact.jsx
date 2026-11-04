@@ -2,15 +2,9 @@ import { useState } from 'react'
 import { GithubLogo, LinkedinLogo, FacebookLogo, EnvelopeSimple } from '@phosphor-icons/react'
 import { profile } from '../data/profile.js'
 import { useDocumentTitle } from '../lib/useDocumentTitle.js'
+import { buildMailto } from '../lib/mailto.js'
 
 const ICONS = { GitHub: GithubLogo, LinkedIn: LinkedinLogo, Facebook: FacebookLogo }
-
-// No form backend (spec §6): the form opens the visitor's own mail app, pre-filled.
-export function buildMailto({ name, message, email }) {
-  const subject = encodeURIComponent(`Project inquiry from ${name}`)
-  const body = encodeURIComponent(message)
-  return `mailto:${email}?subject=${subject}&body=${body}`
-}
 
 const FIELD =
   'mt-2 block w-full rounded-xl bg-card px-4 py-3 text-[16px] text-ink ring-1 ring-line placeholder:text-muted/70 focus:ring-2 focus:ring-accent'

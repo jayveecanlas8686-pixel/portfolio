@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import Sidebar from './Sidebar.jsx'
 import MobileBar from './MobileBar.jsx'
@@ -22,7 +22,9 @@ export default function Layout() {
       <MobileBar />
       <main id="main" className="lg:pl-[264px]">
         <div className="mx-auto max-w-5xl px-4 py-10 sm:px-8 lg:py-14">
-          <Outlet />
+          <Suspense fallback={<div className="min-h-[60vh]" aria-busy="true" />}>
+            <Outlet />
+          </Suspense>
         </div>
       </main>
     </div>

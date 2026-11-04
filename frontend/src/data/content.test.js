@@ -114,3 +114,12 @@ describe('asset paths exist', () => {
     for (const p of paths) expect(existsSync(publicFile(p)), p).toBe(true)
   })
 })
+
+describe('performance: profile images are web-sized', () => {
+  it('sidebar avatar and portrait are small webp files', () => {
+    for (const p of [profile.avatar, profile.photo]) {
+      expect(p, 'path').toMatch(/\.webp$/)
+      expect(existsSync(publicFile(p)), p).toBe(true)
+    }
+  })
+})

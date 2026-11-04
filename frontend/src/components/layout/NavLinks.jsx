@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import { House, FolderSimple, Briefcase, User, EnvelopeSimple } from '@phosphor-icons/react'
 
-export const NAV_ITEMS = [
+const NAV_ITEMS = [
   { to: '/', label: 'Home', icon: House },
   { to: '/projects', label: 'Projects', icon: FolderSimple },
   { to: '/services', label: 'Services', icon: Briefcase },
@@ -9,10 +9,15 @@ export const NAV_ITEMS = [
   { to: '/contact', label: 'Contact', icon: EnvelopeSimple },
 ]
 
+function NavIcon({ icon }) {
+  const Icon = icon
+  return <Icon size={18} weight="duotone" aria-hidden="true" />
+}
+
 export default function NavLinks({ onNavigate }) {
   return (
     <ul className="flex flex-col gap-1">
-      {NAV_ITEMS.map(({ to, label, icon: Icon }) => (
+      {NAV_ITEMS.map(({ to, label, icon }) => (
         <li key={to}>
           <NavLink
             to={to}
@@ -26,7 +31,7 @@ export default function NavLinks({ onNavigate }) {
               }`
             }
           >
-            <Icon size={18} weight="duotone" aria-hidden="true" />
+            <NavIcon icon={icon} />
             {label}
           </NavLink>
         </li>

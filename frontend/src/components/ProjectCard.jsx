@@ -2,16 +2,7 @@ import { Link } from 'react-router-dom'
 import { ArrowUpRight } from '@phosphor-icons/react'
 import ResultHeadline from './ResultHeadline.jsx'
 import ToolTags from './ToolTags.jsx'
-import { formatContext } from '../lib/format.js'
-
-export const EXTERNAL = { target: '_blank', rel: 'noopener noreferrer' }
-
-// Personal projects must say so (spec §7). Most already carry it in their context; add it only when missing.
-export function contextLine(project) {
-  const text = formatContext(project.context)
-  if (project.kind === 'personal' && !text.startsWith('Personal project')) return `Personal project, ${text}`
-  return text
-}
+import { EXTERNAL, contextLine } from '../lib/format.js'
 
 // Images have no stored size in the data; width/height give the browser a ratio to reserve until they load.
 function ProjectImage({ project, className = '' }) {
@@ -116,7 +107,14 @@ export function ProjectTile({ project }) {
       )}
       <div className="flex flex-1 flex-col gap-3 p-5">
         <div>
-          <h3 className="text-lg font-bold">{project.title}</h3>
+          <h3 className="text-lg font-bold">
+            <Link
+              to={`/projects/${project.slug}`}
+              className="underline decoration-line underline-offset-4 hover:decoration-accent"
+            >
+              {project.title}
+            </Link>
+          </h3>
           <p className="mt-1 text-[15px] text-muted">{project.problem}</p>
         </div>
         <div>
