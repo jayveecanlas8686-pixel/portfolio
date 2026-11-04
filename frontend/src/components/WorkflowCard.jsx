@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react'
-import { Sparkle } from '@phosphor-icons/react'
+import { Check, Lightning } from '@phosphor-icons/react'
 import { FLOW_ICONS } from '../lib/flowIcons.js'
 import { useReducedMotion } from '../lib/useReducedMotion.js'
 
 const STEP_MS = 1600
 
-// A moving workflow in place of a screenshot, for backend projects (user request 2026-11-04,
-// styled after jepoy.dev's "From lead to follow-up"): steps on the left with a highlight that
-// walks down them, dashed lines flowing into a small app window, a sparkle badge.
-// Reduced motion: no cycling, no flowing dashes; the last step stays highlighted.
+// An n8n-style workflow in place of a screenshot, for backend projects (user request 2026-11-04).
+// Nodes on a dotted canvas, left to right: a trigger node first, connector lines with handle dots,
+// labels under each node. It "executes" like an n8n run: the running node pulses, finished nodes get
+// the green border and check badge, their connector turns green, then the run starts again.
+// Reduced motion: no cycling; the run is shown finished.
 export default function WorkflowCard({ title, steps, compact = false }) {
   const reduced = useReducedMotion()
   const [active, setActive] = useState(reduced ? steps.length - 1 : 0)
@@ -22,87 +23,83 @@ export default function WorkflowCard({ title, steps, compact = false }) {
     return () => clearInterval(t)
   }, [reduced, steps.length])
 
+  const node = compact ? 'h-12 w-12' : 'h-14 w-14'
+
   return (
     <figure
       aria-label={`How ${title} works`}
-      className={`relative w-full overflow-hidden rounded-[18px] bg-paper-2 ring-1 ring-line ${compact ? 'p-3' : 'p-4'}`}
+      className={`relative w-full overflow-hidden rounded-[18px] bg-paper-2 ring-1 ring-line ${compact ? 'px-3 py-3' : 'px-4 py-4'}`}
+      style={{
+        backgroundImage: 'radial-gradient(var(--dot) 1px, transparent 1.3px)',
+        backgroundSize: '14px 14px',
+      }}
     >
-      <figcaption className="mb-3 font-mono text-[11px] text-muted">How it works</figcaption>
+      <figcaption className="mb-3 flex items-center gap-2 font-mono text-[11px] text-muted">
+        <span
+          aria-hidden="true"
+          className={`h-1.5 w-1.5 rounded-full ${reduced ? 'bg-accent' : 'animate-pulse bg-accent'}`}
+        />
+        {reduced ? 'Workflow executed' : 'Executing workflow'}
+      </figcaption>
 
-      <div className="flex items-stretch gap-3">
-        {/* Steps with a connecting rail */}
-        <ol className="relative flex min-w-0 flex-1 flex-col gap-2.5">
-          <span aria-hidden="true" className="absolute top-5 bottom-5 left-[7px] w-0.5 rounded bg-accent/30" />
-          {steps.map((s, i) => {
-            const Icon = FLOW_ICONS[s.icon]
-            const on = i === active
-            return (
-              <li key={s.title} data-active={on ? 'true' : 'false'} className="relative flex items-center gap-2.5 pl-6">
-                <span
-                  aria-hidden="true"
-                  className={`absolute left-0 h-4 w-4 rounded-full border-2 transition-colors duration-300 ${
-                    on ? 'border-accent bg-accent' : 'border-accent/60 bg-card'
-                  }`}
-                />
-                <span
-                  className={`flex min-w-0 flex-1 items-center gap-2.5 rounded-2xl bg-card px-2.5 py-2 ring-1 transition-all duration-300 ${
-                    on ? 'shadow-[0_8px_20px_-12px_rgba(15,122,69,0.6)] ring-accent/50' : 'ring-line'
-                  }`}
-                >
+      <ol className="flex items-start">
+        {steps.map((s, i) => {
+          const Icon = FLOW_ICONS[s.icon]
+          const done = reduced ? true : i < active
+          const running = !reduced && i === active
+          const last = i === steps.length - 1
+          return (
+            <li
+              key={s.title}
+              data-active={i === active ? 'true' : 'false'}
+              className="relative flex min-w-0 flex-1 flex-col items-center text-center"
+            >
+              {/* Connector to the next node (n8n edge with handle dots) */}
+              {!last && (
+                <span aria-hidden="true" className={`absolute left-1/2 flex w-full items-center ${compact ? 'top-6' : 'top-7'}`}>
+                  <span className={`ml-[calc(theme(spacing.7)+2px)] h-2 w-2 shrink-0 rounded-full border ${done ? 'border-accent bg-accent' : 'border-muted/50 bg-card'}`} />
+                  <span className={`h-0.5 flex-1 transition-colors duration-500 ${done ? 'bg-accent' : 'bg-muted/30'}`} />
+                  <span className={`mr-[calc(theme(spacing.7)+2px)] h-2 w-2 shrink-0 rounded-full border ${done ? 'border-accent bg-accent' : 'border-muted/50 bg-card'}`} />
+                </span>
+              )}
+
+              {/* Node: the first is a trigger (rounded left side, lightning badge) */}
+              <span
+                className={`relative z-10 inline-flex ${node} items-center justify-center bg-card shadow-sm transition-all duration-300 ${
+                  i === 0 ? 'rounded-l-[28px] rounded-r-xl' : 'rounded-xl'
+                } ${
+                  done
+                    ? 'ring-2 ring-accent'
+                    : running
+                      ? 'ring-2 ring-accent/60 shadow-[0_0_0_6px_rgba(15,122,69,0.12)]'
+                      : 'ring-1 ring-line'
+                }`}
+              >
+                {Icon && <Icon size={compact ? 20 : 24} weight="duotone" className="text-ink" aria-hidden="true" />}
+                {i === 0 && (
+                  <Lightning
+                    size={12}
+                    weight="fill"
+                    aria-hidden="true"
+                    className="absolute top-1/2 -left-4 -translate-y-1/2 text-[#ff6d5a]"
+                  />
+                )}
+                {done && (
                   <span
                     aria-hidden="true"
-                    className={`inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-colors duration-300 ${
-                      on ? 'bg-accent text-accent-ink' : 'bg-accent-soft text-accent'
-                    }`}
+                    className="absolute -top-1.5 -right-1.5 inline-flex h-4 w-4 items-center justify-center rounded-full bg-accent text-accent-ink ring-2 ring-paper-2"
                   >
-                    {Icon && <Icon size={16} weight="bold" />}
+                    <Check size={10} weight="bold" />
                   </span>
-                  <span className="min-w-0">
-                    <strong className="block text-[13px] leading-tight text-ink">{s.title}</strong>
-                    <span className="block text-[11px] leading-snug text-muted">{s.text}</span>
-                  </span>
-                </span>
-              </li>
-            )
-          })}
-        </ol>
+                )}
+              </span>
 
-        {/* Flowing dashed lines into a small app window (decorative) */}
-        <div aria-hidden="true" className={`relative hidden shrink-0 sm:block ${compact ? 'w-24' : 'w-[38%]'}`}>
-          <svg className="absolute inset-y-0 -left-3 h-full w-6" viewBox="0 0 24 100" preserveAspectRatio="none">
-            {[20, 50, 80].map((y, i) => (
-              <path
-                key={y}
-                d={`M0 ${y} C 12 ${y}, 12 50, 24 50`}
-                fill="none"
-                className={`flow-dash ${i === active ? 'stroke-accent' : 'stroke-accent/40'}`}
-                strokeWidth="1.5"
-                strokeDasharray="3 3"
-                vectorEffect="non-scaling-stroke"
-              />
-            ))}
-          </svg>
-          <div className="flex h-full flex-col rounded-xl bg-card p-2.5 ring-1 ring-line">
-            <div className="mb-2 flex gap-1">
-              <span className="h-1.5 w-1.5 rounded-full bg-line" />
-              <span className="h-1.5 w-1.5 rounded-full bg-line" />
-              <span className="h-1.5 w-1.5 rounded-full bg-line" />
-            </div>
-            {[80, 60, 72, 50].map((w, i) => (
-              <span
-                key={i}
-                className={`mb-1.5 block h-1.5 rounded transition-colors duration-300 ${
-                  i === active ? 'bg-accent/50' : 'bg-paper-2'
-                }`}
-                style={{ width: `${w}%` }}
-              />
-            ))}
-          </div>
-          <span className="absolute -right-1 -bottom-1 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-accent text-accent-ink shadow-lg ring-4 ring-paper-2">
-            <Sparkle size={18} weight="fill" />
-          </span>
-        </div>
-      </div>
+              <strong className={`mt-2 block leading-tight text-ink ${compact ? 'text-[11px]' : 'text-[12px]'}`}>{s.title}</strong>
+              <span className={`mt-0.5 block px-1 leading-snug text-muted ${compact ? 'text-[10px]' : 'text-[11px]'}`}>{s.text}</span>
+            </li>
+          )
+        })}
+      </ol>
     </figure>
   )
 }

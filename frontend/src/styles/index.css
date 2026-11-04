@@ -122,18 +122,3 @@ body {
     animation: none !important;
   }
 }
-
-/* Workflow cards: dashes flow toward the app window. Still with reduced motion. */
-@keyframes flow-dash {
-  to {
-    stroke-dashoffset: -12;
-  }
-}
-.flow-dash {
-  animation: flow-dash 1.2s linear infinite;
-}
-@media (prefers-reduced-motion: reduce) {
-  .flow-dash {
-    animation: none !important;
-  }
-}
