@@ -1,6 +1,6 @@
 
 
-
+CLAUDE.md
 .env
 .playwright-mcp
 .claude
@@ -8,3 +8,9 @@ slugs.md
 
 
 
+Context/
+.docs/
+node_modules/
+dist/
+.vercel/
+*.local

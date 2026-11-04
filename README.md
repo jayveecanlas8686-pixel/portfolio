@@ -1,31 +1,31 @@
-# Jayvee Canlas Portfolio
+# <Project name>
 
-Static portfolio website ready for local testing and Render Static Site deployment.
+<One or two lines: what this project is and who it's for.>
 
-## Local Preview
+## Structure
+
+```
+backend/      server, DB, services, backend/.env
+frontend/     UI, frontend/.env
+shared/       code used by both sides (types, schemas, constants)
+Context/      client brief, plan, brand, messages, access list (gitignored)
+.docs/.superpowers/   specs → plans → sdd task docs (gitignored)
+.claude/      standing rules (rules/) and skill routing (skills/)
+```
+
+## Run locally
 
 ```bash
-node local-server.cjs
+cd backend && npm ci && npm run dev
+cd frontend && npm ci && npm run dev
 ```
 
-Open:
+## Environments & deploy
 
-```text
-http://127.0.0.1:4173
-```
+- Branch: work on `staging`; `main` is promoted by a manual PR on GitHub.
+- Hosting: <Vercel / Railway / other>
+- Database: <Supabase / SQL Server / other>
 
-## Render Static Site Settings
+## Operations runbook
 
-- Build command: leave blank
-- Publish directory: `.`
-- Root directory: `portfolio` if this folder is inside a larger GitHub repository
-
-If the `portfolio` folder is pushed as the whole repository, the publish directory is still `.`.
-
-
-
-
-node "C:\Users\JAYVEE CANLAS\Desktop\JAYVEE\portfolio\local-server.cjs"
-
-
-node "C:\Users\JAYVEE CANLAS\Desktop\JAYVEE\ai-supportdesk-platform\frontend\local-server.cjs"
+<How to deploy, roll back, rotate a key, and where logs live.>
