@@ -73,3 +73,31 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* ── Premium motion layer (user request 2026-11-04) ─────────────────────────────
+   Static dot grid, like a workflow canvas: never animated (no moving backgrounds). */
+:root {
+  --dot: rgba(20, 32, 47, 0.075);
+  --lift-shadow: 0 16px 36px -20px rgba(20, 32, 47, 0.38);
+}
+[data-theme="dark"] {
+  --dot: rgba(233, 238, 247, 0.06);
+  --lift-shadow: 0 16px 36px -18px rgba(0, 0, 0, 0.7);
+}
+body {
+  background-image: radial-gradient(var(--dot) 1px, transparent 1.3px);
+  background-size: 22px 22px;
+  background-attachment: fixed;
+}
+
+/* Cards: a 2px lift and a soft shadow on hover, 180ms. Disabled by reduced motion above. */
+@utility lift {
+  transition:
+    transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 180ms cubic-bezier(0.22, 1, 0.36, 1);
+  &:hover,
+  &:focus-within {
+    transform: translateY(-2px);
+    box-shadow: var(--lift-shadow);
+  }
+}

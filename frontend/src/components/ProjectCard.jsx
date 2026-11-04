@@ -52,7 +52,7 @@ function FlowNode({ n, label, lit = false, children }) {
 export function ProjectRow({ project }) {
   const href = `/projects/${project.slug}`
   return (
-    <article className="group relative grid overflow-hidden rounded-[20px] bg-card ring-1 ring-line has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-accent md:grid-cols-[2fr_3fr]">
+    <article className="lift group relative grid overflow-hidden rounded-[20px] bg-card ring-1 ring-line has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-accent md:grid-cols-[2fr_3fr]">
       {project.image && (
         <div className="px-5 pt-5 sm:px-6 sm:pt-6 md:pb-6 md:pr-0">
           <ProjectImage project={project} className="h-auto w-full rounded-xl bg-paper-2 ring-1 ring-line" />
@@ -99,7 +99,7 @@ function primaryExternalLink(project) {
 export function ProjectTile({ project }) {
   const link = primaryExternalLink(project)
   return (
-    <article className="flex flex-col overflow-hidden rounded-[20px] bg-card ring-1 ring-line">
+    <article className="lift flex flex-col overflow-hidden rounded-[20px] bg-card ring-1 ring-line">
       {project.image && (
         <div className="aspect-[16/10] border-b border-line bg-paper-2">
           <ProjectImage project={project} className="h-full w-full object-cover object-top" />

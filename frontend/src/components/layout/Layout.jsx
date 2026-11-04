@@ -1,5 +1,7 @@
 import { Suspense, useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import { EASE } from '../../lib/motion.js'
 import Sidebar from './Sidebar.jsx'
 import MobileBar from './MobileBar.jsx'
 import RouteErrorBoundary from './RouteErrorBoundary.jsx'
@@ -25,7 +27,7 @@ export default function Layout() {
   }, [pathname, hash])
 
   return (
-    <div className="min-h-dvh bg-paper text-ink">
+    <div className="min-h-dvh text-ink">
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-card focus:px-4 focus:py-2"
@@ -39,7 +41,15 @@ export default function Layout() {
         <div className="mx-auto max-w-5xl px-4 py-8 sm:px-8 lg:py-6">
           <RouteErrorBoundary resetKey={pathname}>
             <Suspense fallback={<div className="min-h-[60vh]" aria-busy="true" />}>
-              <Outlet />
+              {/* Page transition: each page fades up in, 0.45s. */}
+              <motion.div
+                key={pathname}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, ease: EASE }}
+              >
+                <Outlet />
+              </motion.div>
             </Suspense>
           </RouteErrorBoundary>
         </div>

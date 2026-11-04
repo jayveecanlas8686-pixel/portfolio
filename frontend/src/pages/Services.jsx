@@ -1,3 +1,4 @@
+import Reveal from '../components/motion/Reveal.jsx'
 import { SERVICES, METHOD } from '../data/services.js'
 import { useDocumentTitle } from '../lib/useDocumentTitle.js'
 import ServiceCard from '../components/ServiceCard.jsx'
@@ -23,12 +24,12 @@ export default function Services() {
         </div>
       </section>
 
-      <section aria-labelledby="method">
+      <Reveal as="section" aria-labelledby="method">
         <h2 id="method" className="text-3xl font-extrabold">How I work</h2>
         <div className="mt-8">
           <MethodSteps steps={METHOD} />
         </div>
-      </section>
+      </Reveal>
 
       <ContactBand />
     </div>

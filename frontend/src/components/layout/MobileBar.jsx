@@ -48,7 +48,7 @@ export default function MobileBar() {
           className="border-t border-line bg-paper px-4 pb-5 pt-3"
         >
           <nav aria-label="Mobile">
-            <NavLinks onNavigate={() => setOpen(false)} />
+            <NavLinks onNavigate={() => setOpen(false)} pillId="nav-pill-mobile" />
           </nav>
           <div className="mt-4 flex items-center justify-between">
             <SocialLinks />

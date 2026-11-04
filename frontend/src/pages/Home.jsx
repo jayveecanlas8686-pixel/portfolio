@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ArrowUpRight } from '@phosphor-icons/react'
+import { motion } from 'framer-motion'
+import { fadeUp, stagger } from '../lib/motion.js'
 import { profile } from '../data/profile.js'
 import { SERVICES, HOME_RESULTS } from '../data/services.js'
 import { PROJECTS } from '../data/projects.js'
@@ -15,9 +17,10 @@ const [line1, line2] = profile.headline.split(/(?<=\.)\s+/)
 // scrolling; each tile leads to its full page. Phones stack the tiles and scroll.
 function Tile({ id, title, action, children, className = '' }) {
   return (
-    <section
+    <motion.section
+      variants={fadeUp}
       aria-labelledby={id}
-      className={`flex flex-col rounded-[20px] bg-card p-5 ring-1 ring-line ${className}`}
+      className={`lift flex flex-col rounded-[20px] bg-card p-5 ring-1 ring-line ${className}`}
     >
       <div className="flex items-baseline justify-between gap-3">
         <h2 id={id} className="text-lg font-bold">
@@ -26,7 +29,7 @@ function Tile({ id, title, action, children, className = '' }) {
         {action}
       </div>
       <div className="mt-4">{children}</div>
-    </section>
+    </motion.section>
   )
 }
 
@@ -41,10 +44,11 @@ function TileLink({ to, children }) {
 export default function Home() {
   useDocumentTitle()
   return (
-    <div className="flex flex-col gap-6 lg:gap-5">
+    // One load sequence: headline, then the workflow, then the tiles, 80ms apart.
+    <motion.div className="flex flex-col gap-6 lg:gap-5" variants={stagger(0.08)} initial="hidden" animate="show">
       {/* Hero */}
       <section className="grid items-center gap-6 xl:grid-cols-[1fr_minmax(0,27rem)]">
-        <div>
+        <motion.div variants={fadeUp}>
           <h1 className="text-[2.4rem] font-extrabold leading-[1.02] tracking-[-0.03em] sm:text-5xl">
             <span className="block">{line1}</span>{' '}
             <span className="block text-accent">{line2}</span>
@@ -64,16 +68,18 @@ export default function Home() {
               See results
             </Link>
           </div>
-        </div>
-        <WorkflowStrip
+        </motion.div>
+        <motion.div variants={fadeUp}>
+          <WorkflowStrip
           compact
           steps={['Waybill PDF', 'n8n extracts', 'Clean data', 'Excel ✓']}
-          result="2 hrs → 5–10 min, every day"
-        />
+            result="2 hrs → 5–10 min, every day"
+          />
+        </motion.div>
       </section>
 
       {/* Hub tiles */}
-      <div className="grid items-start gap-5 lg:grid-cols-[1.1fr_1fr_1fr]">
+      <motion.div className="grid items-start gap-5 lg:grid-cols-[1.1fr_1fr_1fr]" variants={stagger(0.08)}>
         <Tile id="home-services" title="Services" action={<TileLink to="/services">All services</TileLink>}>
           <ul className="divide-y divide-line">
             {SERVICES.map((s) => (
@@ -124,7 +130,7 @@ export default function Home() {
             </Link>
           </div>
         </Tile>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   )
 }

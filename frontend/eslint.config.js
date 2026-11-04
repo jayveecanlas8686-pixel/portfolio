@@ -36,7 +36,8 @@ export default [
     rules: {
       ...js.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      // `motion` is only used as <motion.div> in JSX, which this rule can't see without the React plugin.
+      'no-unused-vars': ['error', { varsIgnorePattern: '^(?:[A-Z_]|motion$)' }],
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     },
   },

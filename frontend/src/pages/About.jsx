@@ -1,3 +1,4 @@
+import Reveal from '../components/motion/Reveal.jsx'
 import { ABOUT } from '../data/about.js'
 import { profile } from '../data/profile.js'
 import { useDocumentTitle } from '../lib/useDocumentTitle.js'
@@ -68,7 +69,7 @@ export default function About() {
       </div>
 
       {/* Certifications */}
-      <section aria-labelledby="certifications">
+      <Reveal as="section" aria-labelledby="certifications">
         <h2 id="certifications" className="text-3xl font-extrabold">Certifications</h2>
         <p className="mt-2 max-w-[60ch] text-muted">Open any certificate to see the original.</p>
         <ul className="mt-8 grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 sm:gap-y-9 lg:grid-cols-3">
@@ -97,10 +98,10 @@ export default function About() {
             </li>
           ))}
         </ul>
-      </section>
+      </Reveal>
 
       {/* Toolkit */}
-      <section aria-labelledby="toolkit">
+      <Reveal as="section" aria-labelledby="toolkit">
         <h2 id="toolkit" className="text-3xl font-extrabold">Toolkit</h2>
         <div className="mt-7 grid gap-8 md:grid-cols-3">
           {ABOUT.toolkit.map((g) => (
@@ -110,7 +111,7 @@ export default function About() {
             </div>
           ))}
         </div>
-      </section>
+      </Reveal>
     </div>
   )
 }

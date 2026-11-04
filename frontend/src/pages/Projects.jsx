@@ -1,3 +1,4 @@
+import Reveal from '../components/motion/Reveal.jsx'
 import { PROJECTS, PROJECT_GROUPS } from '../data/projects.js'
 import { useDocumentTitle } from '../lib/useDocumentTitle.js'
 import { ProjectRow, ProjectTile } from '../components/ProjectCard.jsx'
@@ -23,7 +24,7 @@ export default function Projects() {
         if (!items.length) return null
         const rows = items.every(isRow)
         return (
-          <section key={group.id} aria-labelledby={`group-${group.id}`}>
+          <Reveal as="section" key={group.id} aria-labelledby={`group-${group.id}`}>
             <h2 id={`group-${group.id}`} className="text-3xl font-extrabold">
               {group.title}
             </h2>
@@ -33,7 +34,7 @@ export default function Projects() {
                 isRow(p) ? <ProjectRow key={p.slug} project={p} /> : <ProjectTile key={p.slug} project={p} />,
               )}
             </div>
-          </section>
+          </Reveal>
         )
       })}
 
