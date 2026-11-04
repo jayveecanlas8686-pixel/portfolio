@@ -45,5 +45,5 @@ export const METHOD = [
 export const HOME_RESULTS = [
   { value: '2.5×', label: 'more email campaigns a day', slug: 'ai-email-builder', title: 'AI Email Builder', before: '20 emails/day', after: '50+ emails/day', estimate: false },
   { value: '2h → 10m', label: 'daily data entry, ~40 hrs/month saved', slug: 'waybill-pdf-extraction', title: 'Waybill PDF Extraction', before: '2 hrs/day', after: '5–10 min/day', estimate: true },
-  { value: '8×/day', label: 'verified dashboard refreshes, zero by hand', slug: 'power-bi-refresh-monitor', title: 'Power BI Refresh Monitor', before: 'Refreshed by hand', after: '8×/day, verified', estimate: false },
+  { value: '8×/day', label: 'verified dashboard refreshes, zero by hand', slug: 'power-bi-refresh-monitor', title: 'Power BI Refresh Monitor', before: 'Refreshed by hand', after: 'Up to 8×/day, verified', estimate: false },
 ]

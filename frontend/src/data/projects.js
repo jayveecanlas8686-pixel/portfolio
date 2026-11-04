@@ -85,7 +85,7 @@ export const PROJECTS = [
     group: 'automation',
     kind: 'real',
     context: 'Operations team · n8n · daily',
-    problem: 'Staff retyped data from scanned waybill PDFs into Excel by hand: about 2 hours every day, with typos slipping into reports.',
+    problem: 'Staff retyped data from scanned waybill PDFs into Excel by hand, about 2 hours every day.',
     built:
       'An n8n workflow that watches the upload folder, downloads each waybill PDF, extracts the fields, normalizes them, and appends a clean row to the Excel table.',
     result: {

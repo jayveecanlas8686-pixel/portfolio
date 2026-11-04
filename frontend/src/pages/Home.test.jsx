@@ -23,7 +23,7 @@ describe('Home', () => {
     const cases = [
       [/2\.5×/, '/projects/ai-email-builder', '20 emails/day', '50+ emails/day'],
       [/2h → 10m/, '/projects/waybill-pdf-extraction', '2 hrs/day', '5–10 min/day'],
-      [/8×\/day/, '/projects/power-bi-refresh-monitor', 'Refreshed by hand', '8×/day, verified'],
+      [/8×\/day/, '/projects/power-bi-refresh-monitor', 'Refreshed by hand', 'Up to 8×/day, verified'],
     ]
     for (const [name, href, before, after] of cases) {
       const link = screen.getByRole('link', { name })
