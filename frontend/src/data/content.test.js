@@ -4,13 +4,14 @@ import { PROJECTS, PROJECT_GROUPS, getProject } from './projects.js'
 import { SERVICES, METHOD, HOME_RESULTS } from './services.js'
 import { ABOUT } from './about.js'
 import { profile } from './profile.js'
+import { CLIENTS, getClient } from './clients.js'
 
 const publicFile = (p) => resolve(process.cwd(), 'public' + p)
 
 describe('project content honesty (spec §4, §7)', () => {
   it('real projects tell the full story', () => {
     const real = PROJECTS.filter((p) => p.kind === 'real')
-    expect(real.length).toBe(6)
+    expect(real.length).toBe(9)
     for (const p of real) {
       expect(p.problem, p.slug).toBeTruthy()
       expect(p.built, p.slug).toBeTruthy()
@@ -53,11 +54,11 @@ describe('project content honesty (spec §4, §7)', () => {
 })
 
 describe('content structure', () => {
-  it('has 15 projects with unique slugs in known groups', () => {
-    expect(PROJECTS.length).toBe(15)
-    expect(new Set(PROJECTS.map((p) => p.slug)).size).toBe(15)
+  it('has 19 projects with unique slugs in known groups', () => {
+    expect(PROJECTS.length).toBe(19)
+    expect(new Set(PROJECTS.map((p) => p.slug)).size).toBe(19)
     const groupIds = PROJECT_GROUPS.map((g) => g.id)
-    expect(groupIds).toEqual(['automation', 'data-ai', 'demos', 'repos'])
+    expect(groupIds).toEqual(['clients', 'automation', 'data-ai', 'demos', 'repos'])
     for (const p of PROJECTS) expect(groupIds, p.slug).toContain(p.group)
   })
 
@@ -121,5 +122,54 @@ describe('performance: profile images are web-sized', () => {
       expect(p, 'path').toMatch(/\.webp$/)
       expect(existsSync(publicFile(p)), p).toBe(true)
     }
+  })
+})
+
+
+// Client work (user request 2026-11-04): names + company shown, no quotes, facts only from the project files.
+describe('client work', () => {
+  it('lists Nest Marketing (Umar Shaikh) and Resét (Sebastian Larsen), no quotes', () => {
+    expect(CLIENTS.map((c) => c.id)).toEqual(['nest-marketing', 'reset'])
+    expect(getClient('nest-marketing')).toMatchObject({ name: 'Nest Marketing', contact: 'Umar Shaikh', role: 'Founder' })
+    expect(getClient('reset')).toMatchObject({ name: 'Resét Skin & Aesthetics', contact: 'Sebastian Larsen', role: 'Owner' })
+    for (const c of CLIENTS) expect(c.quote, c.id).toBeUndefined()
+  })
+
+  it('every client project exists, sits in the clients group and points back to its client', () => {
+    expect(getClient('nest-marketing').projectSlugs).toEqual(['ai-email-builder', 'nest-brain', 'campaign-alerts', 'nest-audit-engine'])
+    expect(getClient('reset').projectSlugs).toEqual(['reset-dashboard'])
+    for (const c of CLIENTS) {
+      for (const slug of c.projectSlugs) {
+        const p = getProject(slug)
+        expect(p, slug).toBeDefined()
+        expect(p.group, slug).toBe('clients')
+        expect(p.client, slug).toBe(c.id)
+      }
+    }
+  })
+
+  it('a launching project shows its status and claims no result', () => {
+    const p = getProject('nest-audit-engine')
+    expect(p.kind).toBe('launching')
+    expect(p.status).toBe('Launching November 2026')
+    expect(p.result).toBeUndefined()
+  })
+
+  it('client results use only facts from the project files', () => {
+    expect(getProject('nest-brain').result.headline).toContain('840+')
+    expect(getProject('nest-brain').result.detail).toContain('226 channels')
+    expect(getProject('campaign-alerts').result.detail).toContain('25%')
+    expect(getProject('reset-dashboard').result.detail).toContain('6 sources')
+  })
+
+  it('no client money figures or client-of-client names leak into public text', () => {
+    const text = JSON.stringify(PROJECTS.filter((p) => p.client))
+    for (const banned of [/\d\s?kr\b/i, /\bDKK\b/, /Klone|Amour|Ava Rosier|Living Word|Code 118|TrackMan|Hims|Phoenix/i]) {
+      expect(text).not.toMatch(banned)
+    }
+  })
+
+  it('getClient returns undefined for unknown ids', () => {
+    expect(getClient('nope')).toBeUndefined()
   })
 })

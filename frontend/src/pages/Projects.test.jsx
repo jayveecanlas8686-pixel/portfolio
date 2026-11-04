@@ -22,7 +22,7 @@ describe('Projects', () => {
     const h2s = screen.getAllByRole('heading', { level: 2 }).map((h) => h.textContent)
     const groupTitles = PROJECT_GROUPS.map((g) => g.title)
     expect(h2s.filter((t) => groupTitles.includes(t))).toEqual(groupTitles)
-    expect(screen.getAllByRole('article')).toHaveLength(15)
+    expect(screen.getAllByRole('article')).toHaveLength(19)
   })
 
   it('real card shows Problem / Built / Result', () => {
@@ -73,5 +73,21 @@ describe('Projects: every detail page is reachable', () => {
       const tile = articleFor(title)
       expect(within(tile).getByRole('link', { name: title })).toHaveAttribute('href', `/projects/${slug}`)
     }
+  })
+})
+
+describe('Projects: client work', () => {
+  it('starts with client cards that open each client page', () => {
+    renderProjects()
+    const clients = screen.getByRole('region', { name: 'Clients' })
+    expect(within(clients).getByRole('link', { name: /Nest Marketing/ })).toHaveAttribute('href', '/clients/nest-marketing')
+    expect(within(clients).getByRole('link', { name: /Resét Skin & Aesthetics/ })).toHaveAttribute('href', '/clients/reset')
+    expect(within(clients).getByText(/Umar Shaikh/)).toBeInTheDocument()
+    expect(within(clients).getByText(/Sebastian Larsen/)).toBeInTheDocument()
+  })
+
+  it('client project cards name the client', () => {
+    renderProjects()
+    expect(within(articleFor('Nest Brain')).getByText(/Nest Marketing/)).toBeInTheDocument()
   })
 })

@@ -3,6 +3,11 @@
 
 export const PROJECT_GROUPS = [
   {
+    id: 'clients',
+    title: 'Client work',
+    blurb: 'Systems I built and run for clients, named with their OK.',
+  },
+  {
     id: 'automation',
     title: 'Automation',
     blurb: 'Workflows that took manual work off a team, every day.',
@@ -25,13 +30,16 @@ export const PROJECT_GROUPS = [
 ]
 
 export const PROJECTS = [
-  // ── Data & AI tools ────────────────────────────────────────────────
+  // ── Client work ────────────────────────────────────────────────────
+  // Facts from the client project folders (NEST PROJECT/, RESET PROJECT/ Context and READMEs, 2026-11-04).
+  // Left out on purpose: their customers' and staff names, money figures, internal URLs.
   {
     slug: 'ai-email-builder',
     title: 'AI Email Builder',
-    group: 'data-ai',
+    group: 'clients',
+    client: 'nest-marketing',
     kind: 'real',
-    context: 'Marketing agency · AI tool',
+    context: 'Nest Marketing · AI tool',
     problem:
       'The agency built every campaign email by hand, which capped them at about 20 email flows a day.',
     built:
@@ -54,6 +62,96 @@ export const PROJECTS = [
     },
     image: '/images/projects/ai-email-builder-preview.png',
   },
+  {
+    slug: 'nest-brain',
+    title: 'Nest Brain',
+    group: 'clients',
+    client: 'nest-marketing',
+    kind: 'real',
+    context: 'Nest Marketing · Slack AI assistant · live',
+    problem:
+      'The team needed one place to ask about clients, channels and tasks, and task docs had to be turned into posts by hand. It also had to answer only people inside the agency.',
+    built:
+      'A Slack assistant that answers from the team’s own Slack history, turns uploaded task docs into task posts and schedule lists in the right channels, sends a daily health report, and refuses anyone outside the workspace.',
+    result: {
+      headline: '840+ tasks routed in its first 3 weeks',
+      detail: 'Design and scheduling tasks posted from task docs, none sent twice; now in 226 channels.',
+      estimate: false,
+    },
+    highlights: [
+      'Answers questions from indexed Slack history',
+      'Task docs become task posts and schedule lists automatically',
+      'Members-only: nobody outside the workspace gets a reply',
+      'Daily health report',
+    ],
+    tools: ['Node.js', 'TypeScript', 'Slack Bolt', 'Claude API', 'Postgres', 'Railway'],
+    links: {},
+  },
+  {
+    slug: 'campaign-alerts',
+    title: 'Campaign Alerts',
+    group: 'clients',
+    client: 'nest-marketing',
+    kind: 'real',
+    context: 'Nest Marketing · n8n · live',
+    problem:
+      'A brand that was doing fine could suddenly perform badly, and nobody noticed until much later because every brand was checked by hand.',
+    built:
+      'n8n workflows that watch each brand’s Klaviyo flows and post to an alerts channel: week-over-week drops, zero-revenue days, outliers, and a weekly review.',
+    result: {
+      headline: 'Drops flagged automatically, every day',
+      detail: 'Any brand whose flow results fall 25%+ week over week gets flagged; it already caught a brand that had stopped making sales.',
+      estimate: false,
+    },
+    tools: ['n8n', 'Klaviyo', 'Slack', 'TypeScript'],
+    links: {},
+  },
+  {
+    slug: 'nest-audit-engine',
+    title: 'Nest Audit Engine',
+    group: 'clients',
+    client: 'nest-marketing',
+    kind: 'launching',
+    status: 'Launching November 2026',
+    context: 'Nest Marketing · outreach automation',
+    problem:
+      'Winning new clients meant researching each brand by hand, building a 9-page audit PDF, and emailing it one at a time.',
+    built:
+      'A pipeline that finds leads, skips existing clients, writes a branded 9-page audit with a check that nothing is invented, sends it for approval in Slack, then emails it with timed follow-ups and reply alerts.',
+    highlights: [
+      'Lead finder plus a daily exclusion list of current clients',
+      'Every claim in the audit is checked against its source',
+      'One-click approval in Slack before anything is sent',
+    ],
+    tools: ['Node.js', 'TypeScript', 'Claude API', 'Postgres', 'Railway'],
+    links: {},
+  },
+  {
+    slug: 'reset-dashboard',
+    title: 'Business & CFO Dashboard',
+    group: 'clients',
+    client: 'reset',
+    kind: 'real',
+    context: 'Resét Skin & Aesthetics · live',
+    problem:
+      'The clinic’s numbers lived in separate tools and a finance spreadsheet that had to be updated by hand, so there was no single live view of bookings, marketing and finances.',
+    built:
+      'Two sign-in dashboards: a business board (bookings, capacity, customers, marketing, targets) and a CFO board (P&L, budget, cash, bank reconciliation), fed by a daily sync with health alerts.',
+    result: {
+      headline: 'No more manual finance updates',
+      detail: 'Data syncs every morning from 6 sources, so the finance tab no longer needs updating by hand.',
+      estimate: false,
+    },
+    highlights: [
+      'Daily sync from bookings, accounting, email, analytics, ads and OneDrive',
+      'CFO board limited to the finance team',
+      'Danish and English',
+    ],
+    tools: ['TypeScript', 'Supabase', 'React', 'Cloudflare', 'GitHub Actions'],
+    links: {},
+  },
+
+  // ── Data & AI tools ────────────────────────────────────────────────
   {
     slug: 'ai-sales-forecast',
     title: 'AI Sales Forecast',

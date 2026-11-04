@@ -3,8 +3,10 @@ import { PROJECTS, PROJECT_GROUPS } from '../data/projects.js'
 import { useDocumentTitle } from '../lib/useDocumentTitle.js'
 import { ProjectRow, ProjectTile } from '../components/ProjectCard.jsx'
 import ContactBand from '../components/ContactBand.jsx'
+import ClientCard from '../components/ClientCard.jsx'
+import { CLIENTS } from '../data/clients.js'
 
-const isRow = (p) => p.kind === 'real' || p.kind === 'personal'
+const isRow = (p) => p.kind === 'real' || p.kind === 'personal' || p.kind === 'launching'
 
 export default function Projects() {
   useDocumentTitle('Projects')
@@ -15,9 +17,21 @@ export default function Projects() {
           Projects that took work off people's plates.
         </h1>
         <p className="mt-4 max-w-[60ch] text-lg text-muted">
-          Real automations first, with what changed for the team. Then demos and code you can open yourself.
+          Client work first, then automations with what changed for the team, then demos and code you can open yourself.
         </p>
       </header>
+
+      <Reveal as="section" aria-labelledby="clients">
+        <h2 id="clients" className="text-3xl font-extrabold">
+          Clients
+        </h2>
+        <p className="mt-2 max-w-[60ch] text-muted">Open a client to see everything I built for them.</p>
+        <div className="mt-6 grid gap-5 md:grid-cols-2">
+          {CLIENTS.map((c) => (
+            <ClientCard key={c.id} client={c} />
+          ))}
+        </div>
+      </Reveal>
 
       {PROJECT_GROUPS.map((group) => {
         const items = PROJECTS.filter((p) => p.group === group.id)

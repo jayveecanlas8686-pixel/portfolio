@@ -42,7 +42,7 @@ describe('Home hub', () => {
       expect(link).toHaveTextContent(before)
       expect(link).toHaveTextContent(after)
     }
-    expect(within(tile).getByRole('link', { name: /All 15 projects/ })).toHaveAttribute('href', '/projects')
+    expect(within(tile).getByRole('link', { name: /All 19 projects/ })).toHaveAttribute('href', '/projects')
   })
 
   it('has an about tile with the CV and a link to the about page', () => {
@@ -57,5 +57,14 @@ describe('Home hub', () => {
     expect(screen.getAllByRole('listitem').map((li) => li.textContent)).toEqual(
       expect.arrayContaining(['Waybill PDF', 'n8n extracts', 'Clean data', 'Excel ✓']),
     )
+  })
+})
+
+describe('Home hub: clients', () => {
+  it('projects tile names both clients and links to their pages', () => {
+    renderHome()
+    const tile = screen.getByRole('region', { name: 'Projects' })
+    expect(within(tile).getByRole('link', { name: 'Nest Marketing' })).toHaveAttribute('href', '/clients/nest-marketing')
+    expect(within(tile).getByRole('link', { name: 'Resét Skin & Aesthetics' })).toHaveAttribute('href', '/clients/reset')
   })
 })

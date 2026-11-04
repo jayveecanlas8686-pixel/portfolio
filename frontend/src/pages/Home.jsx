@@ -5,6 +5,7 @@ import { fadeUp, stagger } from '../lib/motion.js'
 import { profile } from '../data/profile.js'
 import { SERVICES, HOME_RESULTS } from '../data/services.js'
 import { PROJECTS } from '../data/projects.js'
+import { CLIENTS } from '../data/clients.js'
 import { useDocumentTitle } from '../lib/useDocumentTitle.js'
 import WorkflowStrip from '../components/WorkflowStrip.jsx'
 import ResultsLedger from '../components/ResultsLedger.jsx'
@@ -103,7 +104,18 @@ export default function Home() {
           title="Projects"
           action={<TileLink to="/projects">All {PROJECTS.length} projects</TileLink>}
         >
-          <p className="mb-3 text-sm text-muted">Before and after, from real work.</p>
+          <p className="mb-3 text-sm text-muted">
+            Built for{' '}
+            {CLIENTS.map((c, i) => (
+              <span key={c.id}>
+                {i > 0 && ' and '}
+                <Link to={`/clients/${c.id}`} className="font-semibold text-ink underline decoration-line underline-offset-4 hover:decoration-accent">
+                  {c.name}
+                </Link>
+              </span>
+            ))}
+            .
+          </p>
           <ResultsLedger results={HOME_RESULTS} compact />
         </Tile>
 

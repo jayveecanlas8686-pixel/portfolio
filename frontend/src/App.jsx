@@ -7,6 +7,7 @@ import NotFound from './pages/NotFound.jsx'
 // Home and NotFound ship in the first bundle; the other pages load when first visited.
 const Projects = lazy(() => import('./pages/Projects.jsx'))
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail.jsx'))
+const ClientDetail = lazy(() => import('./pages/ClientDetail.jsx'))
 const Services = lazy(() => import('./pages/Services.jsx'))
 const About = lazy(() => import('./pages/About.jsx'))
 const Contact = lazy(() => import('./pages/Contact.jsx'))
@@ -18,6 +19,7 @@ export function AppRoutes() {
         <Route index element={<Home />} />
         <Route path="projects" element={<Projects />} />
         <Route path="projects/:slug" element={<ProjectDetail />} />
+        <Route path="clients/:id" element={<ClientDetail />} />
         <Route path="services" element={<Services />} />
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />

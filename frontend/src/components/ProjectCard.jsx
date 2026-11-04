@@ -52,7 +52,11 @@ function FlowNode({ n, label, lit = false, children }) {
 export function ProjectRow({ project }) {
   const href = `/projects/${project.slug}`
   return (
-    <article className="lift group relative grid overflow-hidden rounded-[20px] bg-card ring-1 ring-line has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-accent md:grid-cols-[2fr_3fr]">
+    <article
+      className={`lift group relative grid overflow-hidden rounded-[20px] bg-card ring-1 ring-line has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-accent ${
+        project.image ? 'md:grid-cols-[2fr_3fr]' : ''
+      }`}
+    >
       {project.image && (
         <div className="px-5 pt-5 sm:px-6 sm:pt-6 md:pb-6 md:pr-0">
           <ProjectImage project={project} className="h-auto w-full rounded-xl bg-paper-2 ring-1 ring-line" />
@@ -78,9 +82,15 @@ export function ProjectRow({ project }) {
           <FlowNode n={2} label="Built">
             <p className="text-muted">{project.built}</p>
           </FlowNode>
-          <FlowNode n={3} label="Result" lit>
-            <ResultHeadline result={project.result} className="text-lg" />
-          </FlowNode>
+          {project.kind === 'launching' ? (
+            <FlowNode n={3} label="Status">
+              <p className="font-display text-lg font-bold text-ink">{project.status}</p>
+            </FlowNode>
+          ) : (
+            <FlowNode n={3} label="Result" lit>
+              <ResultHeadline result={project.result} className="text-lg" />
+            </FlowNode>
+          )}
         </ol>
 
         <ToolTags tools={project.tools} />
