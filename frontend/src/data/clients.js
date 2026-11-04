@@ -7,6 +7,7 @@ export const CLIENTS = [
   {
     kind: 'client',
     id: 'nest-marketing',
+    logo: '/images/clients/nest-marketing.webp', // official, from the client's project files
     name: 'Nest Marketing',
     contact: 'Umar Shaikh',
     role: 'Founder',
@@ -16,6 +17,7 @@ export const CLIENTS = [
   {
     kind: 'client',
     id: 'reset',
+    logo: '/images/clients/reset.webp', // official, from the client's project files
     name: 'Resét Skin & Aesthetics',
     contact: 'Sebastian Larsen',
     role: 'Owner',

@@ -50,3 +50,13 @@ describe('Projects: three categories of cards', () => {
     expect(container.textContent).not.toContain(' · ')
   })
 })
+
+describe('Projects: logos on cards', () => {
+  it('shows the official logo where we have one, and the letter tile otherwise', () => {
+    renderProjects()
+    const clients = region('Clients')
+    expect(within(clients).getByRole('img', { name: 'Nest Marketing logo' })).toHaveAttribute('src', '/images/clients/nest-marketing.webp')
+    expect(within(clients).getByRole('img', { name: 'Resét Skin & Aesthetics logo' })).toBeInTheDocument()
+    expect(within(clients).queryByRole('img', { name: 'SimGolf logo' })).not.toBeInTheDocument()
+  })
+})

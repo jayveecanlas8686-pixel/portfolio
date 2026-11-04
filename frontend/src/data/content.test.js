@@ -264,3 +264,12 @@ describe('projects grouped by client, employer and personal', () => {
     expect(slugsIn('clients')).toHaveLength(8)
   })
 })
+
+describe('client logos', () => {
+  it('Nest and Resét use their official logos from the project files; others fall back to a letter', () => {
+    expect(getClient('nest-marketing').logo).toBe('/images/clients/nest-marketing.webp')
+    expect(getClient('reset').logo).toBe('/images/clients/reset.webp')
+    for (const c of CLIENTS.filter((x) => x.logo)) expect(existsSync(publicFile(c.logo)), c.logo).toBe(true)
+    expect(getClient('simgolf').logo).toBeUndefined()
+  })
+})
