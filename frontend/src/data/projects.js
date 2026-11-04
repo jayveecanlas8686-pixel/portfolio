@@ -222,6 +222,8 @@ export const PROJECTS = [
       detail: '~40 hrs/month of manual entry removed (about 110 min × 22 workdays).',
       estimate: true,
     },
+    // Estimated cost saving: hours saved × staff rate ($25/hour, Jayvee's choice 2026-11-04). 40.3 h × $25 ≈ $1,000.
+    saving: { monthly: 1000, basis: '~40 hrs/month × $25/hour' },
     highlights: ['Folder watcher picks up every new upload', 'Consistent field format before anything is saved'],
     tools: ['n8n', 'PDF extraction', 'JavaScript', 'Excel'],
     links: {},

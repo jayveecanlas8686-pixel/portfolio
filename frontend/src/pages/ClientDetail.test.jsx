@@ -71,7 +71,7 @@ describe('Employment page: Brigada', () => {
     expect(card.getByText('Built')).toBeInTheDocument()
     expect(card.getByText('Result')).toBeInTheDocument()
     expect(card.getByText(/2 hrs → 5–10 min a day/)).toBeInTheDocument()
-    expect(card.getByText(/estimate/)).toBeInTheDocument()
+    expect(card.getAllByText(/estimate/).length).toBeGreaterThanOrEqual(1)
   })
 
   it('context lines show commas, not dots', () => {
@@ -107,5 +107,14 @@ describe('Personal page', () => {
     expect(ext).toHaveAttribute('target', '_blank')
     expect(ext.getAttribute('rel')).toContain('noreferrer')
     expect(card.getByRole('link', { name: 'ShopHub' })).toHaveAttribute('href', '/projects/shophub')
+  })
+})
+
+describe('estimated saving on the card', () => {
+  it('Waybill card shows the monthly saving as an estimate', () => {
+    renderAt('/employment/brigada')
+    const card = within(articleFor('Waybill PDF Extraction'))
+    expect(card.getByText(/≈ \$1,000\/month saved/)).toBeInTheDocument()
+    expect(card.getByText(/~40 hrs\/month × \$25\/hour/)).toBeInTheDocument()
   })
 })

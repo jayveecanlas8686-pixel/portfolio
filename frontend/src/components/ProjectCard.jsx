@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { ArrowUpRight } from '@phosphor-icons/react'
 import ResultHeadline from './ResultHeadline.jsx'
 import ToolTags from './ToolTags.jsx'
+import SavingNote from './SavingNote.jsx'
 import { EXTERNAL, contextLine } from '../lib/format.js'
 
 // Images have no stored size in the data; width/height give the browser a ratio to reserve until they load.
@@ -90,6 +91,7 @@ export function ProjectRow({ project }) {
           ) : (
             <FlowNode n={3} label="Result" lit>
               <ResultHeadline result={project.result} className="text-lg" />
+              <SavingNote saving={project.saving} className="mt-1" />
             </FlowNode>
           )}
         </ol>

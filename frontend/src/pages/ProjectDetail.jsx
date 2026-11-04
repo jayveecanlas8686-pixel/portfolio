@@ -4,6 +4,7 @@ import { getProject } from '../data/projects.js'
 import { useDocumentTitle } from '../lib/useDocumentTitle.js'
 import ResultHeadline from '../components/ResultHeadline.jsx'
 import ToolTags from '../components/ToolTags.jsx'
+import SavingNote from '../components/SavingNote.jsx'
 import { EXTERNAL, contextLine } from '../lib/format.js'
 import NotFound from './NotFound.jsx'
 
@@ -46,6 +47,7 @@ function steps(project) {
         <>
           <ResultHeadline result={project.result} className="text-2xl" />
           {project.result?.detail && <p className="mt-1 text-muted">{project.result.detail}</p>}
+          <SavingNote saving={project.saving} className="mt-2" />
         </>
       ),
     },

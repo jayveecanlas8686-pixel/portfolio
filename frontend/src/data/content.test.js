@@ -275,3 +275,17 @@ describe('client logos', () => {
     expect(existsSync(publicFile('/images/clients/brigada.webp'))).toBe(true)
   })
 })
+
+// Money shown only as an estimated cost saving from real hours × a stated rate (user choice 2026-11-04: $25/hour).
+describe('estimated cost saving', () => {
+  it('Waybill: ~40 hrs/month × $25/hour ≈ $1,000/month, labeled estimate with its basis', () => {
+    expect(getProject('waybill-pdf-extraction').saving).toEqual({
+      monthly: 1000,
+      basis: '~40 hrs/month × $25/hour',
+    })
+  })
+
+  it('no other project claims a money figure (no hours data yet)', () => {
+    expect(PROJECTS.filter((p) => p.saving).map((p) => p.slug)).toEqual(['waybill-pdf-extraction'])
+  })
+})
