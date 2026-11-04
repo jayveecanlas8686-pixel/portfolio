@@ -6,7 +6,7 @@ const STEP_MS = 650
 
 // The page's one orchestrated moment: a workflow that "runs" once on load, node by node.
 // States per node: idle → running → done. Reduced motion shows the finished run.
-export default function WorkflowStrip({ steps, result, caption }) {
+export default function WorkflowStrip({ steps, result, caption, compact = false }) {
   const reduced = useReducedMotion()
   const [active, setActive] = useState(reduced ? steps.length : 0)
 
@@ -23,8 +23,8 @@ export default function WorkflowStrip({ steps, result, caption }) {
   const finished = active >= steps.length
 
   return (
-    <figure className="rounded-[20px] bg-card p-5 ring-1 ring-line sm:p-6">
-      <figcaption className="mb-5 flex items-center gap-2 text-sm text-muted">
+    <figure className={`rounded-[20px] bg-card ring-1 ring-line ${compact ? "p-5" : "p-5 sm:p-6"}`}>
+      <figcaption className={`${compact ? "mb-4" : "mb-5"} flex items-center gap-2 text-sm text-muted`}>
         <span
           aria-hidden="true"
           className={`h-2 w-2 rounded-full ${finished ? 'bg-accent' : 'animate-pulse bg-accent/60'}`}
@@ -38,7 +38,7 @@ export default function WorkflowStrip({ steps, result, caption }) {
           return (
             <li key={step} data-state={state} className="flex items-center sm:flex-1 sm:last:flex-none">
               <span
-                className={`whitespace-nowrap rounded-xl px-3 py-2 text-sm font-semibold ring-1 transition-colors duration-300 ${
+                className={`whitespace-nowrap rounded-xl font-semibold ${compact ? "px-2.5 py-1.5 text-xs" : "px-3 py-2 text-sm"} ring-1 transition-colors duration-300 ${
                   state === 'done'
                     ? 'bg-accent-soft text-accent ring-accent/40'
                     : state === 'running'
@@ -49,7 +49,7 @@ export default function WorkflowStrip({ steps, result, caption }) {
                 {step}
               </span>
               {i < steps.length - 1 && (
-                <span aria-hidden="true" className="relative mx-2 hidden h-0.5 flex-1 overflow-hidden rounded bg-line sm:block">
+                <span aria-hidden="true" className={`relative ${compact ? "mx-1.5" : "mx-2"} hidden h-0.5 min-w-3 flex-1 overflow-hidden rounded bg-line sm:block`}>
                   <span
                     className="absolute inset-y-0 left-0 bg-accent transition-[width] duration-500 ease-out"
                     style={{ width: i < active ? '100%' : '0%' }}
@@ -63,7 +63,7 @@ export default function WorkflowStrip({ steps, result, caption }) {
 
       {result && (
         <p
-          className={`mt-5 flex items-center gap-2 font-display text-lg font-bold text-accent transition-opacity duration-500 ${
+          className={`${compact ? "mt-4 text-base" : "mt-5 text-lg"} flex items-center gap-2 font-display font-bold text-accent transition-opacity duration-500 ${
             finished ? 'opacity-100' : 'opacity-0'
           }`}
         >

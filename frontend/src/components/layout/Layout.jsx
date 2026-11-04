@@ -8,7 +8,20 @@ export default function Layout() {
   const { pathname, hash } = useLocation()
 
   useEffect(() => {
-    if (!hash) window.scrollTo(0, 0)
+    if (!hash) {
+      window.scrollTo(0, 0)
+      return
+    }
+    // Pages load on demand, so the #section may appear a moment later: try for up to ~1s.
+    let tries = 0
+    let timer
+    const seek = () => {
+      const el = document.getElementById(decodeURIComponent(hash.slice(1)))
+      if (el) el.scrollIntoView({ block: 'start' })
+      else if (tries++ < 20) timer = setTimeout(seek, 50)
+    }
+    seek()
+    return () => clearTimeout(timer)
   }, [pathname, hash])
 
   return (
@@ -23,7 +36,7 @@ export default function Layout() {
       {/* Keyed by path: any navigation (name link, Back button, menu link) closes the menu. */}
       <MobileBar key={pathname} />
       <main id="main" className="lg:pl-[264px]">
-        <div className="mx-auto max-w-5xl px-4 py-10 sm:px-8 lg:py-14">
+        <div className="mx-auto max-w-5xl px-4 py-8 sm:px-8 lg:py-6">
           <RouteErrorBoundary resetKey={pathname}>
             <Suspense fallback={<div className="min-h-[60vh]" aria-busy="true" />}>
               <Outlet />

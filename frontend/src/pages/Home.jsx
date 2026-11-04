@@ -1,30 +1,56 @@
 import { Link } from 'react-router-dom'
+import { ArrowUpRight } from '@phosphor-icons/react'
 import { profile } from '../data/profile.js'
-import { SERVICES, METHOD, HOME_RESULTS } from '../data/services.js'
+import { SERVICES, HOME_RESULTS } from '../data/services.js'
+import { PROJECTS } from '../data/projects.js'
 import { useDocumentTitle } from '../lib/useDocumentTitle.js'
 import WorkflowStrip from '../components/WorkflowStrip.jsx'
 import ResultsLedger from '../components/ResultsLedger.jsx'
-import ServiceCard from '../components/ServiceCard.jsx'
-import MethodSteps from '../components/MethodSteps.jsx'
-import ContactBand from '../components/ContactBand.jsx'
 import DownloadCvButton from '../components/DownloadCvButton.jsx'
 
 // "Less manual work. More reliable data." → two lines, the second in green.
 const [line1, line2] = profile.headline.split(/(?<=\.)\s+/)
 
+// Home is a one-screen hub (user request 2026-11-04): on laptops and up everything fits without
+// scrolling; each tile leads to its full page. Phones stack the tiles and scroll.
+function Tile({ id, title, action, children, className = '' }) {
+  return (
+    <section
+      aria-labelledby={id}
+      className={`flex flex-col rounded-[20px] bg-card p-5 ring-1 ring-line ${className}`}
+    >
+      <div className="flex items-baseline justify-between gap-3">
+        <h2 id={id} className="text-lg font-bold">
+          {title}
+        </h2>
+        {action}
+      </div>
+      <div className="mt-4">{children}</div>
+    </section>
+  )
+}
+
+function TileLink({ to, children }) {
+  return (
+    <Link to={to} className="shrink-0 text-sm font-semibold text-accent underline underline-offset-4">
+      {children}
+    </Link>
+  )
+}
+
 export default function Home() {
   useDocumentTitle()
   return (
-    <div className="flex flex-col gap-20 sm:gap-24">
+    <div className="flex flex-col gap-6 lg:gap-5">
       {/* Hero */}
-      <section className="flex flex-col gap-10">
+      <section className="grid items-center gap-6 xl:grid-cols-[1fr_minmax(0,27rem)]">
         <div>
-          <h1 className="text-[2.6rem] font-extrabold leading-[1.02] tracking-[-0.03em] sm:text-[3.75rem]">
+          <h1 className="text-[2.4rem] font-extrabold leading-[1.02] tracking-[-0.03em] sm:text-5xl">
             <span className="block">{line1}</span>{' '}
             <span className="block text-accent">{line2}</span>
           </h1>
-          <p className="mt-5 max-w-[44ch] text-lg text-muted">{profile.tagline}</p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <p className="mt-4 max-w-[46ch] text-base text-muted sm:text-lg">{profile.tagline}</p>
+          <div className="mt-5 flex flex-wrap gap-3">
             <Link
               to="/contact"
               className="inline-flex rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-accent-ink hover:opacity-90"
@@ -40,69 +66,65 @@ export default function Home() {
           </div>
         </div>
         <WorkflowStrip
+          compact
           steps={['Waybill PDF', 'n8n extracts', 'Clean data', 'Excel ✓']}
           result="2 hrs → 5–10 min, every day"
         />
       </section>
 
-      {/* Results */}
-      <section aria-labelledby="results">
-        <h2 id="results" className="text-3xl font-extrabold">What changed for the teams I built for</h2>
-        <p className="mt-2 max-w-[60ch] text-muted">Before and after, from real work. Open any row for the full story.</p>
-        <div className="mt-8">
-          <ResultsLedger results={HOME_RESULTS} />
-        </div>
-      </section>
+      {/* Hub tiles */}
+      <div className="grid items-start gap-5 lg:grid-cols-[1.1fr_1fr_1fr]">
+        <Tile id="home-services" title="Services" action={<TileLink to="/services">All services</TileLink>}>
+          <ul className="divide-y divide-line">
+            {SERVICES.map((s) => (
+              <li key={s.id} data-testid="service">
+                <Link to={`/services#${s.id}`} className="group flex items-start justify-between gap-3 py-2.5 first:pt-0">
+                  <span className="min-w-0">
+                    <span className="block font-display text-[15px] font-bold text-ink group-hover:text-accent">
+                      {s.title}
+                    </span>
+                    <span className="mt-0.5 block text-sm leading-snug text-muted">{s.outcome}</span>
+                  </span>
+                  <ArrowUpRight size={16} aria-hidden="true" className="mt-0.5 shrink-0 text-muted group-hover:text-accent" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Tile>
 
-      {/* Services */}
-      <section aria-labelledby="services">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <h2 id="services" className="text-3xl font-extrabold">What I can build for you</h2>
-          <Link to="/services" className="text-sm font-semibold text-accent underline underline-offset-4">
-            All services
-          </Link>
-        </div>
-        <div className="mt-6 grid divide-y divide-line sm:grid-cols-2 sm:divide-y-0 sm:[&>*:nth-child(-n+2)]:border-b sm:[&>*:nth-child(odd)]:border-r sm:[&>*]:border-line">
-          {SERVICES.map((s) => (
-            <ServiceCard key={s.id} service={s} />
-          ))}
-        </div>
-      </section>
+        <Tile
+          id="home-projects"
+          title="Projects"
+          action={<TileLink to="/projects">All {PROJECTS.length} projects</TileLink>}
+        >
+          <p className="mb-3 text-sm text-muted">Before and after, from real work.</p>
+          <ResultsLedger results={HOME_RESULTS} compact />
+        </Tile>
 
-      {/* Method */}
-      <section aria-labelledby="method">
-        <h2 id="method" className="text-3xl font-extrabold">How I work</h2>
-        <div className="mt-8">
-          <MethodSteps steps={METHOD} />
-        </div>
-      </section>
-
-      {/* About */}
-      <section aria-labelledby="about-short" className="grid items-center gap-8 sm:grid-cols-[10rem_1fr]">
-        <img
-          src={profile.photo}
-          alt="Jayvee Canlas"
-          width="160"
-          height="200"
-          loading="lazy"
-          className="h-48 w-40 rounded-[20px] object-cover object-top ring-1 ring-line"
-        />
-        <div>
-          <h2 id="about-short" className="text-2xl font-extrabold">I'm Jayvee, a data and automation engineer.</h2>
-          <p className="mt-2 max-w-[60ch] text-muted">
-            Two years building the pipelines, dashboards and automations a distribution business ran on every day. Now
-            I build the same kind of systems for teams that want their hours back.
-          </p>
-          <div className="mt-5 flex flex-wrap gap-3">
+        <Tile id="home-about" title="About me">
+          <div className="flex items-start gap-4">
+            <img
+              src={profile.photo}
+              alt="Jayvee Canlas"
+              width="72"
+              height="96"
+              className="h-24 w-[72px] shrink-0 rounded-xl object-cover object-top ring-1 ring-line"
+            />
+            <div className="min-w-0">
+              <p className="font-display text-[15px] font-bold leading-snug">I'm Jayvee, a data and automation engineer.</p>
+              <p className="mt-1.5 text-sm leading-snug text-muted">
+                Two years building the pipelines, dashboards and automations a distribution business ran on every day.
+              </p>
+            </div>
+          </div>
+          <div className="mt-4 flex flex-wrap items-center gap-3">
             <DownloadCvButton variant="outline" />
-            <Link to="/about" className="inline-flex px-2 py-2.5 text-sm font-semibold text-accent underline underline-offset-4">
+            <Link to="/about" className="text-sm font-semibold text-accent underline underline-offset-4">
               More about me
             </Link>
           </div>
-        </div>
-      </section>
-
-      <ContactBand />
+        </Tile>
+      </div>
     </div>
   )
 }
