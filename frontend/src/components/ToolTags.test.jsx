@@ -80,3 +80,11 @@ describe('AI Email Builder lists the services it really uses', () => {
     ])
   })
 })
+
+describe('About toolkit icons', () => {
+  it('every toolkit entry on the About page has an icon', async () => {
+    const { ABOUT } = await import('../data/about.js')
+    const missing = ABOUT.toolkit.flatMap((g) => g.tools).filter((t) => !TOOL_ICONS[t])
+    expect(missing).toEqual([])
+  })
+})
