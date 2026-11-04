@@ -8,24 +8,14 @@ export const PROJECT_GROUPS = [
     blurb: 'Systems I built and run for clients, named with their OK.',
   },
   {
-    id: 'automation',
-    title: 'Automation',
-    blurb: 'Workflows that took manual work off a team, every day.',
+    id: 'employment',
+    title: 'Employment: Brigada Distributions',
+    blurb: 'Data Engineer / Analyst, Jan 2024 – Mar 2026. Pipelines, reports and automations the business ran on every day.',
   },
   {
-    id: 'data-ai',
-    title: 'Data & AI tools',
-    blurb: 'AI built into real work: content at scale and daily forecasts.',
-  },
-  {
-    id: 'demos',
-    title: 'Builds & demos',
-    blurb: 'Working web apps you can open and click through.',
-  },
-  {
-    id: 'repos',
-    title: 'Data engineering repos',
-    blurb: 'Production-style pipelines, open on GitHub.',
+    id: 'personal',
+    title: 'Personal projects',
+    blurb: 'Things I built on my own: a content automation and web apps you can open and click through.',
   },
 ]
 
@@ -216,36 +206,11 @@ export const PROJECTS = [
     links: {},
   },
 
-  // ── Data & AI tools ────────────────────────────────────────────────
-  {
-    slug: 'ai-sales-forecast',
-    title: 'AI Sales Forecast',
-    group: 'data-ai',
-    kind: 'real',
-    context: 'Sales team · n8n + Python',
-    problem: 'There was no automated daily sales forecast; any forecast meant pulling the numbers together by hand.',
-    built:
-      'A daily 8:00 AM workflow that pulls multi-year sales data from SQL Server (trends, top products and customers, year-on-year, discounts, seasonality), adds PH holidays, and blends a LightGBM model with a Gemini forecasting agent into one report.',
-    result: {
-      headline: 'A forecast report every morning at 8:00 AM',
-      detail: 'Built and delivered automatically, with nobody assembling it.',
-      estimate: false,
-    },
-    highlights: [
-      'Multi-year SQL history with seasonality and PH holiday enrichment',
-      'LightGBM model blended with a Gemini agent (weighted hybrid)',
-      'Runs on a daily schedule, no manual step',
-    ],
-    tools: ['n8n', 'SQL Server', 'Python', 'LightGBM', 'Gemini'],
-    links: {},
-    image: '/images/projects/ai-sales-hybrid-forecast-workflow.png',
-  },
-
-  // ── Automation ─────────────────────────────────────────────────────
+  // ── Employment: Brigada Distributions (user grouping 2026-11-04) ────
   {
     slug: 'waybill-pdf-extraction',
     title: 'Waybill PDF Extraction',
-    group: 'automation',
+    group: 'employment',
     kind: 'real',
     context: 'Operations team · n8n · daily',
     problem: 'Staff retyped data from scanned waybill PDFs into Excel by hand, about 2 hours every day.',
@@ -264,7 +229,7 @@ export const PROJECTS = [
   {
     slug: 'power-bi-refresh-monitor',
     title: 'Power BI Refresh Monitor',
-    group: 'automation',
+    group: 'employment',
     kind: 'real',
     context: 'Reporting · n8n + Power BI',
     problem: 'Power BI datasets were refreshed by hand in the app, so a missed or failed refresh meant people read stale numbers.',
@@ -283,7 +248,7 @@ export const PROJECTS = [
   {
     slug: 'consolidate-raw-collection-data',
     title: 'Consolidate Raw Collection Data',
-    group: 'automation',
+    group: 'employment',
     kind: 'real',
     context: 'Collections team · n8n + AI',
     problem: 'Collectors checked every incoming file by hand for renamed, missing or wrong column names before the data could be appended.',
@@ -301,7 +266,7 @@ export const PROJECTS = [
   {
     slug: 'data-sync-sql-server',
     title: 'Data Sync to SQL Server',
-    group: 'automation',
+    group: 'employment',
     kind: 'real',
     context: 'Data team · n8n + Microsoft Graph',
     problem: 'Data was spread across Power BI datasets and many collectors’ Excel files, so keeping one central table current meant exporting and pasting by hand.',
@@ -322,9 +287,67 @@ export const PROJECTS = [
     image: '/images/projects/onedrive-excel-sql-sync-workflow.png',
   },
   {
+    slug: 'ai-sales-forecast',
+    title: 'AI Sales Forecast',
+    group: 'employment',
+    kind: 'real',
+    context: 'Sales team · n8n + Python',
+    problem: 'There was no automated daily sales forecast; any forecast meant pulling the numbers together by hand.',
+    built:
+      'A daily 8:00 AM workflow that pulls multi-year sales data from SQL Server (trends, top products and customers, year-on-year, discounts, seasonality), adds PH holidays, and blends a LightGBM model with a Gemini forecasting agent into one report.',
+    result: {
+      headline: 'A forecast report every morning at 8:00 AM',
+      detail: 'Built and delivered automatically, with nobody assembling it.',
+      estimate: false,
+    },
+    highlights: [
+      'Multi-year SQL history with seasonality and PH holiday enrichment',
+      'LightGBM model blended with a Gemini agent (weighted hybrid)',
+      'Runs on a daily schedule, no manual step',
+    ],
+    tools: ['n8n', 'SQL Server', 'Python', 'LightGBM', 'Gemini'],
+    links: {},
+    image: '/images/projects/ai-sales-hybrid-forecast-workflow.png',
+  },
+  {
+    slug: 'azure-ecommerce-etl',
+    title: 'Azure E-Commerce ETL Pipeline',
+    group: 'employment',
+    kind: 'repo',
+    context: 'Data engineering · Python',
+    problem: 'Raw API data isn’t ready for analytics until it’s cleaned, modeled and served reliably.',
+    whatItDoes: 'Ingests e-commerce data from a REST API through a Bronze → Silver → Gold medallion design on ADLS Gen2, models it with dbt, serves it from Synapse, orchestrated by Airflow.',
+    tools: ['Airflow', 'ADLS Gen2', 'dbt', 'Synapse'],
+    links: { code: 'https://github.com/jayveecanlas8686-pixel/azure-ecommerce-etl-pipeline' },
+  },
+  {
+    slug: 'azure-realtime-stock-pipeline',
+    title: 'Azure Real-Time Stock Pipeline',
+    group: 'employment',
+    kind: 'repo',
+    context: 'Streaming · Python',
+    problem: 'Live market data is only useful if it’s aggregated and enriched in near real time.',
+    whatItDoes: 'Streams live stock ticks through Event Hubs, computes OHLCV micro-batches and indicators (SMA, RSI, Bollinger Bands), and serves them from Synapse. Infrastructure in Terraform, monitored with Prometheus and Grafana.',
+    tools: ['Event Hubs', 'Terraform', 'Prometheus', 'Grafana'],
+    links: { code: 'https://github.com/jayveecanlas8686-pixel/azure-realtime-stock-pipeline' },
+  },
+  {
+    slug: 'azure-data-quality-framework',
+    title: 'Azure Data Quality Framework',
+    group: 'employment',
+    kind: 'repo',
+    context: 'Data quality · Python',
+    problem: 'Bad data quietly breaks reports long before anyone notices.',
+    whatItDoes: 'A reusable framework where every table has a Great Expectations suite that runs daily, results are kept for trending, and failures alert Teams immediately.',
+    tools: ['Great Expectations', 'Airflow', 'Synapse'],
+    links: { code: 'https://github.com/jayveecanlas8686-pixel/azure-data-quality-framework' },
+  },
+
+  // ── Personal projects ──────────────────────────────────────────────
+  {
     slug: 'youtube-shorts-generator',
     title: 'YouTube Shorts Generator',
-    group: 'automation',
+    group: 'personal',
     kind: 'personal',
     context: 'Personal project · content automation',
     problem: 'Making short videos eats a content creator’s time: scripting, generating, editing and uploading, every single day.',
@@ -339,12 +362,10 @@ export const PROJECTS = [
     links: {},
     image: '/images/projects/yt-content-and-posting.png',
   },
-
-  // ── Builds & demos ─────────────────────────────────────────────────
   {
     slug: 'shophub',
     title: 'ShopHub',
-    group: 'demos',
+    group: 'personal',
     kind: 'demo',
     context: 'E-commerce · live demo',
     problem: 'Small shops need a store customers can actually finish buying from.',
@@ -356,7 +377,7 @@ export const PROJECTS = [
   {
     slug: 'nexuscrm',
     title: 'NexusCRM',
-    group: 'demos',
+    group: 'personal',
     kind: 'demo',
     context: 'CRM · live demo',
     problem: 'Sales teams lose deals when leads live in spreadsheets and inboxes.',
@@ -368,7 +389,7 @@ export const PROJECTS = [
   {
     slug: 'medicare-plus',
     title: 'MediCare+',
-    group: 'demos',
+    group: 'personal',
     kind: 'demo',
     context: 'Healthcare · live demo',
     problem: 'Patients waste time calling clinics to find a free slot.',
@@ -380,7 +401,7 @@ export const PROJECTS = [
   {
     slug: 'stayease',
     title: 'StayEase',
-    group: 'demos',
+    group: 'personal',
     kind: 'demo',
     context: 'Hospitality · live demo',
     problem: 'Hotels lose bookings to clunky reservation flows.',
@@ -392,7 +413,7 @@ export const PROJECTS = [
   {
     slug: 'ai-chat-support',
     title: 'AI Chat Support',
-    group: 'demos',
+    group: 'personal',
     kind: 'demo',
     context: 'Customer support · live demo',
     problem: 'Support teams answer the same questions all day.',
@@ -400,41 +421,6 @@ export const PROJECTS = [
     tools: ['AI chatbot'],
     links: { demo: 'https://jayveecanlas8686-pixel.github.io/ChatbotPlatform/' },
     image: '/images/projects/chatbot-platform-preview.png',
-  },
-
-  // ── Data engineering repos ─────────────────────────────────────────
-  {
-    slug: 'azure-ecommerce-etl',
-    title: 'Azure E-Commerce ETL Pipeline',
-    group: 'repos',
-    kind: 'repo',
-    context: 'Data engineering · Python',
-    problem: 'Raw API data isn’t ready for analytics until it’s cleaned, modeled and served reliably.',
-    whatItDoes: 'Ingests e-commerce data from a REST API through a Bronze → Silver → Gold medallion design on ADLS Gen2, models it with dbt, serves it from Synapse, orchestrated by Airflow.',
-    tools: ['Airflow', 'ADLS Gen2', 'dbt', 'Synapse'],
-    links: { code: 'https://github.com/jayveecanlas8686-pixel/azure-ecommerce-etl-pipeline' },
-  },
-  {
-    slug: 'azure-realtime-stock-pipeline',
-    title: 'Azure Real-Time Stock Pipeline',
-    group: 'repos',
-    kind: 'repo',
-    context: 'Streaming · Python',
-    problem: 'Live market data is only useful if it’s aggregated and enriched in near real time.',
-    whatItDoes: 'Streams live stock ticks through Event Hubs, computes OHLCV micro-batches and indicators (SMA, RSI, Bollinger Bands), and serves them from Synapse. Infrastructure in Terraform, monitored with Prometheus and Grafana.',
-    tools: ['Event Hubs', 'Terraform', 'Prometheus', 'Grafana'],
-    links: { code: 'https://github.com/jayveecanlas8686-pixel/azure-realtime-stock-pipeline' },
-  },
-  {
-    slug: 'azure-data-quality-framework',
-    title: 'Azure Data Quality Framework',
-    group: 'repos',
-    kind: 'repo',
-    context: 'Data quality · Python',
-    problem: 'Bad data quietly breaks reports long before anyone notices.',
-    whatItDoes: 'A reusable framework where every table has a Great Expectations suite that runs daily, results are kept for trending, and failures alert Teams immediately.',
-    tools: ['Great Expectations', 'Airflow', 'Synapse'],
-    links: { code: 'https://github.com/jayveecanlas8686-pixel/azure-data-quality-framework' },
   },
 ]
 

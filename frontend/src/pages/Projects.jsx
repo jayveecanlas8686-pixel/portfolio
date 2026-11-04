@@ -17,7 +17,7 @@ export default function Projects() {
           Projects that took work off people's plates.
         </h1>
         <p className="mt-4 max-w-[60ch] text-lg text-muted">
-          Client work first, then automations with what changed for the team, then demos and code you can open yourself.
+          Client work first, then my work at Brigada Distributions, then things I built on my own.
         </p>
       </header>
 
@@ -36,18 +36,29 @@ export default function Projects() {
       {PROJECT_GROUPS.map((group) => {
         const items = PROJECTS.filter((p) => p.group === group.id)
         if (!items.length) return null
-        const rows = items.every(isRow)
+        // A group can mix full stories (wide rows) with demos/repos (compact tiles): rows first, then a tile grid.
+        const rows = items.filter(isRow)
+        const tiles = items.filter((p) => !isRow(p))
         return (
           <Reveal as="section" key={group.id} aria-labelledby={`group-${group.id}`}>
             <h2 id={`group-${group.id}`} className="text-3xl font-extrabold">
               {group.title}
             </h2>
             <p className="mt-2 max-w-[60ch] text-muted">{group.blurb}</p>
-            <div className={`mt-8 grid gap-6 ${rows ? '' : 'sm:grid-cols-2 xl:grid-cols-3'}`}>
-              {items.map((p) =>
-                isRow(p) ? <ProjectRow key={p.slug} project={p} /> : <ProjectTile key={p.slug} project={p} />,
-              )}
-            </div>
+            {rows.length > 0 && (
+              <div data-testid="rows" className="mt-8 grid gap-6">
+                {rows.map((p) => (
+                  <ProjectRow key={p.slug} project={p} />
+                ))}
+              </div>
+            )}
+            {tiles.length > 0 && (
+              <div data-testid="tiles" className="mt-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+                {tiles.map((p) => (
+                  <ProjectTile key={p.slug} project={p} />
+                ))}
+              </div>
+            )}
           </Reveal>
         )
       })}

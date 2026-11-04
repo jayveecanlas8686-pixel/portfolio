@@ -103,3 +103,22 @@ describe('Projects: work in progress', () => {
     expect(within(card).getByText('In progress')).toBeInTheDocument()
   })
 })
+
+
+describe('Projects: grouped by who the work was for', () => {
+  it('shows Client work, then Brigada, then Personal projects', () => {
+    renderProjects()
+    const h2s = screen.getAllByRole('heading', { level: 2 }).map((h) => h.textContent)
+    const order = ['Client work', 'Employment: Brigada Distributions', 'Personal projects'].map((t) => h2s.indexOf(t))
+    expect(order.every((i) => i >= 0)).toBe(true)
+    expect([...order].sort((a, b) => a - b)).toEqual(order)
+  })
+
+  it('wide rows and compact tiles in the same group stay separate', () => {
+    renderProjects()
+    const brigada = screen.getByRole('region', { name: 'Employment: Brigada Distributions' })
+    expect(within(brigada).getAllByRole('article')).toHaveLength(8)
+    expect(within(brigada).getByTestId('rows')).toBeInTheDocument()
+    expect(within(brigada).getByTestId('tiles')).toBeInTheDocument()
+  })
+})

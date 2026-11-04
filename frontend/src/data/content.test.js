@@ -58,7 +58,7 @@ describe('content structure', () => {
     expect(PROJECTS.length).toBe(22)
     expect(new Set(PROJECTS.map((p) => p.slug)).size).toBe(22)
     const groupIds = PROJECT_GROUPS.map((g) => g.id)
-    expect(groupIds).toEqual(['clients', 'automation', 'data-ai', 'demos', 'repos'])
+    expect(groupIds).toEqual(['clients', 'employment', 'personal'])
     for (const p of PROJECTS) expect(groupIds, p.slug).toContain(p.group)
   })
 
@@ -234,5 +234,33 @@ describe('every client project backs a service', () => {
   it('each client project appears as proof under at least one service', () => {
     const proofs = new Set(SERVICES.flatMap((s) => s.proofSlugs))
     for (const p of PROJECTS.filter((x) => x.group === 'clients')) expect(proofs.has(p.slug), p.slug).toBe(true)
+  })
+})
+
+
+// Projects grouped by who the work was for (user request 2026-11-04).
+describe('projects grouped by client, employer and personal', () => {
+  const slugsIn = (group) => PROJECTS.filter((p) => p.group === group).map((p) => p.slug)
+
+  it('employment at Brigada holds the listed projects and the data engineering repos', () => {
+    expect(slugsIn('employment')).toEqual([
+      'waybill-pdf-extraction',
+      'power-bi-refresh-monitor',
+      'consolidate-raw-collection-data',
+      'data-sync-sql-server',
+      'ai-sales-forecast',
+      'azure-ecommerce-etl',
+      'azure-realtime-stock-pipeline',
+      'azure-data-quality-framework',
+    ])
+    expect(PROJECT_GROUPS.find((g) => g.id === 'employment').title).toBe('Employment: Brigada Distributions')
+  })
+
+  it('personal holds the YouTube generator and every build & demo', () => {
+    expect(slugsIn('personal')).toEqual(['youtube-shorts-generator', 'shophub', 'nexuscrm', 'medicare-plus', 'stayease', 'ai-chat-support'])
+  })
+
+  it('client work is unchanged', () => {
+    expect(slugsIn('clients')).toHaveLength(8)
   })
 })
