@@ -45,7 +45,8 @@ export const PROJECTS = [
       'Exports straight to an editable Figma file',
       'Grew into an agency ops dashboard with task review, audit log and analytics',
     ],
-    tools: ['Claude API', 'Figma API', 'Puppeteer', 'Socket.io', 'Supabase'],
+    // From the project's code: .env key names and the APIs it calls (checked 2026-11-04).
+    tools: ['Claude API', 'Gemini', 'OpenRouter', 'Figma API', 'Firecrawl', 'code.to.design', 'Slack', 'Cloudflare Turnstile', 'Supabase', 'Puppeteer', 'Socket.io', 'Railway'],
     links: {
       site: 'https://nestmarketing-emailbuilder.com/',
       video: 'https://www.loom.com/share/835389e31e2d4231bcfa530c9ab91598',

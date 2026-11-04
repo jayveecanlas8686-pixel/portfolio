@@ -107,7 +107,7 @@ export default function About() {
           {ABOUT.toolkit.map((g) => (
             <div key={g.group}>
               <h3 className="mb-3 text-lg font-bold">{g.group}</h3>
-              <ToolTags tools={g.tools} />
+              <ToolTags tools={g.tools} showNames label={g.group} />
             </div>
           ))}
         </div>
