@@ -1,16 +1,37 @@
+import {
+  AddressBook,
+  Brain,
+  CalendarCheck,
+  ChatCircleDots,
+  FilePdf,
+  FirstAidKit,
+  ShoppingCart,
+  WebhooksLogo,
+} from '@phosphor-icons/react'
+
 // Official tool logos (user request 2026-11-04). Files live in public/icons/tools/.
-// Sources: Simple Icons (official brand marks in brand colour); the brand's own site for Firecrawl and
-// code.to.design; the repo's existing icons for OpenRouter, Express, Power BI, SQL Server and Azure.
-// Logos always sit on a white tile (both themes), so black marks stay visible; dark is kept for reference.
-// Tools with no official logo available (e.g. Klaviyo, Excel, Grok) are left out and show as text.
-const icon = (file, dark = false) => ({ src: `/icons/tools/${file}`, dark })
+// Sources, all official:
+// - Simple Icons (brand marks in brand colour)
+// - the brand's own website: Firecrawl, code.to.design, Klaviyo, ActiveCampaign, Grok, Gecko Booking,
+//   json2video, Great Expectations, Google DeepMind (Veo)
+// - Microsoft's Office brand-icon CDN: Excel, Teams, OneDrive; Microsoft's Azure icon set: Synapse, Event Hubs, Storage
+// - LightGBM's GitHub repo; the Microsoft logo for Microsoft Graph (no separate Graph icon exists)
+// - the repo's existing icons: OpenRouter, Express, Power BI, SQL Server, Azure, Docker, PHP
+// Generic labels with no brand (PDF extraction, CRM, ...) use a matching Phosphor icon instead.
+// Every logo sits on a white tile in both themes, so dark marks stay visible.
+const icon = (file) => ({ src: `/icons/tools/${file}` })
+const generic = (Icon) => ({ Icon })
 
 export const TOOL_ICONS = {
   'Claude API': icon('claude.svg'),
   Claude: icon('claude.svg'),
+  'Claude Code': icon('claude.svg'),
   Gemini: icon('googlegemini.svg'),
-  OpenRouter: icon('openrouter.svg', true),
-  OpenAI: icon('openai.svg', true),
+  Veo: icon('googledeepmind.svg'),
+  OpenRouter: icon('openrouter.svg'),
+  OpenAI: icon('openai.svg'),
+  Codex: icon('openai.svg'),
+  Grok: icon('grok.svg'),
   Figma: icon('figma.svg'),
   'Figma API': icon('figma.svg'),
   Firecrawl: icon('firecrawl.png'),
@@ -22,30 +43,49 @@ export const TOOL_ICONS = {
   Supabase: icon('supabase.svg'),
   Postgres: icon('postgresql.svg'),
   Puppeteer: icon('puppeteer.svg'),
-  'Socket.io': icon('socketdotio.svg', true),
-  Railway: icon('railway.svg', true),
+  'Socket.io': icon('socketdotio.svg'),
+  Railway: icon('railway.svg'),
   React: icon('react.svg'),
-  Express: icon('express.svg', true),
+  Express: icon('express.svg'),
   n8n: icon('n8n.svg'),
   Python: icon('python.svg'),
+  LightGBM: icon('lightgbm.svg'),
   'Power BI': icon('powerbi.svg'),
   'SQL Server': icon('sqlserver.svg'),
+  Excel: icon('excel.svg'),
+  'Microsoft Teams': icon('teams.svg'),
+  OneDrive: icon('onedrive.svg'),
+  'Microsoft Graph': icon('microsoft.svg'),
   Azure: icon('azure.svg'),
+  'ADLS Gen2': icon('azurestorage.svg'),
+  Synapse: icon('azuresynapse.svg'),
+  'Event Hubs': icon('azureeventhubs.svg'),
+  Klaviyo: icon('klaviyo.png'),
+  ActiveCampaign: icon('activecampaign.png'),
+  'Gecko Booking': icon('geckobooking.png'),
+  json2video: icon('json2video.svg'),
+  'Great Expectations': icon('greatexpectations.png'),
   'Google Sheets': icon('googlesheets.svg'),
   'YouTube API': icon('youtube.svg'),
   JavaScript: icon('javascript.svg'),
   TypeScript: icon('typescript.svg'),
   'Node.js': icon('nodedotjs.svg'),
   Airflow: icon('apacheairflow.svg'),
+  'Apache Airflow': icon('apacheairflow.svg'),
   dbt: icon('dbt.svg'),
   Terraform: icon('terraform.svg'),
   Prometheus: icon('prometheus.svg'),
   Grafana: icon('grafana.svg'),
   'GitHub Actions': icon('githubactions.svg'),
-  // Spellings used in the About toolkit
-  'Apache Airflow': icon('apacheairflow.svg'),
-  'Claude Code': icon('claude.svg'),
-  Codex: icon('openai.svg', true),
   Docker: icon('docker.svg'),
   PHP: icon('php.svg'),
+  // Generic labels (no brand)
+  'PDF extraction': generic(FilePdf),
+  AI: generic(Brain),
+  'AI chatbot': generic(ChatCircleDots),
+  CRM: generic(AddressBook),
+  Booking: generic(CalendarCheck),
+  'E-commerce': generic(ShoppingCart),
+  Healthcare: generic(FirstAidKit),
+  Webhooks: generic(WebhooksLogo),
 }

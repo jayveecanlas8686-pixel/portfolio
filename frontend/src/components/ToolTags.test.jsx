@@ -1,6 +1,6 @@
 import { existsSync } from 'node:fs'
 import { resolve } from 'node:path'
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import ToolTags from './ToolTags.jsx'
 import { TOOL_ICONS } from '../lib/toolIcons.js'
 import { getProject, PROJECTS } from '../data/projects.js'
@@ -11,18 +11,44 @@ describe('ToolTags', () => {
     render(<ToolTags tools={['Figma API']} />)
     const logo = screen.getByRole('img', { name: 'Figma API' })
     expect(logo).toHaveAttribute('src', '/icons/tools/figma.svg')
-    expect(logo.closest('li')).toHaveAttribute('title', 'Figma API')
-    expect(screen.queryByText('Figma API')).not.toBeInTheDocument()
+    expect(within(logo.closest('li')).getByRole('tooltip')).toHaveTextContent('Figma API')
+    // The name lives only in the tooltip, not as a visible label next to the logo.
+    expect(screen.getAllByText('Figma API').every((el) => el.getAttribute('role') === 'tooltip')).toBe(true)
   })
 
-  it('falls back to the name when there is no official logo', () => {
-    render(<ToolTags tools={['Klaviyo']} />)
-    expect(screen.getByText('Klaviyo')).toBeInTheDocument()
+  it('falls back to the name only for a tool nobody has mapped', () => {
+    render(<ToolTags tools={['Some Unknown Tool']} />)
+    expect(screen.getByText('Some Unknown Tool')).toBeInTheDocument()
     expect(screen.queryByRole('img')).not.toBeInTheDocument()
   })
 
+  it('every tool on every project has an icon (no text-only chips left)', () => {
+    const tools = [...new Set(PROJECTS.flatMap((p) => p.tools))]
+    const missing = tools.filter((t) => !TOOL_ICONS[t])
+    expect(missing).toEqual([])
+  })
+
+  it('hovering or focusing an icon shows its name in a tooltip', () => {
+    render(<ToolTags tools={['Klaviyo', 'PDF extraction']} />)
+    for (const name of ['Klaviyo', 'PDF extraction']) {
+      const chip = screen.getByRole('img', { name }).closest('li')
+      expect(chip).toHaveAttribute('tabindex', '0')
+      const tip = within(chip).getByRole('tooltip')
+      expect(tip).toHaveTextContent(name)
+      expect(tip.className).toMatch(/group-hover\/tool:opacity-100/)
+      expect(tip.className).toMatch(/group-focus\/tool:opacity-100/)
+    }
+  })
+
+  it('sits above the card link overlay so hover reaches the icons', () => {
+    render(<ToolTags tools={['Figma API']} />)
+    const list = screen.getByRole('list', { name: 'Tools used' })
+    expect(list.className).toMatch(/\brelative\b/)
+    expect(list.className).toMatch(/\bz-10\b/)
+  })
+
   it('every mapped logo file exists', () => {
-    for (const { src } of Object.values(TOOL_ICONS)) {
+    for (const { src } of Object.values(TOOL_ICONS).filter((i) => i.src)) {
       expect(existsSync(resolve(process.cwd(), 'public' + src)), src).toBe(true)
     }
   })
