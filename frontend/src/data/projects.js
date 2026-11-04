@@ -39,6 +39,9 @@ export const PROJECTS = [
       detail: 'More campaigns shipped every day, depending on the schedule set.',
       estimate: false,
     },
+    // Estimated added revenue capacity (Jayvee, 2026-11-04): ~$50 per email (his figure), 30 extra emails/day, 22 workdays.
+    // Capacity the tool makes possible, not revenue earned; shown as an estimate with its math.
+    revenue: { monthly: 33000, basis: '30 extra emails/day × 22 workdays × ~$50/email' },
     highlights: [
       'Brand research, copywriting and email design in one run',
       'Self-critique loop: renders each email and fixes what looks wrong',

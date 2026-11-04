@@ -110,6 +110,15 @@ describe('Personal page', () => {
   })
 })
 
+describe('estimated revenue capacity on the card', () => {
+  it('AI Email Builder card shows added revenue capacity as an estimate with its math', () => {
+    renderAt('/clients/nest-marketing')
+    const card = within(articleFor('AI Email Builder'))
+    expect(card.getByText(/≈ \$33,000\/month added revenue capacity/)).toBeInTheDocument()
+    expect(card.getByText(/30 extra emails\/day × 22 workdays × ~\$50\/email/)).toBeInTheDocument()
+  })
+})
+
 describe('estimated saving on the card', () => {
   it('Waybill card shows the monthly saving as an estimate', () => {
     renderAt('/employment/brigada')

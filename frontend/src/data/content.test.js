@@ -285,7 +285,17 @@ describe('estimated cost saving', () => {
     })
   })
 
-  it('no other project claims a money figure (no hours data yet)', () => {
-    expect(PROJECTS.filter((p) => p.saving).map((p) => p.slug)).toEqual(['waybill-pdf-extraction'])
+  it('AI Email Builder: added revenue capacity = 30 extra emails/day × 22 workdays × ~$50/email ≈ $33,000/month', () => {
+    expect(getProject('ai-email-builder').revenue).toEqual({
+      monthly: 33000,
+      basis: '30 extra emails/day × 22 workdays × ~$50/email',
+    })
+  })
+
+  it('only projects with a real basis show money (Email Builder, Waybill)', () => {
+    expect(PROJECTS.filter((p) => p.saving || p.revenue).map((p) => p.slug)).toEqual([
+      'ai-email-builder',
+      'waybill-pdf-extraction',
+    ])
   })
 })

@@ -91,7 +91,7 @@ export function ProjectRow({ project }) {
           ) : (
             <FlowNode n={3} label="Result" lit>
               <ResultHeadline result={project.result} className="text-lg" />
-              <SavingNote saving={project.saving} className="mt-1" />
+              <SavingNote saving={project.saving} revenue={project.revenue} className="mt-1" />
             </FlowNode>
           )}
         </ol>

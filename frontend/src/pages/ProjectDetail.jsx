@@ -47,7 +47,7 @@ function steps(project) {
         <>
           <ResultHeadline result={project.result} className="text-2xl" />
           {project.result?.detail && <p className="mt-1 text-muted">{project.result.detail}</p>}
-          <SavingNote saving={project.saving} className="mt-2" />
+          <SavingNote saving={project.saving} revenue={project.revenue} className="mt-2" />
         </>
       ),
     },
