@@ -13,7 +13,7 @@ export default function ThemeToggle() {
       aria-label={`Switch to ${next} mode`}
       className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-muted ring-1 ring-line hover:bg-card hover:text-ink"
     >
-      {theme === 'dark' ? <Sun size={18} aria-hidden="true" /> : <Moon size={18} aria-hidden="true" />}
+      {theme === 'dark' ? <Sun size="1.125rem" aria-hidden="true" /> : <Moon size="1.125rem" aria-hidden="true" />}
     </button>
   )
 }

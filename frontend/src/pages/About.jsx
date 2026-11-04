@@ -11,10 +11,10 @@ function Timeline({ items }) {
     <ol className="relative space-y-7 border-l border-line pl-6">
       {items.map((item) => (
         <li key={`${item.title}-${item.period}`} className="relative">
-          <span aria-hidden="true" className="absolute -left-[29px] top-1.5 h-2.5 w-2.5 rounded-full bg-paper ring-2 ring-line" />
+          <span aria-hidden="true" className="absolute -left-[1.8125rem] top-1.5 h-2.5 w-2.5 rounded-full bg-paper ring-2 ring-line" />
           <p className="text-sm text-muted tabular-nums">{item.period}</p>
           <p className="mt-1 font-semibold">{item.title}</p>
-          <p className="text-[15px] text-muted">{item.place}</p>
+          <p className="text-[0.9375rem] text-muted">{item.place}</p>
         </li>
       ))}
     </ol>
@@ -35,13 +35,13 @@ export default function About() {
           alt="Jayvee Canlas"
           width="208"
           height="260"
-          className="h-[13rem] w-[10.5rem] rounded-[20px] object-cover object-top ring-1 ring-line sm:h-[16.25rem] sm:w-[13rem]"
+          className="h-[13rem] w-[10.5rem] rounded-[1.25rem] object-cover object-top ring-1 ring-line sm:h-[16.25rem] sm:w-[13rem]"
         />
         <div>
-          <h1 className="text-[2.4rem] font-extrabold leading-[1.05] tracking-[-0.03em] sm:text-[3.25rem]">
+          <h1 className="text-[clamp(1.875rem,9.5vw,2.4rem)] font-extrabold leading-[1.05] tracking-[-0.03em] sm:text-[3.25rem]">
             Hi, I'm Jayvee.
           </h1>
-          <div className="mt-5 max-w-[62ch] space-y-4 text-[17px] leading-relaxed">
+          <div className="mt-5 max-w-[62ch] space-y-4 text-[1.0625rem] leading-relaxed">
             {ABOUT.story.map((p) => (
               <p key={p}>{p}</p>
             ))}
@@ -79,7 +79,7 @@ export default function About() {
                 href={c.pdf || c.image}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block overflow-hidden rounded-[12px] bg-card ring-1 ring-line hover:ring-accent"
+                className="block overflow-hidden rounded-[0.75rem] bg-card ring-1 ring-line hover:ring-accent"
               >
                 <img
                   src={c.image}

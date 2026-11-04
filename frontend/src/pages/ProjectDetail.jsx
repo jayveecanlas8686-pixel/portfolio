@@ -87,12 +87,12 @@ function Detail({ project }) {
       <div>
         <Link
           to="/projects"
-          className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent underline underline-offset-4"
+          className="py-1 inline-flex items-center gap-1.5 text-sm font-semibold text-accent underline underline-offset-4"
         >
-          <ArrowLeft size={14} aria-hidden="true" />
+          <ArrowLeft size="0.875rem" aria-hidden="true" />
           All projects
         </Link>
-        <h1 className="mt-6 text-[2.4rem] font-extrabold leading-[1.05] tracking-[-0.03em] sm:text-[3.25rem]">
+        <h1 className="mt-6 text-[clamp(1.875rem,9.5vw,2.4rem)] font-extrabold leading-[1.05] tracking-[-0.03em] sm:text-[3.25rem]">
           {project.title}
         </h1>
         <p className="mt-3 text-lg text-muted">{contextLine(project)}</p>
@@ -104,7 +104,7 @@ function Detail({ project }) {
           alt={`${project.title} screenshot`}
           width="1600"
           height="900"
-          className="h-auto w-full rounded-[20px] bg-card ring-1 ring-line"
+          className="h-auto w-full rounded-[1.25rem] bg-card ring-1 ring-line"
         />
       )}
       {!project.image && project.flow && (
@@ -114,7 +114,7 @@ function Detail({ project }) {
       )}
 
       <ol className="relative flex max-w-[70ch] flex-col gap-8">
-        <span aria-hidden="true" className="absolute bottom-4 left-[15px] top-4 w-px bg-line" />
+        <span aria-hidden="true" className="absolute bottom-4 left-[0.9375rem] top-4 w-px bg-line" />
         {steps(project).map((s, i) => (
           <li key={s.label} className="relative pl-12">
             <span
@@ -126,7 +126,7 @@ function Detail({ project }) {
               {i + 1}
             </span>
             <h2 className="pt-1 text-lg font-bold">{s.label}</h2>
-            <div className={`mt-2 text-[17px] leading-relaxed ${s.lit ? 'rounded-xl bg-accent-soft p-4' : ''}`}>
+            <div className={`mt-2 text-[1.0625rem] leading-relaxed ${s.lit ? 'rounded-xl bg-accent-soft p-4' : ''}`}>
               {s.body}
             </div>
           </li>
@@ -141,7 +141,7 @@ function Detail({ project }) {
           <ul className="mt-4 flex flex-col gap-2.5">
             {project.highlights.map((h) => (
               <li key={h} className="flex gap-2.5">
-                <Check size={18} weight="bold" aria-hidden="true" className="mt-0.5 shrink-0 text-accent" />
+                <Check size="1.125rem" weight="bold" aria-hidden="true" className="mt-0.5 shrink-0 text-accent" />
                 <span>{h}</span>
               </li>
             ))}
@@ -170,7 +170,7 @@ function Detail({ project }) {
               }`}
             >
               {label}
-              <ArrowUpRight size={14} aria-hidden="true" />
+              <ArrowUpRight size="0.875rem" aria-hidden="true" />
             </a>
           ))}
         </div>

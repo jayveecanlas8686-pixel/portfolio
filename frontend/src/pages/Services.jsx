@@ -10,7 +10,7 @@ export default function Services() {
   return (
     <div className="flex flex-col gap-20 sm:gap-24">
       <section>
-        <h1 className="text-[2.4rem] font-extrabold leading-[1.05] tracking-[-0.03em] sm:text-[3.25rem]">
+        <h1 className="text-[clamp(1.875rem,9.5vw,2.4rem)] font-extrabold leading-[1.05] tracking-[-0.03em] sm:text-[3.25rem]">
           What I can build for you.
         </h1>
         <p className="mt-4 max-w-[56ch] text-lg text-muted">

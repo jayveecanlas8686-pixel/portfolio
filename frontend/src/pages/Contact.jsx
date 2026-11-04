@@ -7,7 +7,7 @@ import { buildMailto } from '../lib/mailto.js'
 const ICONS = { GitHub: GithubLogo, LinkedIn: LinkedinLogo, Facebook: FacebookLogo }
 
 const FIELD =
-  'mt-2 block w-full rounded-xl bg-card px-4 py-3 text-[16px] text-ink ring-1 ring-line placeholder:text-muted/70 focus:ring-2 focus:ring-accent'
+  'mt-2 block w-full rounded-xl bg-card px-4 py-3 text-[1rem] text-ink ring-1 ring-line placeholder:text-muted/70 focus:ring-2 focus:ring-accent'
 
 export default function Contact() {
   useDocumentTitle('Contact')
@@ -22,7 +22,7 @@ export default function Contact() {
   return (
     <div className="flex flex-col gap-12">
       <section>
-        <h1 className="max-w-[18ch] text-[2.4rem] font-extrabold leading-[1.05] tracking-[-0.03em] sm:text-[3.25rem]">
+        <h1 className="max-w-[18ch] text-[clamp(1.875rem,9.5vw,2.4rem)] font-extrabold leading-[1.05] tracking-[-0.03em] sm:text-[3.25rem]">
           Tell me what your team does by hand.
         </h1>
         <p className="mt-4 max-w-[56ch] text-lg text-muted">
@@ -79,7 +79,7 @@ export default function Contact() {
             href={`mailto:${profile.email}`}
             className="mt-3 inline-flex items-center gap-2 font-semibold [overflow-wrap:anywhere] text-accent underline underline-offset-4"
           >
-            <EnvelopeSimple size={18} weight="bold" aria-hidden="true" className="shrink-0" />
+            <EnvelopeSimple size="1.125rem" weight="bold" aria-hidden="true" className="shrink-0" />
             {profile.email}
           </a>
           <h2 className="mt-8 text-xl font-bold">Elsewhere</h2>
@@ -94,7 +94,7 @@ export default function Contact() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 font-semibold text-ink underline decoration-line underline-offset-4 hover:decoration-accent"
                   >
-                    {Icon && <Icon size={18} aria-hidden="true" className="shrink-0 text-muted" />}
+                    {Icon && <Icon size="1.125rem" aria-hidden="true" className="shrink-0 text-muted" />}
                     {s.label}
                   </a>
                 </li>

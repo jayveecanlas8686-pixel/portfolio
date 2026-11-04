@@ -17,7 +17,7 @@ export default function SocialLinks() {
             aria-label={label}
             className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-muted hover:bg-card hover:text-ink"
           >
-            <Icon size={18} aria-hidden="true" />
+            <Icon size="1.125rem" aria-hidden="true" />
           </a>
         )
       })}
@@ -26,7 +26,7 @@ export default function SocialLinks() {
         aria-label="Email"
         className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-muted hover:bg-card hover:text-ink"
       >
-        <EnvelopeSimple size={18} aria-hidden="true" />
+        <EnvelopeSimple size="1.125rem" aria-hidden="true" />
       </a>
     </div>
   )

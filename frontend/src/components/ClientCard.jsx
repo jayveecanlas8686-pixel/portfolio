@@ -29,7 +29,7 @@ export default function ClientCard({ client }) {
   return (
     <Link
       to={hrefFor(client)}
-      className="lift group flex items-start justify-between gap-4 rounded-[20px] bg-card p-5 ring-1 ring-line"
+      className="lift group flex items-start justify-between gap-4 rounded-[1.25rem] bg-card p-5 ring-1 ring-line"
     >
       <span className="flex min-w-0 items-start gap-4">
         <ClientMark client={client} />
@@ -42,7 +42,7 @@ export default function ClientCard({ client }) {
           </span>
         </span>
       </span>
-      <ArrowUpRight size={18} aria-hidden="true" className="mt-1 shrink-0 text-muted group-hover:text-accent" />
+      <ArrowUpRight size="1.125rem" aria-hidden="true" className="mt-1 shrink-0 text-muted group-hover:text-accent" />
     </Link>
   )
 }

@@ -21,7 +21,7 @@ export default function WorkflowCard({ title, steps, compact = false, columns })
   const canvasRef = useRef(null)
   const nodeRefs = useRef([])
 
-  const cols = columns ?? (compact || (width && width < 420) ? 2 : 3)
+  const cols = columns ?? (compact || (width && width < 26.25) ? 2 : 3)
   const colsRef = useRef(cols)
   colsRef.current = cols
 
@@ -39,7 +39,8 @@ export default function WorkflowCard({ title, steps, compact = false, columns })
     const canvas = canvasRef.current
     if (!canvas) return
     const c = canvas.getBoundingClientRect()
-    setWidth(c.width)
+    // In rem, so the column choice is the same at any root font size.
+    setWidth(c.width / (parseFloat(getComputedStyle(document.documentElement).fontSize) || 16))
     const boxes = nodeRefs.current.map((n) => {
       if (!n) return null
       const r = n.getBoundingClientRect()
@@ -74,12 +75,12 @@ export default function WorkflowCard({ title, steps, compact = false, columns })
   return (
     <figure
       aria-label={`How ${title} works`}
-      className={`relative flex h-full min-h-[260px] w-full flex-col overflow-hidden rounded-[18px] px-6 bg-paper-2 ring-1 ring-line ${
+      className={`relative flex h-full min-h-[16.25rem] w-full flex-col overflow-hidden rounded-[1.125rem] px-6 bg-paper-2 ring-1 ring-line ${
         compact ? 'p-3' : 'p-4'
       }`}
       style={{ backgroundImage: 'radial-gradient(var(--dot) 1px, transparent 1.3px)', backgroundSize: '14px 14px' }}
     >
-      <figcaption className="mb-2 flex items-center gap-2 font-mono text-[11px] text-muted">
+      <figcaption className="mb-2 flex items-center gap-2 font-mono text-[0.6875rem] text-muted">
         <span aria-hidden="true" className={`h-1.5 w-1.5 rounded-full bg-accent ${reduced ? '' : 'animate-pulse'}`} />
         {reduced ? 'Workflow executed' : 'Executing workflow'}
       </figcaption>
@@ -157,7 +158,7 @@ export default function WorkflowCard({ title, steps, compact = false, columns })
                   animate={{ scale: running ? 1.06 : 1 }}
                   transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1], delay: running && i > 0 ? EDGE_S : 0 }}
                   className={`relative inline-flex h-full w-full items-center justify-center bg-card shadow-sm transition-[box-shadow,outline-color] duration-500 ${
-                    i === 0 ? 'rounded-l-[26px] rounded-r-xl' : 'rounded-xl'
+                    i === 0 ? 'rounded-l-[1.625rem] rounded-r-xl' : 'rounded-xl'
                   } ${
                     done
                       ? 'outline-2 outline-accent'
@@ -166,10 +167,10 @@ export default function WorkflowCard({ title, steps, compact = false, columns })
                         : 'outline-1 outline-line'
                   } outline outline-offset-0`}
                 >
-                  {Icon && <Icon size={compact ? 18 : 22} weight="duotone" className="text-ink" aria-hidden="true" />}
+                  {Icon && <Icon size={compact ? '1.125rem' : '1.375rem'} weight="duotone" className="text-ink" aria-hidden="true" />}
                   {i === 0 && (
                     <Lightning
-                      size={12}
+                      size="0.75rem"
                       weight="fill"
                       aria-hidden="true"
                       className="absolute top-1/2 -left-4 -translate-y-1/2 text-[#ff6d5a]"
@@ -182,14 +183,14 @@ export default function WorkflowCard({ title, steps, compact = false, columns })
                     transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                     className="absolute -top-1.5 -right-1.5 inline-flex h-4 w-4 items-center justify-center rounded-full bg-accent text-accent-ink ring-2 ring-paper-2"
                   >
-                    <Check size={10} weight="bold" />
+                    <Check size="0.625rem" weight="bold" />
                   </motion.span>
                 </motion.span>
                 </span>
-                <strong className={`mt-1.5 block leading-tight text-ink ${compact ? 'text-[11px]' : 'text-[12px]'}`}>
+                <strong className={`mt-1.5 block leading-tight text-ink ${compact ? 'text-[0.6875rem]' : 'text-[0.75rem]'}`}>
                   {s.title}
                 </strong>
-                <span className={`mt-0.5 block px-0.5 leading-snug text-muted ${compact ? 'text-[10px]' : 'text-[11px]'}`}>
+                <span className={`mt-0.5 block px-0.5 leading-snug text-muted ${compact ? 'text-[0.625rem]' : 'text-[0.6875rem]'}`}>
                   {s.text}
                 </span>
               </li>

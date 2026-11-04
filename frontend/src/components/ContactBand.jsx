@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 export default function ContactBand() {
   return (
-    <section aria-labelledby="contact-band" className="rounded-[20px] bg-paper-2 px-6 py-10 sm:px-10">
+    <section aria-labelledby="contact-band" className="rounded-[1.25rem] bg-paper-2 px-6 py-10 sm:px-10">
       <h2 id="contact-band" className="max-w-[22ch] text-3xl font-extrabold leading-tight">
         Have work your team still does by hand?
       </h2>

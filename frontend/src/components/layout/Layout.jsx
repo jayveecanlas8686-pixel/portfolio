@@ -28,7 +28,7 @@ export default function Layout() {
   }, [pathname, hash])
 
   return (
-    <div className="min-h-dvh text-ink">
+    <div className="min-h-dvh overflow-x-clip text-ink">
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-card focus:px-4 focus:py-2"
@@ -39,8 +39,8 @@ export default function Layout() {
       <Sidebar />
       {/* Keyed by path: any navigation (name link, Back button, menu link) closes the menu. */}
       <MobileBar key={pathname} />
-      <main id="main" className="relative z-10 lg:pl-[264px]">
-        <div className="mx-auto max-w-6xl px-4 py-8 sm:px-8 lg:py-6">
+      <main id="main" className="relative z-10 lg:pl-[16.5rem]">
+        <div className="mx-auto max-w-[80rem] px-4 py-8 sm:px-8 lg:py-6">
           <RouteErrorBoundary resetKey={pathname}>
             <Suspense fallback={<div className="min-h-[60vh]" aria-busy="true" />}>
               {/* Page transition: each page fades up in, 0.45s. */}
