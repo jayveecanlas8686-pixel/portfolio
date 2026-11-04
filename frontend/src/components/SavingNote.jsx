@@ -11,10 +11,12 @@ function Line({ amount, label, basis }) {
   )
 }
 
-export default function SavingNote({ saving, revenue, className = '' }) {
-  if (!saving && !revenue) return null
+// conversion = estimated conversion revenue; its label and stated assumption come from the project data.
+export default function SavingNote({ saving, revenue, conversion, className = '' }) {
+  if (!saving && !revenue && !conversion) return null
   return (
     <div className={`flex flex-col gap-0.5 ${className}`}>
+      {conversion && <Line amount={conversion.monthly} label={conversion.label} basis={conversion.basis} />}
       {revenue && <Line amount={revenue.monthly} label="added revenue capacity" basis={revenue.basis} />}
       {saving && <Line amount={saving.monthly} label="saved" basis={saving.basis} />}
     </div>

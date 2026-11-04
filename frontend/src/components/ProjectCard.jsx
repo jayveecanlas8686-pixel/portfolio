@@ -87,11 +87,12 @@ export function ProjectRow({ project }) {
           {project.kind === 'launching' || project.kind === 'building' ? (
             <FlowNode n={3} label="Status">
               <p className="font-display text-lg font-bold text-ink">{project.status}</p>
+              <SavingNote conversion={project.conversion} className="mt-1" />
             </FlowNode>
           ) : (
             <FlowNode n={3} label="Result" lit>
               <ResultHeadline result={project.result} className="text-lg" />
-              <SavingNote saving={project.saving} revenue={project.revenue} className="mt-1" />
+              <SavingNote saving={project.saving} revenue={project.revenue} conversion={project.conversion} className="mt-1" />
             </FlowNode>
           )}
         </ol>

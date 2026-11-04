@@ -97,6 +97,12 @@ export const PROJECTS = [
       detail: 'Any brand whose flow results fall 25%+ week over week gets flagged; it already caught a brand that had stopped making sales.',
       estimate: false,
     },
+    // Conversion estimate requested by Jayvee (2026-11-04). The assumption is shown on the card; no client-stated figure.
+    conversion: {
+      monthly: 1000,
+      label: 'revenue protected',
+      basis: "assumes catching one dropped flow a month a week earlier saves ~$1,000 of a client's sales",
+    },
     tools: ['n8n', 'Klaviyo', 'Slack', 'TypeScript'],
     links: {},
   },
@@ -107,6 +113,12 @@ export const PROJECTS = [
     client: 'nest-marketing',
     kind: 'launching',
     status: 'Launching November 2026',
+    // Conversion estimate requested by Jayvee (2026-11-04). The assumption is shown on the card; no client-stated figure.
+    conversion: {
+      monthly: 1500,
+      label: 'potential conversion revenue',
+      basis: 'assumes 1 new client a month from the outreach × ~$1,500/month retainer',
+    },
     context: 'Nest Marketing · outreach automation',
     problem:
       'Winning new clients meant researching each brand by hand, building a 9-page audit PDF, and emailing it one at a time.',
@@ -175,6 +187,12 @@ export const PROJECTS = [
     client: 'reset',
     kind: 'launching',
     status: 'Rolling out November 2026',
+    // Conversion estimate requested by Jayvee (2026-11-04). The assumption is shown on the card; no client-stated figure.
+    conversion: {
+      monthly: 3000,
+      label: 'potential conversion revenue', // still rolling out
+      basis: 'assumes 20 extra rebookings a month × ~$150 per treatment',
+    },
     context: 'Resét Skin & Aesthetics · n8n',
     problem:
       'The clinic wanted more repeat bookings without annoying customers: the right message at each step of the customer journey, and quality over quantity.',

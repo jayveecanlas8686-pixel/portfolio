@@ -119,6 +119,22 @@ describe('estimated revenue capacity on the card', () => {
   })
 })
 
+describe('estimated conversion revenue on the card', () => {
+  it('Resét automation card shows the conversion estimate with its assumption', () => {
+    renderAt('/clients/reset')
+    const card = within(articleFor('Marketing Automation'))
+    expect(card.getByText(/≈ \$3,000\/month potential conversion revenue/)).toBeInTheDocument()
+    expect(card.getByText(/assumes 20 extra rebookings a month/)).toBeInTheDocument()
+  })
+
+  it('a launching project shows its estimate as potential', () => {
+    renderAt('/clients/nest-marketing')
+    const card = within(articleFor('Nest Audit Engine'))
+    expect(card.getByText(/≈ \$1,500\/month potential conversion revenue/)).toBeInTheDocument()
+    expect(card.getByText('Launching November 2026')).toBeInTheDocument()
+  })
+})
+
 describe('estimated saving on the card', () => {
   it('Waybill card shows the monthly saving as an estimate', () => {
     renderAt('/employment/brigada')

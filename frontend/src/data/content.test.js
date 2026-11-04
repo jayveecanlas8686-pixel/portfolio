@@ -292,9 +292,31 @@ describe('estimated cost saving', () => {
     })
   })
 
-  it('only projects with a real basis show money (Email Builder, Waybill)', () => {
-    expect(PROJECTS.filter((p) => p.saving || p.revenue).map((p) => p.slug)).toEqual([
+  it('conversion estimates (user asked 2026-11-04): each states its assumption and is labeled', () => {
+    expect(getProject('nest-audit-engine').conversion).toEqual({
+      monthly: 1500,
+      label: 'potential conversion revenue',
+      basis: 'assumes 1 new client a month from the outreach × ~$1,500/month retainer',
+    })
+    expect(getProject('reset-automation').conversion).toEqual({
+      monthly: 3000,
+      label: 'potential conversion revenue',
+      basis: 'assumes 20 extra rebookings a month × ~$150 per treatment',
+    })
+    expect(getProject('campaign-alerts').conversion).toEqual({
+      monthly: 1000,
+      label: 'revenue protected',
+      basis: "assumes catching one dropped flow a month a week earlier saves ~$1,000 of a client's sales",
+    })
+    for (const p of PROJECTS.filter((x) => x.conversion)) expect(p.conversion.basis, p.slug).toMatch(/^assumes /)
+  })
+
+  it('money figures appear only on these projects', () => {
+    expect(PROJECTS.filter((p) => p.saving || p.revenue || p.conversion).map((p) => p.slug)).toEqual([
       'ai-email-builder',
+      'campaign-alerts',
+      'nest-audit-engine',
+      'reset-automation',
       'waybill-pdf-extraction',
     ])
   })
