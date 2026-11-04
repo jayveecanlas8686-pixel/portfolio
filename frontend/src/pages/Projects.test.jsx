@@ -57,6 +57,7 @@ describe('Projects: logos on cards', () => {
     const clients = region('Clients')
     expect(within(clients).getByRole('img', { name: 'Nest Marketing logo' })).toHaveAttribute('src', '/images/clients/nest-marketing.webp')
     expect(within(clients).getByRole('img', { name: 'Resét Skin & Aesthetics logo' })).toBeInTheDocument()
-    expect(within(clients).queryByRole('img', { name: 'SimGolf logo' })).not.toBeInTheDocument()
+    expect(within(clients).getByRole('img', { name: 'SimGolf logo' })).toHaveAttribute('src', '/images/clients/simgolf.webp')
+    expect(within(region('Employment')).getByRole('img', { name: 'Brigada Distributions logo' })).toBeInTheDocument()
   })
 })

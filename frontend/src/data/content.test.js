@@ -4,7 +4,7 @@ import { PROJECTS, PROJECT_GROUPS, getProject } from './projects.js'
 import { SERVICES, METHOD, HOME_RESULTS } from './services.js'
 import { ABOUT } from './about.js'
 import { profile } from './profile.js'
-import { CLIENTS, getClient } from './clients.js'
+import { CLIENTS, getClient, getCollection } from './clients.js'
 
 const publicFile = (p) => resolve(process.cwd(), 'public' + p)
 
@@ -270,6 +270,8 @@ describe('client logos', () => {
     expect(getClient('nest-marketing').logo).toBe('/images/clients/nest-marketing.webp')
     expect(getClient('reset').logo).toBe('/images/clients/reset.webp')
     for (const c of CLIENTS.filter((x) => x.logo)) expect(existsSync(publicFile(c.logo)), c.logo).toBe(true)
-    expect(getClient('simgolf').logo).toBeUndefined()
+    expect(getClient('simgolf').logo).toBe('/images/clients/simgolf.webp')
+    expect(getCollection('employer', 'brigada').logo).toBe('/images/clients/brigada.webp')
+    expect(existsSync(publicFile('/images/clients/brigada.webp'))).toBe(true)
   })
 })

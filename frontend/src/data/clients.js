@@ -28,6 +28,7 @@ export const CLIENTS = [
     // Owner per Jayvee (2026-11-04). Day-to-day contact in the files is Michael Frahm.
     kind: 'client',
     id: 'simgolf',
+    logo: '/images/clients/simgolf.webp', // official, from simgolf.dk (white mark on a dark tile)
     name: 'SimGolf',
     contact: 'Keld Jensen',
     role: 'Owner',
@@ -42,6 +43,7 @@ export const EMPLOYERS = [
   {
     kind: 'employer',
     id: 'brigada',
+    logo: '/images/clients/brigada.webp', // official, from Desktop/BRIGADA PROJECTS (Prime Hub)
     name: 'Brigada Distributions',
     contact: 'Data Engineer / Analyst, Jan 2024 – Mar 2026',
     about: 'A distribution business in General Santos City, Philippines.',
