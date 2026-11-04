@@ -82,8 +82,11 @@ export const PROJECTS = [
     links: {},
     flow: [
       { icon: 'question', title: 'Question', text: 'Someone asks in Slack' },
+      { icon: 'shield', title: 'Members only', text: 'No reply to anyone outside the workspace' },
       { icon: 'memory', title: 'Slack memory', text: 'Searches the team\'s own history' },
-      { icon: 'answer', title: 'Answer or task', text: 'Replies, or posts the task in the right channel' },
+      { icon: 'answer', title: 'Answer', text: 'Replies in the thread' },
+      { icon: 'checklist', title: 'Task docs', text: 'Turned into task posts and schedule lists' },
+      { icon: 'report', title: 'Health report', text: 'Sent every day' },
     ],
   },
   {
@@ -111,9 +114,12 @@ export const PROJECTS = [
     tools: ['n8n', 'Klaviyo', 'Slack', 'TypeScript'],
     links: {},
     flow: [
-      { icon: 'results', title: 'Flow results', text: 'Each brand\'s daily Klaviyo numbers' },
-      { icon: 'check', title: 'Check', text: '25%+ drop week over week?' },
+      { icon: 'schedule', title: 'Daily run', text: 'Every morning' },
+      { icon: 'results', title: 'Flow results', text: 'Each brand\'s Klaviyo numbers' },
+      { icon: 'check', title: 'Week over week', text: 'A 25%+ drop?' },
+      { icon: 'zero', title: 'Zero-sales days', text: 'Any day with nothing sold' },
       { icon: 'alert', title: 'Alert', text: 'Posted to the alerts channel' },
+      { icon: 'review', title: 'Weekly review', text: 'Outliers summed up' },
     ],
   },
   {
@@ -142,9 +148,12 @@ export const PROJECTS = [
     tools: ['Node.js', 'TypeScript', 'Claude API', 'Postgres', 'Railway'],
     links: {},
     flow: [
-      { icon: 'lead', title: 'Lead', text: 'Finds brands, skips current clients' },
+      { icon: 'lead', title: 'Lead finder', text: 'New brands to contact' },
+      { icon: 'exclude', title: 'Skip clients', text: 'Daily list of current clients' },
       { icon: 'audit', title: 'Audit', text: '9 pages, every claim checked' },
-      { icon: 'send', title: 'Outreach', text: 'Approved in Slack, then emailed with follow-ups' },
+      { icon: 'approve', title: 'Slack approval', text: 'One click before anything is sent' },
+      { icon: 'send', title: 'Email', text: 'Sent with timed follow-ups' },
+      { icon: 'alert', title: 'Replies', text: 'Reply alerts on the card' },
     ],
   },
   {
@@ -171,9 +180,13 @@ export const PROJECTS = [
     tools: ['TypeScript', 'Supabase', 'React', 'Cloudflare', 'GitHub Actions'],
     links: {},
     flow: [
-      { icon: 'sources', title: '6 sources', text: 'Bookings, accounting, email, analytics, ads' },
+      { icon: 'booking', title: 'Bookings', text: 'From the booking system' },
+      { icon: 'accounting', title: 'Accounting', text: 'Finance data' },
+      { icon: 'message', title: 'Email & SMS', text: 'Customer contact data' },
+      { icon: 'analytics', title: 'Analytics & ads', text: 'Site and ad numbers' },
       { icon: 'sync', title: 'Daily sync', text: 'Every morning, with health alerts' },
-      { icon: 'dashboard', title: 'Dashboards', text: 'Business board and CFO board' },
+      { icon: 'dashboard', title: 'Business board', text: 'Bookings, customers, targets' },
+      { icon: 'finance', title: 'CFO board', text: 'P&L, budget, cash' },
     ],
   },
 
@@ -198,9 +211,11 @@ export const PROJECTS = [
     tools: ['Slack', 'Grok', 'Figma'], // database not chosen yet; Grok per Umar 2026-11-02
     links: {},
     flow: [
-      { icon: 'rule', title: 'Brand rule', text: 'The team posts it in Slack' },
-      { icon: 'memory', title: 'Memory', text: 'Saved per brand, updated on change' },
-      { icon: 'checklist', title: 'Checklist', text: 'Do\'s and Don\'ts before a design ships' },
+      { icon: 'rule', title: 'Brand rule', text: 'Posted in Slack with the brand' },
+      { icon: 'memory', title: 'Memory', text: 'Saved per brand' },
+      { icon: 'update', title: 'Update', text: 'Changed when a client changes their mind' },
+      { icon: 'checklist', title: 'Checklist', text: 'Do\'s and Don\'ts' },
+      { icon: 'design', title: 'Designer', text: 'Sees it before finishing a design' },
     ],
   },
   {
@@ -231,9 +246,12 @@ export const PROJECTS = [
     tools: ['n8n', 'ActiveCampaign', 'Gecko Booking'],
     links: {},
     flow: [
-      { icon: 'booking', title: 'Booking event', text: 'Visit, cancellation or treatment due' },
+      { icon: 'booking', title: 'Booking event', text: 'A visit, cancellation or due treatment' },
       { icon: 'sync', title: 'Nightly sync', text: 'Booking system to email platform' },
-      { icon: 'message', title: 'Message', text: 'The right email or SMS, opt-out respected' },
+      { icon: 'cancel', title: 'Cancelled', text: 'No new time booked' },
+      { icon: 'followup', title: 'Consultation', text: 'Follow-up after the visit' },
+      { icon: 'due', title: 'Treatment due', text: 'Time to come back' },
+      { icon: 'message', title: 'Message', text: 'Email or SMS, stop or pause anytime' },
     ],
   },
   {
@@ -257,9 +275,12 @@ export const PROJECTS = [
     tools: ['React', 'TypeScript', 'Postgres', 'Express', 'n8n'],
     links: {},
     flow: [
-      { icon: 'data', title: 'Data', text: 'Bookings, sales and members' },
-      { icon: 'kpi', title: 'KPIs', text: 'Clubhouse and steering-meeting views' },
-      { icon: 'screens', title: 'Screens', text: 'Dashboards, TV screens, staff league' },
+      { icon: 'booking', title: 'Bookings & sales', text: 'From each centre' },
+      { icon: 'members', title: 'Members', text: 'Customer records' },
+      { icon: 'data', title: 'Database', text: 'One source, with roles and audit log' },
+      { icon: 'kpi', title: 'KPIs', text: 'Clubhouse and steering views' },
+      { icon: 'screens', title: 'TV screens', text: 'Staff league on display' },
+      { icon: 'report', title: 'Weekly report', text: 'Sent automatically' },
     ],
   },
 
@@ -379,8 +400,11 @@ export const PROJECTS = [
     tools: ['Airflow', 'ADLS Gen2', 'dbt', 'Synapse'],
     links: { code: 'https://github.com/jayveecanlas8686-pixel/azure-ecommerce-etl-pipeline' },
     flow: [
+      { icon: 'schedule', title: 'Airflow', text: 'Runs the pipeline' },
       { icon: 'ingest', title: 'REST API', text: 'E-commerce data comes in' },
-      { icon: 'layers', title: 'Bronze → Gold', text: 'Cleaned and modeled with dbt' },
+      { icon: 'raw', title: 'Bronze', text: 'Raw data on ADLS Gen2' },
+      { icon: 'clean', title: 'Silver', text: 'Cleaned' },
+      { icon: 'model', title: 'Gold', text: 'Modeled with dbt' },
       { icon: 'dashboard', title: 'Synapse', text: 'Analytics-ready tables' },
     ],
   },
@@ -395,9 +419,12 @@ export const PROJECTS = [
     tools: ['Event Hubs', 'Terraform', 'Prometheus', 'Grafana'],
     links: { code: 'https://github.com/jayveecanlas8686-pixel/azure-realtime-stock-pipeline' },
     flow: [
-      { icon: 'live', title: 'Live ticks', text: 'Stock prices via Event Hubs' },
-      { icon: 'math', title: 'Indicators', text: 'OHLCV, SMA, RSI, Bollinger Bands' },
-      { icon: 'chart', title: 'Synapse', text: 'Enriched data, monitored' },
+      { icon: 'live', title: 'Live ticks', text: 'Stock prices stream in' },
+      { icon: 'stream', title: 'Event Hubs', text: 'Ingests the stream' },
+      { icon: 'layers', title: 'Micro-batches', text: 'OHLCV aggregations' },
+      { icon: 'math', title: 'Indicators', text: 'SMA, RSI, Bollinger Bands' },
+      { icon: 'chart', title: 'Synapse', text: 'Enriched data served' },
+      { icon: 'monitor', title: 'Monitoring', text: 'Prometheus and Grafana' },
     ],
   },
   {
@@ -412,7 +439,9 @@ export const PROJECTS = [
     links: { code: 'https://github.com/jayveecanlas8686-pixel/azure-data-quality-framework' },
     flow: [
       { icon: 'schedule', title: 'Daily run', text: 'Airflow triggers every suite' },
-      { icon: 'validate', title: 'Expectations', text: 'Every table checked' },
+      { icon: 'validate', title: 'Expectations', text: 'A suite per table' },
+      { icon: 'check', title: 'Checks', text: 'Every table tested' },
+      { icon: 'store', title: 'Results', text: 'Kept for trending' },
       { icon: 'alert', title: 'Alert', text: 'Failures posted to Teams' },
     ],
   },

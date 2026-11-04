@@ -50,15 +50,36 @@ describe('WorkflowCard', () => {
 })
 
 describe('every project without a screenshot has a workflow', () => {
-  it('3 steps each, with known icons', () => {
+  it('a full run of 5 to 7 steps each, with known icons', () => {
     const noImage = PROJECTS.filter((p) => !p.image)
     expect(noImage.length).toBeGreaterThan(0)
     for (const p of noImage) {
-      expect(p.flow?.length, p.slug).toBe(3)
+      expect(p.flow?.length, p.slug).toBeGreaterThanOrEqual(5)
+      expect(p.flow.length, p.slug).toBeLessThanOrEqual(7)
       for (const s of p.flow) {
         expect(FLOW_ICONS[s.icon], `${p.slug}: ${s.icon}`).toBeDefined()
         expect(s.title && s.text, p.slug).toBeTruthy()
       }
     }
+  })
+})
+
+
+describe('WorkflowCard zigzag layout', () => {
+  const SIX = Array.from({ length: 6 }, (_, i) => ({ icon: 'data', title: 'Step ' + (i + 1), text: 'x' }))
+
+  it('snakes: row 1 left to right, row 2 right to left (3 per row)', () => {
+    render(<WorkflowCard title="Demo" steps={SIX} columns={3} />)
+    const cells = screen.getAllByRole('listitem')
+    const pos = cells.map((li) => [li.style.gridRow, li.style.gridColumn])
+    expect(pos).toEqual([
+      ['1', '1'], ['1', '2'], ['1', '3'],
+      ['2', '3'], ['2', '2'], ['2', '1'],
+    ])
+  })
+
+  it('fills the space it is given (full height canvas)', () => {
+    render(<WorkflowCard title="Demo" steps={SIX} />)
+    expect(screen.getByRole('figure').className).toMatch(/\bh-full\b/)
   })
 })
